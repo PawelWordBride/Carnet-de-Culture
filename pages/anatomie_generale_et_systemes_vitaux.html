@@ -1,0 +1,82 @@
+<h3>Sciences de la Vie - Anatomie & Physiologie</h3>
+
+<!-- Sommaire interactif -->
+<ul>
+  <li>
+    <a href="pages/la_cellule.html" class="load-page"><strong>La cellule</strong></a>
+  </li>
+ <!-- <li><a href="#" class="toggle-section" data-target="systemes_vitaux"><strong>Systèmes vitaux</strong></a></li>
+  <li><a href="#" class="toggle-section" data-target="systeme_circulatoire"><strong>Système circulatoire</strong></a></li>
+  <li><a href="#" class="toggle-section" data-target="systeme_respiratoire"><strong>Système respiratoire</strong></a></li>
+  <li><a href="#" class="toggle-section" data-target="systeme_digestif"><strong>Système digestif</strong></a></li>
+</ul>
+
+<!-- Carré de contenu dynamique pour "La cellule" -->
+<div id="page-content"></div>
+
+<!-- Contenu caché par défaut pour les autres sections -->
+<section id="systemes_vitaux" class="hidden">
+  <p>Les systèmes vitaux assurent les fonctions essentielles à la vie : circulation, respiration, digestion, excrétion.</p>
+</section>
+
+<section id="systeme_circulatoire" class="hidden">
+  <p>Le cœur, les artères, veines et capillaires transportent le sang et les nutriments dans tout le corps.</p>
+</section>
+
+<section id="systeme_respiratoire" class="hidden">
+  <p>Les poumons et voies respiratoires permettent l’échange de gaz (O₂ et CO₂) avec l’environnement.</p>
+</section>
+
+<section id="systeme_digestif" class="hidden">
+  <p>Les organes digestifs transforment les aliments en nutriments assimilables par le corps.</p>
+</section>
+
+<!-- Script pour afficher/masquer les sections et charger "La cellule" -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // Toggle sections internes
+  document.querySelectorAll('.toggle-section').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const targetId = link.getAttribute('data-target');
+      const section = document.getElementById(targetId);
+
+      // Toggle l'affichage
+      if (section.style.display === 'block') {
+        section.style.display = 'none';
+      } else {
+        section.style.display = 'block';
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Charger les pages dynamiques
+  const contentDiv = document.getElementById('page-content');
+  let currentPage = null;
+
+  document.querySelectorAll('.load-page').forEach(link => {
+    link.addEventListener('click', async e => {
+      e.preventDefault();
+      const url = link.getAttribute('href');
+
+      // Fermer si on clique à nouveau sur le même lien
+      if (currentPage === url) {
+        contentDiv.innerHTML = "";
+        currentPage = null;
+        return;
+      }
+
+      try {
+        const response = await fetch(url);
+        const html = await response.text();
+        contentDiv.innerHTML = html;
+        currentPage = url;
+      } catch (error) {
+        contentDiv.innerHTML = "<p>Erreur lors du chargement de la page.</p>";
+        currentPage = null;
+      }
+    });
+  });
+});
+</script>

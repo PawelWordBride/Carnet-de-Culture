@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carnet de Culture</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Carnet de Culture P</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li>
+     <!--   <a href="#automobile">Automobile</a>
+        <ul>
+          <li><a href="#histoire_et_present">Histoire et Présent</a></li>
+          <li><a href="#technologie_innovation">Technologie & Innovation</a></li>
+          <li><a href="#design_automobile">Design automobile</a></li>
+          <li><a href="#competitions_sport_automobile">Compétitions et sport automobile</a></li>
+          <li><a href="#voitures_mythiques">Voitures mythiques</a></li>
+          <li><a href="#ecologie_et_mobilité">Écologie et mobilité</a></li>
+          <li><a href="#ingenierie_et_mecanique">Ingénierie et mécanique</a></li>
+          <!--<li><a href="#culture_automobile">Culture automobile</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#geographie">Géographie</a>
+        <ul>
+          <li><a href="#geographie_physique">Géographie physique</a></li>
+          <li><a href="#geographie_humaine">Géographie humaine</a></li>
+          <li><a href="#geographie_economique">Géographie économique</a></li>
+          <li><a href="#geographie_environnementale">Géographie environnementale</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#histoire">Histoire</a>
+        <ul>
+          <li><a href="#grandes_civilisations">Les Grandes Civilisations</a></li>
+          <li><a href="#histoire_medievale">L’Histoire Médiévale</a></li>
+          <li><a href="#age_des_decouvertes">L’Âge des Découvertes</a></li>
+        </ul>
+      </li> -->
+
+      <li>
+        <a href="sciences_physiques">Sciences & Physiques</a>
+      </li>
+    </ul>
+  </nav>
+
+  <section class="questionnement">
+    <div class="bulle-question">
+      <h3>🧠 Question du jour</h3>
+      <p id="question"></p>
+    </div>
+  </section>
+
+<section class="tresors-langue">
+  <h3>💎 Trésors de Langue</h3>
+  <div class="langue-cards">
+    <a href="#langue_francaise" target="_blank" class="langue-card">
+      <div class="flag france"></div>
+      <span>Langue Française</span>
+    </a>
+
+    <a href="#langue_polonaise" target="_blank" class="langue-card">
+      <div class="flag pologne"></div>
+      <span>Langue Polonaise</span>
+    </a>
+
+    <a href="#langue_anglaise" target="_blank" class="langue-card">
+      <div class="flag royaume-uni"></div>
+      <span>Langue Anglaise</span>
+    </a>
+  </div>
+</section>
+
+
+
+<section class="ressources-utilisees">
+  <h3>🧭 Ressources utilisées</h3>
+  <div class="ressource-cards">
+    <a href="https://www.notion.so/Article-1f87922c2d9280f5ada3dcc3f7f68c73?pvs=21" target="_blank" class="ressource-card">
+      <span class="icon">🌐</span>
+      <span class="text">Articles</span>
+    </a>
+    <a href="https://www.notion.so/Vid-o-Podcasts-1f87922c2d928047a8a2f6c2ca65363e?pvs=21" target="_blank" class="ressource-card">
+      <span class="icon">🎬🎧</span>
+      <span class="text">Vidéos & Podcasts</span>
+    </a>
+    <a href="https://www.notion.so/Sites-Web-1fa7922c2d928094b15dfd73a150b5f7?pvs=21" target="_blank" class="ressource-card">
+      <span class="icon">💻</span>
+      <span class="text">Sites Web</span>
+    </a>
+  </div>
+</section>
+
+
+<script>
+  const questions = [
+    "Pourquoi la glace flotte-t-elle sur l’eau ?",
+    "Comment les lois de la physique influencent-elles le fonctionnement du corps humain ?",
+    "Pourquoi la cellule est-elle considérée comme l’unité fondamentale de la vie ?",
+    "Quels sont les liens entre l’observation scientifique et la compréhension philosophique du monde ?",
+    "Qu’est-ce qui différencie une théorie scientifique d’une simple hypothèse ?",
+    "Comment l’énergie se transforme-t-elle dans les systèmes vivants ?",
+    "Peut-on vraiment tout expliquer par la science ?",
+    "Quelle est la limite entre le vivant et le non-vivant ?",
+    "Pourquoi la lumière est-elle à la fois onde et particule ?"
+  ];
+
+  const randomIndex = Math.floor(Math.random() * questions.length);
+  document.getElementById("question").textContent = questions[randomIndex];
+</script>
+</body>
+</html>

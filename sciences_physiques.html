@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sciences & Physiques - Carnet de Culture</title>
+  <link rel="stylesheet" href="style_sciences_physiques.css">
+</head>
+<body>
+
+  <header>
+    <h1>Sciences & Physiques</h1>
+    <nav>
+      <a href="index.html">⬅ Retour au sommaire</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Sous-catégories</h2>
+    <ul>
+  <!--     <li><a href="#sciences_vie">Sciences de la Vie</a></li>
+      <li><a href="#sciences_physiques_detail">Sciences Physiques</a></li>
+      <li><a href="#sciences_terre_univers">Sciences de la Terre et de l’Univers</a></li>
+      <li><a href="#sciences_cognitives_humaines">Sciences Cognitives et Humaines</a></li>
+      <li><a href="#mathematiques_logique">Mathématiques et Logique</a></li>
+      <li><a href="#sciences_appliquees">Sciences Appliquées et Interdisciplinaires</a></li> 
+      <li>
+        <a href="#anatomie_&_physiologie">Anatomie & Physiologie</a>-->
+        <ul>
+          <li><a href="pages/anatomie_generale_et_systemes_vitaux.html" class="load-page">
+            Anatomie générale et systèmes vitaux
+          </a></li>
+        </ul>
+      </li>
+    </ul>
+
+    <!-- Zone où les pages s’affichent -->
+    <div id="page-content"></div>
+  </main>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const links = document.querySelectorAll("a.load-page");
+    const contentDiv = document.getElementById("page-content");
+    let currentPage = null;
+
+    links.forEach(link => {
+      link.addEventListener("click", async function (e) {
+        e.preventDefault();
+        const url = this.getAttribute("href");
+
+        // Fermer si on clique à nouveau sur le même lien
+        if (currentPage === url) {
+          contentDiv.innerHTML = "";
+          currentPage = null;
+          return;
+        }
+
+        // Charger la page
+        try {
+          const response = await fetch(url);
+          const html = await response.text();
+          contentDiv.innerHTML = html;
+          currentPage = url;
+        } catch (error) {
+          contentDiv.innerHTML = "<p>Erreur lors du chargement de la page.</p>";
+          currentPage = null;
+        }
+      });
+    });
+  });
+  </script>
+
+</body>
+</html>
