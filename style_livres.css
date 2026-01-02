@@ -58,6 +58,7 @@ main {
 
 /* === Zone de contenu dynamique === */
 #page-content {
+  display: none;
   margin-top: 30px;
   background: #ffffff;
   padding: 20px;

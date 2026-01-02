@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sciences & Physiques - Carnet de Culture</title>
+  <title>Technologie & Informatique - Carnet de Culture</title>
 
   <style>
     body{font-family:Arial,sans-serif;margin:0;background:#f7f9fc;color:#333;}
@@ -30,53 +30,24 @@
 
 <body>
   <header>
-    <h1>⚗️ Sciences & Physiques</h1>
+    <h1>💻 Technologie & Informatique</h1>
     <nav><a href="index.html">⬅ Retour au sommaire</a></nav>
   </header>
 
   <main>
     <section class="intro">
-      <h2>Bienvenue dans la section Sciences</h2>
-      <p>Vivant, matière, Terre, cognition, maths, ingénierie : tout ton tronc commun.</p>
+      <h2>Bienvenue dans la section Tech</h2>
+      <p>Développement web, informatique, systèmes, IA, outils et curiosités.</p>
       <p class="hint">Clique sur une sous-catégorie pour afficher son contenu.</p>
     </section>
 
     <section class="grid">
-      <a class="card load-page" href="pages/sciences/sciences_vie.html">
-        <div class="icon">🧬</div>
-        <div><h3>Sciences de la Vie</h3><p>Biologie, génétique, microbio, zoologie, écologie.</p></div>
-        <span class="arrow">→</span>
-      </a>
-
-      <a class="card load-page" href="pages/sciences/sciences_physiques.html">
-        <div class="icon">⚛️</div>
-        <div><h3>Sciences physiques</h3><p>Chimie, physique, eau, énergie, matière.</p></div>
-        <span class="arrow">→</span>
-      </a>
-
-      <a class="card load-page" href="pages/sciences/terre_univers.html">
-        <div class="icon">🌋</div>
-        <div><h3>Terre & Univers</h3><p>Géologie, climat, astronomie, planétologie.</p></div>
-        <span class="arrow">→</span>
-      </a>
-
-      <a class="card load-page" href="pages/sciences/cognitives_humaines.html">
-        <div class="icon">🧠</div>
-        <div><h3>Cognitives & humaines</h3><p>Neurosciences, psychologie, comportement, IA.</p></div>
-        <span class="arrow">→</span>
-      </a>
-
-      <a class="card load-page" href="pages/sciences/maths_logique.html">
-        <div class="icon">🧮</div>
-        <div><h3>Maths & logique</h3><p>Arithmétique, algèbre, stats, proba, logique.</p></div>
-        <span class="arrow">→</span>
-      </a>
-
-      <a class="card load-page" href="pages/sciences/anatomie_physiologie.html">
-        <div class="icon">🫀</div>
-        <div><h3>Anatomie & physiologie</h3><p>Systèmes vitaux, anatomie générale, fiches.</p></div>
-        <span class="arrow">→</span>
-      </a>
+      <a class="card load-page" href="pages/tech/developpement_web.html"><div class="icon">🌐</div><div><h3>Développement web</h3><p>HTML/CSS/JS, projets, bonnes pratiques.</p></div><span class="arrow">→</span></a>
+      <a class="card load-page" href="pages/tech/programming.html"><div class="icon">⌨️</div><div><h3>Programmation</h3><p>Python, JS, logique, mini-projets.</p></div><span class="arrow">→</span></a>
+      <a class="card load-page" href="pages/tech/systemes_reseaux.html"><div class="icon">🖧</div><div><h3>Systèmes & réseaux</h3><p>Linux, Windows, réseau, sécurité.</p></div><span class="arrow">→</span></a>
+      <a class="card load-page" href="pages/tech/ia.html"><div class="icon">🤖</div><div><h3>Intelligence artificielle</h3><p>Concepts, usages, limites, notes.</p></div><span class="arrow">→</span></a>
+      <a class="card load-page" href="pages/tech/outils.html"><div class="icon">🧰</div><div><h3>Outils</h3><p>Notion, GitHub, Figma, workflow.</p></div><span class="arrow">→</span></a>
+      <a class="card load-page" href="pages/tech/curiosites.html"><div class="icon">✨</div><div><h3>Curiosités</h3><p>Découvertes, articles, idées, veille.</p></div><span class="arrow">→</span></a>
     </section>
 
     <section id="page-content"></section>
@@ -87,7 +58,6 @@
       const cards = document.querySelectorAll(".load-page");
       const content = document.getElementById("page-content");
       let currentUrl = null;
-
       const clearActive = () => cards.forEach(c => c.classList.remove("is-active"));
 
       cards.forEach(card => {
@@ -107,7 +77,6 @@
             const res = await fetch(url);
             if (!res.ok) throw new Error("HTTP " + res.status);
             const html = await res.text();
-
             content.innerHTML = html;
             content.style.display = "block";
             currentUrl = url;

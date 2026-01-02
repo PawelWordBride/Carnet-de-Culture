@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Histoire de l'automobile</title>
+    <style>
+        :root{
+            --bg:#0f1724; --card:#0b1220; --accent:#ff6b35; --muted:#9aa4b2;
+            --glass: rgba(255,255,255,0.03);
+            --maxw:1100px;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+        html,body{height:100%;margin:0;background:linear-gradient(180deg,#071021 0%, #071827 60%);color:#e6eef6}
+        .wrap{max-width:var(--maxw);margin:28px auto;padding:22px;box-sizing:border-box;}
+        header{display:flex;align-items:center;gap:18px;margin-bottom:18px}
+        .logo{
+            width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#ff9b6b);
+            display:flex;align-items:center;justify-content:center;font-weight:700;color:#071021;font-size:18px;
+            box-shadow:0 6px 20px rgba(0,0,0,0.5);
+        }
+        h1{margin:0;font-size:20px}
+        p.lead{margin:2px 0 0;color:var(--muted);font-size:13px}
+
+        /* controls */
+        .controls{display:flex;gap:10px;align-items:center;margin:16px 0 22px;flex-wrap:wrap}
+        .btn{
+            background:var(--glass);border:1px solid rgba(255,255,255,0.04);color:var(--accent);
+            padding:8px 12px;border-radius:10px;font-weight:600;cursor:pointer;font-size:13px;
+        }
+        .btn.ghost{background:transparent;color:var(--muted);border-color:transparent}
+        .btn.active{background:linear-gradient(90deg,var(--accent),#ff9b6b);color:#071021;border:none}
+
+        /* timeline */
+        .timeline{display:grid;grid-template-columns:1fr;gap:14px}
+        .card{
+            background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+            border:1px solid rgba(255,255,255,0.03);
+            padding:14px;border-radius:12px;display:flex;gap:14px;align-items:flex-start;transition:transform .28s,box-shadow .28s,opacity .28s;
+            overflow:hidden;
+        }
+        .card:hover{transform:translateY(-6px);box-shadow:0 14px 30px rgba(0,0,0,0.45)}
+        .card .icon{
+            width:74px;height:74px;border-radius:10px;flex:0 0 74px;display:flex;align-items:center;justify-content:center;
+            background:linear-gradient(135deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));
+            border:1px solid rgba(255,255,255,0.03);
+        }
+        .card h3{margin:0 0 6px;font-size:16px}
+        .meta{font-size:12px;color:var(--muted);margin-bottom:8px}
+        .desc{color:#dce9fb;font-size:14px;line-height:1.45}
+        .tag{font-size:12px;padding:6px 8px;border-radius:999px;background:rgba(0,0,0,0.2);color:var(--muted);margin-left:auto}
+
+        /* hidden state */
+        .card.hidden{opacity:0.16;transform:scale(.98);filter:grayscale(40%);pointer-events:none}
+
+        /* details toggle */
+        .more{margin-top:8px;font-size:13px;color:var(--muted);display:none}
+        .card.expanded .more{display:block}
+
+        /* responsive */
+        @media (min-width:820px){
+            .timeline{grid-template-columns:repeat(2,1fr)}
+        }
+        @media (min-width:1200px){
+            .timeline{grid-template-columns:repeat(3,1fr)}
+        }
+        footer{margin-top:18px;color:var(--muted);font-size:13px}
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <header>
+            <div class="logo">AU</div>
+            <div>
+                <h1>Histoire de l'automobile</h1>
+                <p class="lead">Synthèse des grandes étapes, technologies et dates clés — interactive et légère.</p>
+            </div>
+        </header>
+
+        <div class="controls" aria-label="Contrôles de la timeline">
+            <div>
+                <button class="btn active" data-era="all">Toutes les époques</button>
+                <button class="btn" data-era="fin-xix">Fin XIXe</button>
+                <button class="btn" data-era="debut-xx">Début XXe</button>
+                <button class="btn" data-era="milieu-xx">Milieu XXe</button>
+                <button class="btn" data-era="fin-xx">Fin XXe</button>
+                <button class="btn" data-era="xxi">XXI</button>
+            </div>
+            <div style="margin-left:auto;display:flex;gap:8px">
+                <button id="play" class="btn ghost" title="Lecture automatique">▶ Lecture</button>
+                <button id="reset" class="btn ghost" title="Réinitialiser filtres">Réinitialiser</button>
+            </div>
+        </div>
+
+        <main>
+            <section class="timeline" id="timeline">
+                <article class="card" data-era="fin-xix" tabindex="0" aria-labelledby="inv-title">
+                    <div class="icon" aria-hidden>
+                        <!-- roue + engrenage pour symboliser prototypes et mécanique -->
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#ffb490" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Icône invention">
+                            <circle cx="12" cy="12" r="3.2"></circle>
+                            <path d="M12 2v3"></path>
+                            <path d="M12 19v3"></path>
+                            <path d="M4.2 7.2l2.2 1.6"></path>
+                            <path d="M17.6 15.2l2.2 1.6"></path>
+                            <path d="M4.2 16.8l2.2-1.6"></path>
+                            <path d="M17.6 8.8l2.2-1.6"></path>
+                            <path d="M8 12h8" stroke-opacity="0.6"></path>
+                        </svg>
+                    </div>
+                    <div style="flex:1">
+                        <div style="display:flex;align-items:center;gap:8px">
+                            <h3 id="inv-title">Invention et premières expérimentations</h3>
+                            <div class="tag">~1880–1900</div>
+                        </div>
+                        <div class="meta">Transition vapeur → combustion interne ; premiers brevets, châssis et transmissions expérimentaux.</div>
+                        <div class="desc">
+                            Entre 1880 et 1900 : transition vapeur → essence, brevets et premiers prototypes. Cliquez pour en savoir plus.
+                        </div>
+
+                        <div class="more">
+                            <p><strong>Acteurs clés :</strong> Karl Benz (première voiture à essence pratique, 1886), Gottlieb Daimler et Wilhelm Maybach (moteurs légers), Émile Levassor et Armand Peugeot (premières expérimentations industrielles en France).</p>
+
+                            <p><strong>Étapes marquantes :</strong></p>
+                            <ul>
+                                <li><strong>1881–1886</strong> : essais de moteurs à essence compacts et premiers brevets.</li>
+                                <li><strong>1886</strong> : Karl Benz construit et brevète un véhicule à essence motorisé (véritable prototype automobile moderne).</li>
+                                <li><strong>fin 1880s</strong> : premières courses et démonstrations publiques qui valident l'intérêt du véhicule motorisé.</li>
+                                <li><strong>1890s</strong> : amélioration des transmissions, pneumatiques plus fiables, développement du carburateur et premières infrastructures routières adaptées.</li>
+                            </ul>
+
+                            <p><strong>Conséquences techniques et sociales :</strong> la bascule vers des moteurs à combustion entraîne la standardisation progressive des pièces (roues, transmissions, châssis), la naissance d'un marché de l'après-vente et la démocratisation ultérieure lorsque la production se mécanise.</p>
+
+                            <p style="font-size:13px;color:var(--muted)">Sources : synthèse historique — textes publics et synthèses pédagogiques (récapitulatif à visée éducative).</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card" data-era="debut-xx" tabindex="0">
+                    <div class="icon" aria-hidden>
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#8ee0ff" stroke-width="1.6">
+                            <rect x="2.5" y="7" width="19" height="9" rx="2"></rect>
+                            <circle cx="7.5" cy="17.5" r="1.8"></circle>
+                            <circle cx="16.5" cy="17.5" r="1.8"></circle>
+                        </svg>
+                    </div>
+                    <div style="flex:1">
+                        <div style="display:flex;align-items:center;gap:8px">
+                            <h3>Production de masse</h3>
+                            <div class="tag">~1908–1930</div>
+                        </div>
+                        <div class="meta">Modèle Ford T, chaînes de montage, réduction des coûts.</div>
+                        <div class="desc">L'industrialisation rend l'automobile accessible au plus grand nombre. Apparition des premières normes et d'un réseau routier moderne.</div>
+                        <div class="more">Conséquences sociales : mobilité accrue, urbanisme adapté aux véhicules, essor des voyages personnels et du commerce régional.</div>
+                    </div>
+                </article>
+
+                <article class="card" data-era="milieu-xx" tabindex="0">
+                    <div class="icon" aria-hidden>
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#ffd86b" stroke-width="1.6">
+                            <path d="M3 12h18"></path>
+                            <path d="M6 8v8"></path>
+                            <path d="M18 8v8"></path>
+                        </svg>
+                    </div>
+                    <div style="flex:1">
+                        <div style="display:flex;align-items:center;gap:8px">
+                            <h3>Design et moteur améliorés</h3>
+                            <div class="tag">~1945–1970</div>
+                        </div>
+                        <div class="meta">Puissance, confort, esthétique — essor des berlines et des modèles familiaux.</div>
+                        <div class="desc">Après-guerre, innovations en suspension, sécurité passive (ceintures), et nouveaux carburants entraînent une diversification des usages.</div>
+                        <div class="more">Apparition des autoroutes, premières préoccupations réglementaires sur la sécurité et les émissions.</div>
+                    </div>
+                </article>
+
+                <article class="card" data-era="fin-xx" tabindex="0">
+                    <div class="icon" aria-hidden>
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#c0ffb3" stroke-width="1.6">
+                            <path d="M3 7h18v10H3z"></path>
+                            <path d="M7 7v-2"></path>
+                            <path d="M17 7v-2"></path>
+                        </svg>
+                    </div>
+                    <div style="flex:1">
+                        <div style="display:flex;align-items:center;gap:8px">
+                            <h3>Électronique et normes</h3>
+                            <div class="tag">~1980–2000</div>
+                        </div>
+                        <div class="meta">Injection électronique, ABS, airbags, premières normes antipollution.</div>
+                        <div class="desc">Les systèmes électroniques améliorent sécurité et performance. Les constructeurs se tournent vers l'efficacité énergétique et la réduction des émissions.</div>
+                        <div class="more">Débuts des voitures hybrides expérimentales et premiers programmes de normes environnementales strictes.</div>
+                    </div>
+                </article>
+
+                <article class="card" data-era="xxi" tabindex="0">
+                    <div class="icon" aria-hidden>
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#9be6ff" stroke-width="1.6">
+                            <path d="M3 12h18"></path>
+                            <path d="M12 3v18"></path>
+                        </svg>
+                    </div>
+                    <div style="flex:1">
+                        <div style="display:flex;align-items:center;gap:8px">
+                            <h3>Électrification et conduite assistée</h3>
+                            <div class="tag">2000–présent</div>
+                        </div>
+                        <div class="meta">Batteries, VE grand public, aides à la conduite et début de l'autonomie.</div>
+                        <div class="desc">La transition vers l'électrique modifie la chaîne d'énergie et les modèles industriels. Les logiciels deviennent centraux (ADAS, connectivité).</div>
+                        <div class="more">Défis actuels : infrastructure de recharge, matériaux, neutralité carbone et intégration des véhicules autonomes en sécurité réelle.</div>
+                    </div>
+                </article>
+            </section>
+        </main>
+
+        <footer>
+            Sélectionnez une époque pour filtrer, cliquez sur une carte pour en voir plus. Contenu résumé à des fins pédagogiques.
+        </footer>
+    </div>
+
+    <script>
+        // timeline interactivité: filtrer, expansion, lecture automatique
+        (function(){
+            const buttons = document.querySelectorAll('.controls .btn[data-era]');
+            const cards = Array.from(document.querySelectorAll('.card'));
+            const playBtn = document.getElementById('play');
+            const resetBtn = document.getElementById('reset');
+            let autoTimer = null;
+            let autoIndex = 0;
+
+            function setActiveButton(targetEra){
+                buttons.forEach(b=> b.classList.toggle('active', b.dataset.era === targetEra));
+            }
+
+            function filterEra(era){
+                if(era === 'all'){
+                    cards.forEach(c=> c.classList.remove('hidden'));
+                } else {
+                    cards.forEach(c=> c.classList.toggle('hidden', c.dataset.era !== era));
+                }
+            }
+
+            buttons.forEach(btn=>{
+                btn.addEventListener('click', ()=> {
+                    const era = btn.dataset.era;
+                    setActiveButton(era);
+                    filterEra(era);
+                    stopAuto();
+                });
+            });
+
+            // expand/collapse card on click or Enter
+            cards.forEach(card=>{
+                card.addEventListener('click', ()=> card.classList.toggle('expanded'));
+                card.addEventListener('keydown', (e)=> {
+                    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); card.classList.toggle('expanded'); }
+                });
+            });
+
+            function startAuto(){
+                stopAuto();
+                playBtn.textContent = '⏸ Arrêter';
+                playBtn.classList.add('active');
+                const visible = cards.filter(c=> !c.classList.contains('hidden'));
+                if(visible.length === 0) return;
+                autoIndex = 0;
+                visible.forEach(c=> c.classList.remove('highlight'));
+                autoTimer = setInterval(()=>{
+                    visible.forEach(c=> c.classList.remove('highlight'));
+                    const c = visible[autoIndex % visible.length];
+                    c.scrollIntoView({behavior:'smooth',block:'center'});
+                    c.classList.add('highlight');
+                    // briefly expand for detail
+                    c.classList.add('expanded');
+                    setTimeout(()=> c.classList.remove('expanded'), 2500);
+                    autoIndex++;
+                }, 3200);
+            }
+
+            function stopAuto(){
+                if(autoTimer) clearInterval(autoTimer);
+                autoTimer = null;
+                playBtn.textContent = '▶ Lecture';
+                playBtn.classList.remove('active');
+                cards.forEach(c=> c.classList.remove('highlight'));
+            }
+
+            playBtn.addEventListener('click', ()=>{
+                if(autoTimer) stopAuto(); else startAuto();
+            });
+
+            resetBtn.addEventListener('click', ()=>{
+                setActiveButton('all');
+                filterEra('all');
+                stopAuto();
+            });
+
+            // small CSS-in-JS for highlight visual
+            const style = document.createElement('style');
+            style.textContent = `
+                .card.highlight{box-shadow:0 30px 60px rgba(255,107,53,0.12);transform:translateY(-10px) scale(1.01);border-color:rgba(255,107,53,0.18)}
+            `;
+            document.head.appendChild(style);
+
+            // initial state
+            setActiveButton('all');
+        })();
+    </script>
+</body>
+</html></div></svg></div>

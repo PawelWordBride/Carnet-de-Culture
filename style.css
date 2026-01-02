@@ -14,42 +14,103 @@ header {
   text-align: center;
 }
 
-/* === Navigation === */
-nav {
+/* ===========================
+   SOMMAIRE (HUB EN CARTES)
+   =========================== */
+
+.sommaire {
   background-color: #526D82;
-  padding: 1rem;
+  padding: 28px 16px;
 }
 
-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-nav ul li {
-  margin-bottom: 0.5rem;
-}
-
-nav ul li a {
+.sommaire h2 {
+  margin: 0 auto 6px;
+  max-width: 1000px;
   color: #DDE6ED;
+  font-size: 1.5rem;
+}
+
+.sommaire-hint {
+  margin: 0 auto 18px;
+  max-width: 1000px;
+  color: #DDE6ED;
+  opacity: 0.9;
+  font-size: 0.95rem;
+}
+
+.sommaire-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+/* Carte de sommaire (lien) */
+.sommaire-card {
   text-decoration: none;
-  font-weight: bold;
+  background: #DDE6ED;
+  border-radius: 18px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid rgba(39, 55, 77, 0.12);
 }
 
-nav ul li ul {
-  margin-top: 0.3rem;
-  margin-left: 1rem;
-  list-style: circle;
+.sommaire-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.16);
 }
 
-/* Section Questionnement */
-.questionnement-container {
-  position: fixed;      /* fixe la section sur toute la page */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* centre exactement */
-  z-index: 1000;        /* au-dessus des autres sections */
-  text-align: center;
+.sommaire-icon {
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: #27374D;
+  color: #DDE6ED;
+  font-size: 1.4rem;
+  flex: 0 0 auto;
+}
+
+.sommaire-content h3 {
+  margin: 0 0 6px;
+  color: #27374D;
+  font-size: 1.05rem;
+}
+
+.sommaire-content p {
+  margin: 0;
+  color: #27374D;
+  opacity: 0.85;
+  font-size: 0.92rem;
+  line-height: 1.3;
+}
+
+.sommaire-arrow {
+  margin-left: auto;
+  color: #27374D;
+  font-weight: 900;
+  font-size: 1.2rem;
+  opacity: 0.7;
+}
+
+/* ===========================
+   QUESTION DU JOUR
+   =========================== */
+
+.questionnement {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 15px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .bulle-question {
@@ -59,42 +120,14 @@ nav ul li ul {
   border-radius: 25px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   max-width: 600px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  cursor: default;
-}
-
-.bulle-question {
-  background: #f0f4ff;       /* Couleur de fond de la bulle */
-  color: #27374D;             /* Texte sombre */
-  padding: 20px 25px;
-  border-radius: 25px;        /* Forme de bulle */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   font-size: 1.1rem;
-  max-width: 600px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  cursor: default;
+  text-align: center;
+  animation: floating-cloud 6s ease-in-out infinite;
 }
 
 .bulle-question:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-#questionnement button#nouvelle-question {
-  margin-top: 15px;
-  padding: 10px 20px;
-  background-color: #2d6cdf;
-  color: #fff;
-  border: none;
-  border-radius: 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-#questionnement button#nouvelle-question:hover {
-  background-color: #1b4db2;
-  transform: translateY(-2px);
 }
 
 /* Mobile friendly */
@@ -103,15 +136,19 @@ nav ul li ul {
     font-size: 1rem;
     padding: 15px 20px;
   }
-
-  #questionnement button#nouvelle-question {
-    width: 100%;
-  }
 }
 
+/* Animation nuage */
+@keyframes floating-cloud {
+  0%   { transform: translateY(-10px); }
+  50%  { transform: translateY(10px); }
+  100% { transform: translateY(-10px); }
+}
 
+/* ===========================
+   TRÉSORS DE LANGUE
+   =========================== */
 
-/* Section Trésors de Langue */
 .tresors-langue {
   background: linear-gradient(135deg, #f4f8ff, #eef5fb);
   border-radius: 20px;
@@ -158,16 +195,9 @@ nav ul li ul {
   box-shadow: 0 5px 15px rgba(46, 93, 159, 0.15);
 }
 
-.langue-card .icon {
-  font-size: 1.5em;
-}
-
-.langue-card .text {
-  font-size: 1em;
-}
-
-
-/*section ressources*/
+/* ===========================
+   RESSOURCES
+   =========================== */
 
 .ressources-utilisees {
   background: #f9fbff;
