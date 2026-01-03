@@ -138,17 +138,17 @@
 <section class="tresors-langue">
   <h3>💎 Trésors de Langue</h3>
   <div class="langue-cards">
-    <a href="#langue_francaise" target="_blank" class="langue-card">
+    <a href="#langue_francaise" class="langue-card">
       <div class="flag france"></div>
       <span>Langue Française</span>
     </a>
 
-    <a href="#langue_polonaise" target="_blank" class="langue-card">
+    <a href="#langue_polonaise" class="langue-card">
       <div class="flag pologne"></div>
       <span>Langue Polonaise</span>
     </a>
 
-    <a href="#langue_anglaise" target="_blank" class="langue-card">
+    <a href="#langue_anglaise" class="langue-card">
       <div class="flag royaume-uni"></div>
       <span>Langue Anglaise</span>
     </a>
@@ -160,15 +160,15 @@
 <section class="ressources-utilisees">
   <h3>🧭 Ressources utilisées</h3>
   <div class="ressource-cards">
-    <a href="https://www.notion.so/Article-1f87922c2d9280f5ada3dcc3f7f68c73?pvs=21" target="_blank" class="ressource-card">
-      <span class="icon">🌐</span>
-      <span class="text">Articles</span>
-    </a>
-    <a href="https://www.notion.so/Vid-o-Podcasts-1f87922c2d928047a8a2f6c2ca65363e?pvs=21" target="_blank" class="ressource-card">
+<a href="articles.html" class="ressource-card">
+  <span class="icon">📰</span>
+  <span class="text">Articles</span>
+</a>
+    <a href="videos_podcasts.html" target="_blank" class="ressource-card">
       <span class="icon">🎬🎧</span>
       <span class="text">Vidéos & Podcasts</span>
     </a>
-    <a href="https://www.notion.so/Sites-Web-1fa7922c2d928094b15dfd73a150b5f7?pvs=21" target="_blank" class="ressource-card">
+    <a href="sites_web.html" class="ressource-card">
       <span class="icon">💻</span>
       <span class="text">Sites Web</span>
     </a>
@@ -192,5 +192,8 @@
   const randomIndex = Math.floor(Math.random() * questions.length);
   document.getElementById("question").textContent = questions[randomIndex];
 </script>
+<footer>
+  © Carnet de Culture — Accueil 2026
+</footer>
 </body>
 </html>

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auteurs - Carnet de Culture</title>
+
+  <style>
+    body{font-family:Arial,sans-serif;margin:0;background:#f7f9fc;color:#333;}
+    header{background:#27374D;color:#fff;padding:18px 14px;text-align:center;}
+    header h1{margin:0 0 8px;font-size:1.6rem;}
+    header a{color:#DDE6ED;text-decoration:none;font-weight:700;}
+    header a:hover{text-decoration:underline;}
+    main{max-width:1000px;margin:0 auto;padding:24px 16px 60px;}
+
+    .intro{
+      background:#DDE6ED;border:1px solid rgba(39,55,77,.12);
+      border-radius:18px;padding:18px;
+      box-shadow:0 4px 14px rgba(0,0,0,.08);
+      margin-bottom:18px;
+    }
+    .intro h2{margin:0 0 6px;color:#27374D;font-size:1.2rem;}
+    .intro p{margin:0;color:#27374D;opacity:.9;line-height:1.45;}
+    .hint{margin-top:10px;font-size:.92rem;opacity:.85;color:#27374D;}
+
+    /* ====== OUTILS FILTRES (au-dessus des auteurs) ====== */
+    .filters{
+      background:#fff;
+      border-radius:18px;
+      padding:14px;
+      border:1px solid rgba(39,55,77,.10);
+      box-shadow:0 4px 14px rgba(0,0,0,.06);
+      margin:14px 0 18px;
+    }
+    .filters-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .filters input, .filters select{
+      padding:10px 12px;border-radius:12px;
+      border:1px solid rgba(39,55,77,.16);
+      outline:none;background:#f7f9fc;color:#27374D;
+      font-size:.95rem;
+    }
+    .filters input{flex:1;min-width:240px;background:#fff;}
+    .filters select{min-width:220px;cursor:pointer;}
+
+    .filters-meta{
+      margin:10px 0 0;
+      font-size:.9rem;
+      opacity:.85;
+      color:#27374D;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid rgba(39,55,77,.16);
+      background:#f7f9fc;
+      color:#27374D;
+      text-decoration:none;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .btn:hover{filter:brightness(.98);}
+
+    /* ✅ Cartes auteurs plus petites */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fill, 200px);
+      gap:14px;
+      justify-content:start;
+    }
+
+    /* ====== CARTE AUTEUR ====== */
+    .author-card{
+      background:#fff;
+      border-radius:18px;
+      border:1px solid rgba(39,55,77,.10);
+      box-shadow:0 4px 14px rgba(0,0,0,.06);
+      cursor:pointer;
+      overflow:hidden;
+      transition:transform .2s ease, box-shadow .2s ease;
+      aspect-ratio:1 / 1;
+      display:flex;
+      flex-direction:column;
+    }
+    .author-card:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(0,0,0,.10);}
+
+    .author-photo{
+      position:relative;
+      width:100%;
+      flex:1 1 auto;
+      background:#f7f9fc;
+      overflow:hidden;
+    }
+    .author-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+
+    .author-overlay{
+      position:absolute;
+      left:0; right:0; bottom:0;
+      padding:10px 10px 10px;
+      background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.72));
+      color:#fff;
+    }
+    .author-name{margin:0;font-weight:900;font-size:.92rem;line-height:1.15;}
+    .author-nat{margin:4px 0 0;font-size:.78rem;opacity:.92;}
+
+    /* Rectangle sous la photo : catégories (non cliquable) */
+    .author-cats-bar{
+      padding:10px;
+      border-top:1px solid rgba(39,55,77,.10);
+      background:#fff;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:flex-start;
+    }
+    .cat-pill{
+      user-select:none;
+      padding:7px 10px;
+      border-radius:999px;
+      font-size:.78rem;
+      font-weight:800;
+      background:#526D82;
+      color:#DDE6ED;
+      border:1px solid rgba(39,55,77,.06);
+    }
+
+    footer{text-align:center;padding:18px 14px;color:#6b7280;font-size:.85rem;}
+
+    /* ====== MODAL FICHE AUTEUR ====== */
+    .modal{position:fixed;inset:0;display:none;z-index:9999;}
+    .modal.is-open{display:block;}
+    .modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.55);backdrop-filter: blur(2px);}
+    .modal-panel{
+      position:relative;z-index:1;
+      width:min(920px, calc(100% - 24px));
+      margin:12px auto;background:#fff;border-radius:18px;
+      border:1px solid rgba(39,55,77,.12);
+      box-shadow:0 18px 60px rgba(0,0,0,.25);
+      overflow:hidden;
+    }
+    .modal-close{
+      position:absolute;top:10px;right:10px;
+      width:40px;height:40px;border-radius:12px;
+      border:1px solid rgba(39,55,77,.14);background:#f7f9fc;
+      cursor:pointer;font-size:1.1rem;
+    }
+    .modal-top{
+      padding:18px;
+      background:linear-gradient(180deg, rgba(221,230,237,.75), rgba(255,255,255,1));
+      border-bottom:1px solid rgba(39,55,77,.10);
+    }
+    .modal-top h2{margin:0 0 6px;color:#27374D;}
+    .modal-top p{margin:0;color:#27374D;opacity:.9;}
+    .modal-badges{margin-top:10px;display:flex;gap:10px;flex-wrap:wrap;}
+    .badge{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:.78rem;
+      font-weight:800;
+      background:#526D82;
+      color:#DDE6ED;
+      opacity:.95;
+    }
+
+    .modal-body{
+      padding:18px;
+      display:grid;
+      grid-template-columns: 240px 1fr;
+      gap:16px;
+      align-items:start;
+    }
+    .modal-photo{
+      width:100%;
+      aspect-ratio: 3/4;
+      border-radius:16px;
+      border:1px solid rgba(39,55,77,.12);
+      overflow:hidden;
+      background:#f7f9fc;
+      box-shadow:0 10px 28px rgba(0,0,0,.10);
+    }
+    .modal-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+
+    /* Zone bio scrollable */
+    .bio-text{
+      max-height:220px;
+      overflow:auto;
+      padding-right:8px;
+    }
+    .bio-text.is-expanded{max-height:520px;}
+    .bio-text::-webkit-scrollbar{width:10px;}
+    .bio-text::-webkit-scrollbar-thumb{background:rgba(39,55,77,.25);border-radius:999px;}
+    .bio-text::-webkit-scrollbar-track{background:rgba(39,55,77,.06);border-radius:999px;}
+
+    .readmore{margin-top:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+
+    .bio{
+      background:#fff;border-radius:16px;border:1px solid rgba(39,55,77,.10);
+      padding:14px;box-shadow:0 6px 18px rgba(0,0,0,.06);
+    }
+    .bio h3{margin:0 0 10px;color:#27374D;}
+    .bio p{margin:0 0 10px;line-height:1.55;color:#27374D;opacity:.92;}
+    .modal-actions{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;}
+
+    @media (max-width:720px){
+      .modal-body{grid-template-columns:1fr;}
+      .modal-photo{max-width:320px;margin:0 auto;}
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>✍️ Auteurs</h1>
+    <nav><a href="../../livres.html">⬅ Retour à Livres</a></nav>
+  </header>
+
+  <main>
+    <section class="intro">
+      <h2>Bibliothèque d’auteurs</h2>
+      <p>Cartes compactes avec photo, nom, nationalité et catégories.</p>
+      <p class="hint">Clique sur une carte pour ouvrir la fiche de l’auteur.</p>
+    </section>
+
+    <section class="filters" aria-label="Filtres auteurs">
+      <div class="filters-row">
+        <input id="q" type="search" placeholder="Rechercher un auteur…" autocomplete="off" />
+        <select id="nat">
+          <option value="all">Toutes les nationalités</option>
+          <option value="fr">France</option>
+          <option value="us">USA</option>
+          <option value="uk">Royaume-Uni</option>
+          <option value="pl">Pologne</option>
+          <option value="other">Autre</option>
+        </select>
+        <select id="cat">
+          <option value="all">Toutes les catégories</option>
+        </select>
+        <button id="reset" class="btn" type="button">Réinitialiser</button>
+      </div>
+
+      <div class="filters-meta">
+        <span id="count">0 auteur</span>
+        <span style="opacity:.8;">Astuce : la catégorie se filtre ici (pas en cliquant sur les bulles).</span>
+      </div>
+    </section>
+
+    <section class="grid" id="authorsGrid"></section>
+  </main>
+
+  <footer>© Carnet de Culture — Auteurs 2026</footer>
+
+  <!-- ====== MODAL FICHE AUTEUR ====== -->
+  <div class="modal" id="bioModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close="true"></div>
+
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="bioTitle">
+      <button class="modal-close" type="button" aria-label="Fermer" data-close="true">✕</button>
+
+      <div class="modal-top">
+        <h2 id="bioTitle">Auteur</h2>
+        <p id="bioMeta"></p>
+        <div class="modal-badges" id="bioBadges"></div>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-photo">
+          <img id="bioImg" src="" alt="">
+        </div>
+
+        <div class="bio">
+          <h3>Biographie</h3>
+
+          <div id="bioText" class="bio-text"></div>
+
+          <div class="readmore">
+            <button id="bioToggle" class="btn" type="button">Lire plus</button>
+          </div>
+
+          <div class="modal-actions">
+            <a id="bioExternal" class="btn" href="#" target="_blank" rel="noopener" style="display:none;">Lien externe</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", async () => {
+
+    // ✅ Charger les auteurs depuis JSON (page = pages/livres/auteurs.html)
+    let authors = [];
+    async function loadAuthors(){
+      const res = await fetch("../../assets/data/auteurs.json");
+      if(!res.ok) throw new Error("Impossible de charger ../../assets/data/auteurs.json");
+      authors = await res.json();
+    }
+
+    const NAT_LABELS = {
+      all: "Toutes",
+      fr: "France",
+      us: "USA",
+      uk: "Royaume-Uni",
+      pl: "Pologne",
+      other: "Autre"
+    };
+
+    // UI refs
+    const grid = document.getElementById("authorsGrid");
+    const q = document.getElementById("q");
+    const nat = document.getElementById("nat");
+    const cat = document.getElementById("cat");
+    const resetBtn = document.getElementById("reset");
+    const countEl = document.getElementById("count");
+
+    // Modal refs
+    const modal = document.getElementById("bioModal");
+    const bioTitle = document.getElementById("bioTitle");
+    const bioMeta = document.getElementById("bioMeta");
+    const bioBadges = document.getElementById("bioBadges");
+    const bioImg = document.getElementById("bioImg");
+    const bioText = document.getElementById("bioText");
+    const bioExternal = document.getElementById("bioExternal");
+    const bioToggle = document.getElementById("bioToggle");
+
+    function escapeHtml(str){
+      return String(str)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    // ✅ bio JSON => HTML (tableau de paragraphes)
+    function bioToHtml(bio){
+      if (Array.isArray(bio)) {
+        return bio.map(p => `<p>${escapeHtml(p)}</p>`).join("");
+      }
+      if (typeof bio === "string" && bio.trim()) {
+        return `<p>${escapeHtml(bio)}</p>`;
+      }
+      return "<p>Biographie à compléter.</p>";
+    }
+
+    function setBioCollapsed(){
+      bioText.classList.remove("is-expanded");
+      bioToggle.textContent = "Lire plus";
+    }
+
+    bioToggle.addEventListener("click", () => {
+      const expanded = bioText.classList.toggle("is-expanded");
+      bioToggle.textContent = expanded ? "Réduire" : "Lire plus";
+    });
+
+    function openBio(author){
+      bioTitle.textContent = author.name || "Auteur";
+
+      const natLabel = NAT_LABELS[author.nationality] || "—";
+      bioMeta.textContent = `Nationalité : ${natLabel}`;
+
+      const cats = Array.isArray(author.categories) ? author.categories : [];
+      bioBadges.innerHTML = cats.map(c => `<span class="badge">${escapeHtml(c)}</span>`).join("");
+
+      // ✅ si pas d'image : placeholder
+      const placeholder = "../../assets/img/auteurs/_placeholder.jpg";
+      bioImg.src = author.photo ? `../../${author.photo}` : placeholder;
+      bioImg.alt = `Photo — ${author.name || "Auteur"}`;
+
+      bioText.innerHTML = bioToHtml(author.bio);
+      setBioCollapsed();
+      bioText.scrollTop = 0;
+
+      if (author.link && String(author.link).trim() !== ""){
+        bioExternal.href = author.link;
+        bioExternal.style.display = "inline-block";
+      } else {
+        bioExternal.style.display = "none";
+      }
+
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeBio(){
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    function uniqueCategories(){
+      const set = new Set();
+      authors.forEach(a => (a.categories || []).forEach(c => set.add(c)));
+      return Array.from(set).sort((a,b) => a.localeCompare(b, "fr"));
+    }
+
+    function fillCategorySelect(){
+      const cats = uniqueCategories();
+      cat.innerHTML =
+        `<option value="all">Toutes les catégories</option>` +
+        cats.map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join("");
+    }
+
+    function render(list){
+      grid.innerHTML = "";
+
+      if (!list.length){
+        grid.innerHTML = `
+          <article class="author-card" style="cursor:default;">
+            <div class="author-photo"></div>
+            <div class="author-cats-bar">
+              <span style="opacity:.85;color:#27374D;font-weight:700;">Aucun résultat</span>
+            </div>
+          </article>
+        `;
+        return;
+      }
+
+      list.forEach(a => {
+        const cardEl = document.createElement("article");
+        cardEl.className = "author-card";
+        cardEl.setAttribute("role", "button");
+        cardEl.setAttribute("tabindex", "0");
+        cardEl.setAttribute("aria-label", `Ouvrir la fiche de ${a.name}`);
+
+        const natLabel = NAT_LABELS[a.nationality] || "—";
+        const cats = Array.isArray(a.categories) ? a.categories : [];
+
+        const photoSrc = a.photo ? `../../${a.photo}` : "../../assets/img/auteurs/_placeholder.jpg";
+
+        cardEl.innerHTML = `
+          <div class="author-photo">
+            <img src="${photoSrc}" alt="Photo — ${escapeHtml(a.name || "Auteur")}">
+            <div class="author-overlay">
+              <p class="author-name">${escapeHtml(a.name || "")}</p>
+              <p class="author-nat">${escapeHtml(natLabel)}</p>
+            </div>
+          </div>
+
+          <div class="author-cats-bar" aria-label="Catégories">
+            ${
+              cats.length
+                ? cats.map(c => `<span class="cat-pill">${escapeHtml(c)}</span>`).join("")
+                : `<span style="opacity:.75;">—</span>`
+            }
+          </div>
+        `;
+
+        const open = () => openBio(a);
+        cardEl.addEventListener("click", open);
+        cardEl.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            open();
+          }
+        });
+
+        grid.appendChild(cardEl);
+      });
+    }
+
+    function apply(){
+      const query = (q.value || "").trim().toLowerCase();
+      const n = nat.value;
+      const c = cat.value;
+
+      const filtered = authors.filter(a => {
+        const okNat = (n === "all") || (a.nationality === n);
+        const okQ = !query || (a.name || "").toLowerCase().includes(query);
+
+        const cats = Array.isArray(a.categories) ? a.categories : [];
+        const okCat = (c === "all") || cats.includes(c);
+
+        return okNat && okQ && okCat;
+      });
+
+      countEl.textContent = `${filtered.length} auteur${filtered.length > 1 ? "s" : ""}`;
+      render(filtered);
+    }
+
+    // events
+    q.addEventListener("input", apply);
+    nat.addEventListener("change", apply);
+    cat.addEventListener("change", apply);
+
+    resetBtn.addEventListener("click", () => {
+      q.value = "";
+      nat.value = "all";
+      cat.value = "all";
+      apply();
+    });
+
+    modal.addEventListener("click", (e) => {
+      if (e.target && e.target.dataset && e.target.dataset.close === "true") closeBio();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("is-open")) closeBio();
+    });
+
+    // init
+    try{
+      await loadAuthors();
+      fillCategorySelect();
+      apply();
+    } catch(err){
+      console.error(err);
+      grid.innerHTML = `
+        <article class="author-card" style="cursor:default;">
+          <div class="author-photo"></div>
+          <div class="author-cats-bar">
+            <span style="opacity:.85;color:#27374D;font-weight:700;">
+              Impossible de charger les auteurs (vérifie ../../assets/data/auteurs.json et le serveur).
+            </span>
+          </div>
+        </article>
+      `;
+      countEl.textContent = "0 auteur";
+    }
+  });
+</script>
+
+</body>
+</html>
