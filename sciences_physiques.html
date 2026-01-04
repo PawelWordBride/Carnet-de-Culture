@@ -40,7 +40,7 @@
       box-shadow:0 4px 14px rgba(0,0,0,0.08);
     }
 
-    /* ====== La Cellule (fragment) ====== */
+    /* ====== Styles “cellule / fragments” réutilisables ====== */
     .cellule { color: #27374D; }
     .cellule-back {
       display: inline-block; margin-bottom: 12px; text-decoration: none;
@@ -70,38 +70,6 @@
     .cell-card h3 { margin-top: 0; }
     .hl { color: #526D82; font-weight: 800; }
     .cell-list { margin: 10px 0 0; padding-left: 18px; }
-    .cell-callout {
-      margin-top: 12px; padding: 12px 14px; border-radius: 16px;
-      background: #f0f4ff; border: 1px solid rgba(82,109,130,0.25);
-    }
-    .cell-callout strong { display: inline-block; margin-bottom: 6px; }
-    .cell-callout.vocab { background: #eef5fb; }
-    .cell-grid-2 {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 12px; margin-top: 12px;
-    }
-    .cell-mini {
-      background: #DDE6ED; border-radius: 18px; padding: 14px;
-      border: 1px solid rgba(39,55,77,0.10);
-    }
-    .cell-mini h4 { margin: 0 0 8px; }
-    .cell-mini-list { margin: 10px 0 0; padding-left: 18px; }
-    .cell-table-wrap { margin-top: 14px; overflow-x: auto; }
-    .cell-table {
-      width: 100%; border-collapse: collapse; background: #fff;
-      border-radius: 16px; overflow: hidden;
-    }
-    .cell-table th, .cell-table td {
-      border-bottom: 1px solid rgba(39,55,77,0.12);
-      padding: 10px 12px; text-align: left;
-    }
-    .cell-table th { background: #27374D; color: #DDE6ED; }
-    .cell-sources {
-      background: #eef5fb; border: 1px solid rgba(39,55,77,0.10);
-      border-radius: 18px; padding: 16px; margin-top: 14px;
-    }
-    .cell-sources a { color: #27374D; font-weight: 800; text-decoration: none; }
-    .cell-sources a:hover { text-decoration: underline; color: #526D82; }
   </style>
 </head>
 
@@ -154,8 +122,42 @@
         <div><h3>Anatomie & physiologie</h3><p>Systèmes vitaux, anatomie générale, fiches.</p></div>
         <span class="arrow">→</span>
       </a>
+
+      <!-- ✅ NOUVELLE CARTE (sans page, ouvre un contenu ici) -->
+      <a class="card toggle-local" href="#" data-target="ingenierie">
+        <div class="icon">🛠️</div>
+        <div><h3>Ingénierie</h3><p>Mécanique, électricité, civil, aéronautique.</p></div>
+        <span class="arrow">→</span>
+      </a>
     </section>
 
+    <!-- ✅ Contenu local Ingénierie (s’ouvre/ferme) -->
+    <section id="ingenierie" class="hidden" style="margin-top:18px;">
+      <div class="cell-card">
+        <h3>🛠️ Ingénierie</h3>
+        <p>Applications des sciences physiques : conception, calcul, matériaux, systèmes.</p>
+        <ul class="cell-list">
+          <li><span class="hl">Mécanique</span></li>
+          <li><span class="hl">Électricité</span></li>
+          <li><span class="hl">Génie civil</span></li>
+          <li><span class="hl">Aéronautique</span></li>
+        </ul>
+      </div>
+
+      <div class="cell-card">
+        <h3>✈️ Aéronautique</h3>
+        <ul class="cell-list">
+          <li>Moteurs d’avion</li>
+          <li>Aérodynamique</li>
+          <li>Structures et matériaux</li>
+          <li>Avionique</li>
+          <li>Navigation</li>
+          <li>Histoire et réglementation</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Contenu injecté des pages -->
     <section id="page-content"></section>
   </main>
 
@@ -167,116 +169,63 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const clearActive = () => cards.forEach(c => c.classList.remove("is-active"));
 
-  function initLifeContent() {
-    const subContent = content.querySelector("#sub-content");
-    const svSummary = content.querySelector("#sv-summary"); // ✅ wrapper dans sciences_vie.html
-
-    const closeSubContent = () => {
-      if (!subContent) return;
-      subContent.innerHTML = "";
-      subContent.style.display = "none";
-    };
-
-    const showSummary = () => {
-      if (svSummary) svSummary.style.display = "block";
-    };
-
-    const hideSummary = () => {
-      if (svSummary) svSummary.style.display = "none";
-    };
-
-    const closeAllToggles = () => {
-      content.querySelectorAll("section[id]").forEach(sec => {
-        if (sec.id.startsWith("systeme") || sec.id.startsWith("systemes")) {
-          sec.classList.add("hidden");
-        }
-      });
-    };
-
-    // ✅ Toggle sections : accordéon + ferme La cellule
+  // ✅ Toggle générique : marche pour TOUTES les pages injectées
+  function initInjectedPageContent() {
     content.querySelectorAll(".toggle-section").forEach(link => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
         const targetId = link.dataset.target;
+        if (!targetId) return;
 
-        // ferme toutes les sections sauf celle cliquée
         content.querySelectorAll("section[id]").forEach(sec => {
           if (sec.id === targetId) return;
-          if (sec.id.startsWith("systeme") || sec.id.startsWith("systemes")) {
-            sec.classList.add("hidden");
-          }
+          sec.classList.add("hidden");
         });
 
         const section = content.querySelector("#" + CSS.escape(targetId));
         if (!section) return;
 
         section.classList.toggle("hidden");
-
         if (!section.classList.contains("hidden")) {
-          closeSubContent();
-          showSummary();
           section.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      });
-    });
-
-    // ✅ Charger "La cellule" : cache le sommaire + ferme les toggles
-    if (!subContent) return;
-    let currentSubUrl = null;
-
-    content.querySelectorAll(".sub-load").forEach(link => {
-      link.addEventListener("click", async (e) => {
-        e.preventDefault();
-        const url = link.getAttribute("href");
-
-        closeAllToggles();
-
-        // fermer si on reclique
-        if (currentSubUrl === url) {
-          closeSubContent();
-          currentSubUrl = null;
-          showSummary();
-          return;
-        }
-
-        try {
-          const res = await fetch(url);
-          if (!res.ok) throw new Error("HTTP " + res.status);
-          const html = await res.text();
-
-          subContent.innerHTML = html;
-          subContent.style.display = "block";
-          currentSubUrl = url;
-
-          hideSummary(); // ✅ le sommaire disparaît
-
-          // bouton retour au sommaire dans la cellule (class="back-to-sv")
-          const backBtn = subContent.querySelector(".back-to-sv");
-          if (backBtn) {
-            backBtn.addEventListener("click", (ev) => {
-              ev.preventDefault();
-              closeSubContent();
-              currentSubUrl = null;
-              showSummary();
-              svSummary?.scrollIntoView({ behavior: "smooth", block: "start" });
-            });
-          }
-
-          subContent.scrollIntoView({ behavior: "smooth", block: "start" });
-        } catch (err) {
-          subContent.innerHTML = "<p>Erreur lors du chargement de la page.</p>";
-          subContent.style.display = "block";
-          currentSubUrl = null;
-          showSummary();
         }
       });
     });
   }
 
+  // ✅ Toggle local (Ingénierie dans ce fichier)
+  document.querySelectorAll(".toggle-local").forEach(link => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const targetId = link.dataset.target;
+      const sec = document.getElementById(targetId);
+      if (!sec) return;
+
+      // Si un contenu injecté est ouvert, on le masque pour éviter mélange
+      if (content.style.display === "block") {
+        content.innerHTML = "";
+        content.style.display = "none";
+        currentUrl = null;
+        clearActive();
+      }
+
+      sec.classList.toggle("hidden");
+      if (!sec.classList.contains("hidden")) {
+        sec.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  });
+
   cards.forEach(card => {
     card.addEventListener("click", async (e) => {
       e.preventDefault();
       const url = card.getAttribute("href");
+
+      // Ferme Ingénierie local si ouvert
+      const localIng = document.getElementById("ingenierie");
+      if (localIng && !localIng.classList.contains("hidden")) {
+        localIng.classList.add("hidden");
+      }
 
       if (currentUrl === url) {
         content.innerHTML = "";
@@ -299,8 +248,7 @@ document.addEventListener("DOMContentLoaded", () => {
         card.classList.add("is-active");
         content.scrollIntoView({ behavior: "smooth", block: "start" });
 
-        // ✅ init après injection
-        initLifeContent();
+        initInjectedPageContent();
 
       } catch (err) {
         content.innerHTML = "<p>Erreur lors du chargement de la page.</p>";

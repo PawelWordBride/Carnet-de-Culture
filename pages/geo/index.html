@@ -1,0 +1,140 @@
+<style>
+  /* === WRAPPER IDENTIQUE AU <main> DE GÉOGRAPHIE === */
+  .geo-wrapper{
+    max-width:1000px;
+    margin:0 auto;
+    padding:24px 16px 60px;
+  }
+
+  .intro{
+    background:#DDE6ED;
+    border:1px solid rgba(39,55,77,.12);
+    border-radius:18px;
+    padding:18px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08);
+    margin-bottom:18px;
+  }
+
+  .intro h2{
+    margin:0 0 8px;
+    color:#27374D;
+    font-size:1.2rem;
+  }
+
+  .intro p{
+    margin:0;
+    color:#27374D;
+    opacity:.9;
+    line-height:1.4;
+  }
+
+  .hint{
+    margin-top:14px;
+    font-size:.92rem;
+    opacity:.85;
+    color:#27374D;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:14px;
+    margin-top:16px;
+  }
+
+  .card{
+    background:#fff;
+    border-radius:18px;
+    padding:16px;
+    border:1px solid rgba(39,55,77,.10);
+    box-shadow:0 4px 14px rgba(0,0,0,.06);
+    display:flex;
+    align-items:center;
+    gap:12px;
+    transition:transform .2s ease,box-shadow .2s ease;
+    cursor:pointer;
+    color:#27374D;
+    text-decoration:none;
+  }
+
+  .card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 22px rgba(0,0,0,.10);
+  }
+
+  .icon{
+    width:46px;
+    height:46px;
+    border-radius:14px;
+    background:#526D82;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#DDE6ED;
+    font-size:1.3rem;
+    flex:0 0 auto;
+  }
+
+  .card h3{
+    margin:0 0 6px;
+    font-size:1.05rem;
+  }
+
+  .card p{
+    margin:0;
+    font-size:.92rem;
+    opacity:.85;
+    line-height:1.3;
+  }
+
+  .arrow{
+    margin-left:auto;
+    font-weight:900;
+    opacity:.6;
+    font-size:1.2rem;
+  }
+</style>
+
+<div class="geo-wrapper">
+
+  <section class="intro">
+    <h2>🏙️ Études urbaines</h2>
+    <p>
+      Analyse des territoires sous l’angle urbain : morphologie, mobilités, densité,
+      services, économie locale, risques, durabilité, projets d’aménagement.
+    </p>
+    <p class="hint">
+      Choisis une échelle pour ouvrir les fiches correspondantes.
+    </p>
+  </section>
+
+  <section class="grid">
+    <a class="card load-page" href="pages/geo/etudes_urbaines/pays.html">
+      <div class="icon">🌍</div>
+      <div>
+        <h3>Fiches Pays</h3>
+        <p>Réseaux urbains, métropolisation, politiques publiques, mobilités.</p>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="card load-page" href="pages/geo/etudes_urbaines/regions.html">
+      <div class="icon">🗺️</div>
+      <div>
+        <h3>Fiches Régions</h3>
+        <p>Polarités, axes structurants, attractivité, infrastructures.</p>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="card load-page" href="pages/geo/etudes_urbaines/villes.html">
+      <div class="icon">🏘️</div>
+      <div>
+        <h3>Fiches Villes</h3>
+        <p>Quartiers, transports, morphologie, projets, enjeux du quotidien.</p>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+  </section>
+
+</div>
