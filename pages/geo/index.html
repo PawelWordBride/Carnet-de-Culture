@@ -1,140 +1,148 @@
-<style>
-  /* === WRAPPER IDENTIQUE AU <main> DE GÉOGRAPHIE === */
-  .geo-wrapper{
-    max-width:1000px;
-    margin:0 auto;
-    padding:24px 16px 60px;
-  }
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Géographie - Carnet de Culture</title>
 
-  .intro{
-    background:#DDE6ED;
-    border:1px solid rgba(39,55,77,.12);
-    border-radius:18px;
-    padding:18px;
-    box-shadow:0 4px 14px rgba(0,0,0,.08);
-    margin-bottom:18px;
-  }
+  <style>
+    body{font-family:Arial,sans-serif;margin:0;background:#f7f9fc;color:#333;}
+    header{background:#27374D;color:#fff;padding:18px 14px;text-align:center;}
+    header h1{margin:0 0 8px;font-size:1.6rem;}
+    header a{color:#DDE6ED;text-decoration:none;font-weight:700;}
+    header a:hover{text-decoration:underline;}
+    main{max-width:1000px;margin:0 auto;padding:24px 16px 60px;}
+    .intro{background:#DDE6ED;border:1px solid rgba(39,55,77,.12);border-radius:18px;padding:18px;box-shadow:0 4px 14px rgba(0,0,0,.08);margin-bottom:18px;}
+    .intro h2{margin:0 0 8px;color:#27374D;font-size:1.2rem;}
+    .intro p{margin:0;color:#27374D;opacity:.9;line-height:1.4;}
+    .hint{margin-top:14px;font-size:.92rem;opacity:.85;color:#27374D;}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:16px;}
+    .card{text-decoration:none;background:#fff;border-radius:18px;padding:16px;border:1px solid rgba(39,55,77,.10);box-shadow:0 4px 14px rgba(0,0,0,.06);display:flex;align-items:center;gap:12px;transition:transform .2s ease,box-shadow .2s ease;cursor:pointer;color:#27374D;}
+    .card:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(0,0,0,.10);}
+    .icon{width:46px;height:46px;border-radius:14px;background:#526D82;display:flex;align-items:center;justify-content:center;color:#DDE6ED;font-size:1.3rem;flex:0 0 auto;}
+    .card h3{margin:0 0 6px;font-size:1.05rem;}
+    .card p{margin:0;font-size:.92rem;opacity:.85;line-height:1.3;}
+    .arrow{margin-left:auto;font-weight:900;opacity:.6;font-size:1.2rem;}
+    #page-content{display:none;margin-top:18px;background:#fff;border-radius:18px;padding:18px;border:1px solid rgba(39,55,77,.10);box-shadow:0 6px 18px rgba(0,0,0,.08);}
+    .card.is-active{outline:3px solid rgba(82,109,130,.35);}
+  </style>
+</head>
 
-  .intro h2{
-    margin:0 0 8px;
-    color:#27374D;
-    font-size:1.2rem;
-  }
+<body>
+  <header>
+    <h1>🌍 Géographie</h1>
+<nav><a href="../../index.html">⬅ Retour au sommaire</a></nav>
+  </header>
 
-  .intro p{
-    margin:0;
-    color:#27374D;
-    opacity:.9;
-    line-height:1.4;
-  }
+  <main>
+    <section class="intro">
+      <h2>Bienvenue dans la section Géographie</h2>
+      <p>Reliefs, climats, populations, économies, territoires, enjeux contemporains.</p>
+      <p class="hint">Clique sur une sous-catégorie pour afficher son contenu.</p>
+    </section>
 
-  .hint{
-    margin-top:14px;
-    font-size:.92rem;
-    opacity:.85;
-    color:#27374D;
-  }
+    <section class="grid">
+      <a class="card load-page" href="geographie_physique.html">
+        <div class="icon">🏔️</div>
+        <div><h3>Géographie physique</h3><p>Reliefs, climat, océans, volcans, écosystèmes.</p></div>
+        <span class="arrow">→</span>
+      </a>
 
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-    gap:14px;
-    margin-top:16px;
-  }
+      <a class="card load-page" href="geographie_humaine.html">
+        <div class="icon">👥</div>
+        <div><h3>Géographie humaine</h3><p>Peuplement, métropoles, migrations, frontières.</p></div>
+        <span class="arrow">→</span>
+      </a>
 
-  .card{
-    background:#fff;
-    border-radius:18px;
-    padding:16px;
-    border:1px solid rgba(39,55,77,.10);
-    box-shadow:0 4px 14px rgba(0,0,0,.06);
-    display:flex;
-    align-items:center;
-    gap:12px;
-    transition:transform .2s ease,box-shadow .2s ease;
-    cursor:pointer;
-    color:#27374D;
-    text-decoration:none;
-  }
+      <a class="card load-page" href="geographie_economique.html">
+        <div class="icon">📈</div>
+        <div><h3>Géographie économique</h3><p>Ressources, échanges, réseaux, tourisme.</p></div>
+        <span class="arrow">→</span>
+      </a>
 
-  .card:hover{
-    transform:translateY(-3px);
-    box-shadow:0 10px 22px rgba(0,0,0,.10);
-  }
+      <a class="card load-page" href="geographie_environnementale.html">
+        <div class="icon">🌿</div>
+        <div><h3>Géographie environnementale</h3><p>Climat, biodiversité, transition, résilience.</p></div>
+        <span class="arrow">→</span>
+      </a>
 
-  .icon{
-    width:46px;
-    height:46px;
-    border-radius:14px;
-    background:#526D82;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#DDE6ED;
-    font-size:1.3rem;
-    flex:0 0 auto;
-  }
+      <a class="card load-page" href="geographie_regionale.html">
+        <div class="icon">🗺️</div>
+        <div><h3>Géographie régionale</h3><p>Fleuves, déserts, ensembles régionaux, focus.</p></div>
+        <span class="arrow">→</span>
+      </a>
 
-  .card h3{
-    margin:0 0 6px;
-    font-size:1.05rem;
-  }
+      <a class="card load-page" href="geographie_historique.html">
+        <div class="icon">🧭</div>
+        <div><h3>Géographie historique</h3><p>Cartographie, routes, frontières, civilisations.</p></div>
+        <span class="arrow">→</span>
+      </a>
 
-  .card p{
-    margin:0;
-    font-size:.92rem;
-    opacity:.85;
-    line-height:1.3;
-  }
+      <a class="card load-page" href="geographie_et_technologies.html">
+        <div class="icon">🛰️</div>
+        <div><h3>Géographie et technologies</h3><p>SIG, satellites, géolocalisation, big data.</p></div>
+        <span class="arrow">→</span>
+      </a>
 
-  .arrow{
-    margin-left:auto;
-    font-weight:900;
-    opacity:.6;
-    font-size:1.2rem;
-  }
-</style>
+      <a class="card load-page" href="pays_regions_et_villes.html">
+        <div class="icon">📌</div>
+        <div><h3>Pays, régions et villes</h3><p>Études par pays, comparaisons, fiches territoriales.</p></div>
+        <span class="arrow">→</span>
+      </a>
 
-<div class="geo-wrapper">
+    </section>
 
-  <section class="intro">
-    <h2>🏙️ Études urbaines</h2>
-    <p>
-      Analyse des territoires sous l’angle urbain : morphologie, mobilités, densité,
-      services, économie locale, risques, durabilité, projets d’aménagement.
-    </p>
-    <p class="hint">
-      Choisis une échelle pour ouvrir les fiches correspondantes.
-    </p>
-  </section>
+    <section id="page-content"></section>
+  </main>
 
-  <section class="grid">
-    <a class="card load-page" href="pages/geo/etudes_urbaines/pays.html">
-      <div class="icon">🌍</div>
-      <div>
-        <h3>Fiches Pays</h3>
-        <p>Réseaux urbains, métropolisation, politiques publiques, mobilités.</p>
-      </div>
-      <span class="arrow">→</span>
-    </a>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const content = document.getElementById("page-content");
+      let currentUrl = null;
 
-    <a class="card load-page" href="pages/geo/etudes_urbaines/regions.html">
-      <div class="icon">🗺️</div>
-      <div>
-        <h3>Fiches Régions</h3>
-        <p>Polarités, axes structurants, attractivité, infrastructures.</p>
-      </div>
-      <span class="arrow">→</span>
-    </a>
+      const clearActive = () => {
+        document.querySelectorAll(".load-page.is-active")
+          .forEach(c => c.classList.remove("is-active"));
+      };
 
-    <a class="card load-page" href="pages/geo/etudes_urbaines/villes.html">
-      <div class="icon">🏘️</div>
-      <div>
-        <h3>Fiches Villes</h3>
-        <p>Quartiers, transports, morphologie, projets, enjeux du quotidien.</p>
-      </div>
-      <span class="arrow">→</span>
-    </a>
-  </section>
+      // ✅ Délégation d'événements (comme Histoire) :
+      // fonctionne même si des liens .load-page sont ajoutés dans les pages injectées
+      document.addEventListener("click", async (e) => {
+        const link = e.target.closest("a.load-page");
+        if (!link) return;
 
-</div>
+        e.preventDefault();
+        const url = link.getAttribute("href");
+
+        if (currentUrl === url) {
+          content.innerHTML = "";
+          content.style.display = "none";
+          currentUrl = null;
+          clearActive();
+          return;
+        }
+
+        try {
+          const res = await fetch(url);
+          if (!res.ok) throw new Error("HTTP " + res.status);
+          const html = await res.text();
+
+          content.innerHTML = html;
+          content.style.display = "block";
+          currentUrl = url;
+
+          clearActive();
+          link.classList.add("is-active");
+          content.scrollIntoView({ behavior: "smooth", block: "start" });
+
+        } catch (err) {
+          content.innerHTML = "<p>Erreur lors du chargement de la page.</p>";
+          content.style.display = "block";
+          currentUrl = null;
+          clearActive();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Histoire - Carnet de Culture</title>
+
+  <style>
+    body{font-family:Arial,sans-serif;margin:0;background:#f7f9fc;color:#333;}
+    header{background:#27374D;color:#fff;padding:18px 14px;text-align:center;}
+    header h1{margin:0 0 8px;font-size:1.6rem;}
+    header a{color:#DDE6ED;text-decoration:none;font-weight:700;}
+    header a:hover{text-decoration:underline;}
+    main{max-width:1000px;margin:0 auto;padding:24px 16px 60px;}
+    .intro{background:#DDE6ED;border:1px solid rgba(39,55,77,.12);border-radius:18px;padding:18px;box-shadow:0 4px 14px rgba(0,0,0,.08);margin-bottom:18px;}
+    .intro h2{margin:0 0 8px;color:#27374D;font-size:1.2rem;}
+    .intro p{margin:0;color:#27374D;opacity:.9;line-height:1.4;}
+    .hint{margin-top:14px;font-size:.92rem;opacity:.85;color:#27374D;}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:16px;}
+    .card{text-decoration:none;background:#fff;border-radius:18px;padding:16px;border:1px solid rgba(39,55,77,.10);box-shadow:0 4px 14px rgba(0,0,0,.06);display:flex;align-items:center;gap:12px;transition:transform .2s ease,box-shadow .2s ease;cursor:pointer;color:#27374D;}
+    .card:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(0,0,0,.10);}
+    .icon{width:46px;height:46px;border-radius:14px;background:#526D82;display:flex;align-items:center;justify-content:center;color:#DDE6ED;font-size:1.3rem;flex:0 0 auto;}
+    .card h3{margin:0 0 6px;font-size:1.05rem;}
+    .card p{margin:0;font-size:.92rem;opacity:.85;line-height:1.3;}
+    .arrow{margin-left:auto;font-weight:900;opacity:.6;font-size:1.2rem;}
+    #page-content{display:none;margin-top:18px;background:#fff;border-radius:18px;padding:18px;border:1px solid rgba(39,55,77,.10);box-shadow:0 6px 18px rgba(0,0,0,.08);}
+    .card.is-active{outline:3px solid rgba(82,109,130,.35);}
+  </style>
+</head>
+
+<body>
+<header>
+  <h1>🏛️ Histoire</h1>
+<nav><a href="../../index.html">⬅ Retour au sommaire</a></nav>
+</header>
+
+<main>
+  <section class="intro">
+    <h2>Bienvenue dans la section Histoire</h2>
+    <p>Civilisations, périodes, révolutions, guerres, mythes, environnement et méthodes historiques.</p>
+    <p class="hint">Clique sur un chapitre pour afficher son contenu.</p>
+  </section>
+
+  <section class="grid">
+
+<a class="card load-page" href="grandes_civilisations.html">
+      <div class="icon">🏺</div>
+      <div>
+        <h3>Grandes civilisations</h3>
+        <p>Premières civilisations, empires classiques, mondes précolombiens.</p>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="card load-page" href="histoire_medievale.html">
+      <div class="icon">🏰</div>
+      <div>
+        <h3>Histoire médiévale</h3>
+        <p>Féodalité, religions, dynasties, croisades, société.</p>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="card load-page" href="age_des_decouvertes.html">
+      <div class="icon">⛵</div>
+      <div>
+        <h3>Âge des découvertes</h3>
+        <p>Explorations, routes maritimes, cartographie, colonisation.</p>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="card load-page" href="revolutions_et_changements.html">
+      <div class="icon">🔥</div>
+      <div>
+        <h3>Révolutions et changements</h3>
+        <p>Renaissance, Lumières, révolutions politiques et industrielles.</p>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="card load-page" href="guerres_et_conflits.html">
+      <div class="icon">⚔️</div>
+      <div>
+        <h3>Guerres et conflits</h3>
+        <p>Conflits majeurs, stratégies, conséquences humaines et culturelles.</p>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="card load-page" href="mythes_et_histoire.html">
+      <div class="icon">🐺</div>
+      <div>
+        <h3>Mythes et Histoire</h3>
+        <p>Légendes, folklore, symboles, récits et mémoire collective.</p>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="card load-page" href="histoire_et_environnement.html">
+      <div class="icon">🌍</div>
+      <div>
+        <h3>Histoire et environnement</h3>
+        <p>Climat, catastrophes, ressources, relations hommes-nature.</p>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="card load-page" href="methodes_historiques.html">
+      <div class="icon">🧠</div>
+      <div>
+        <h3>Méthodes historiques</h3>
+        <p>Sources, critique, chronologies, archéologie, outils numériques.</p>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+
+  </section>
+
+  <section id="page-content"></section>
+</main>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const content = document.getElementById("page-content");
+  let currentUrl = null;
+
+  const clearActive = () => {
+    document.querySelectorAll(".load-page.is-active").forEach(c => c.classList.remove("is-active"));
+  };
+
+  // Délégation d'événements : marche aussi pour les cartes injectées
+  document.addEventListener("click", async (e) => {
+    const link = e.target.closest("a.load-page");
+    if (!link) return;
+
+    e.preventDefault();
+    const url = link.getAttribute("href");
+
+    if (currentUrl === url) {
+      content.innerHTML = "";
+      content.style.display = "none";
+      currentUrl = null;
+      clearActive();
+      return;
+    }
+
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      const html = await res.text();
+
+      content.innerHTML = html;
+      content.style.display = "block";
+      currentUrl = url;
+
+      clearActive();
+      link.classList.add("is-active");
+      content.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    } catch (err) {
+      content.innerHTML = "<p>Erreur lors du chargement de la page.</p>";
+      content.style.display = "block";
+      currentUrl = null;
+      clearActive();
+    }
+  });
+});
+</script>
+</body>
+</html>
