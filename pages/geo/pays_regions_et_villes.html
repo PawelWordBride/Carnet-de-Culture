@@ -61,11 +61,16 @@
 .subchapter li{margin-bottom:8px;line-height:1.4;}
 .subchapter a{color:#27374D;font-weight:700;text-decoration:none;}
 .subchapter a:hover{text-decoration:underline;}
-.subchapter a.load-page{
-  font-weight:400; /* texte normal dans le lien */
+
+/* Liens dans les sous-chapitres : texte normal */
+.subchapter a{
+  color:#27374D;
+  font-weight:400;        /* ⬅️ TEXTE NORMAL */
+  text-decoration:none;
 }
 
-.subchapter a.load-page strong{
-  font-weight:800;
+/* Le gras UNIQUEMENT pour <strong> */
+.subchapter a strong{
+  font-weight:700;        /* ou 800 si tu veux plus marqué */
 }
 </style>

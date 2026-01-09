@@ -1,226 +1,708 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Carnet de Culture</title>
-  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* =========================================
+       THEME : AIGLE SOLITAIRE DANS LES MONTAGNES
+       (HTML + CSS autonome)
+       ========================================= */
+
+    :root{
+      --bg0:#050A12;
+      --bg1:#0A1424;
+      --ice:rgba(170,215,255,.18);
+      --gold:rgba(255,213,140,.8);
+      --goldSoft:rgba(255,213,140,.14);
+
+      --text:rgba(245,248,255,.92);
+      --muted:rgba(230,240,255,.78);
+
+      --card:rgba(255,255,255,.06);
+      --card2:rgba(255,255,255,.035);
+      --stroke:rgba(180,220,255,.14);
+
+      --shadow:0 18px 60px rgba(0,0,0,.35);
+      --shadow2:0 10px 30px rgba(0,0,0,.25);
+
+      --r-lg:22px;
+      --r-md:18px;
+      --r-sm:14px;
+    }
+
+    *{ box-sizing:border-box; }
+    html, body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 12% 10%, rgba(170, 210, 255, 0.18), transparent 60%),
+        radial-gradient(900px 600px at 88% 20%, rgba(255, 213, 140, 0.10), transparent 55%),
+        radial-gradient(700px 500px at 70% 85%, rgba(140, 180, 255, 0.10), transparent 60%),
+        linear-gradient(180deg, var(--bg1) 0%, var(--bg0) 70%, #03050A 100%);
+      overflow-x:hidden;
+    }
+
+    /* texture crêtes + étoiles */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background:
+        repeating-linear-gradient(135deg,
+          rgba(255,255,255,0.035) 0px,
+          rgba(255,255,255,0.035) 1px,
+          transparent 1px,
+          transparent 10px
+        );
+      mix-blend-mode:overlay;
+      opacity:.18;
+    }
+    body::after{
+      content:"";
+      position:fixed; inset:-40px;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.06) 0 1px, transparent 2px),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0 1px, transparent 2px),
+        radial-gradient(circle at 55% 65%, rgba(255,255,255,0.04) 0 1px, transparent 2px);
+      opacity:.28;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    p{ line-height:1.6; margin:0; }
+
+    /* =========================================
+       Layout
+       ========================================= */
+    .container{
+      width:min(1100px, calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    .topbar{
+      padding:16px 0 0;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(180,220,255,.14);
+      background:rgba(0,0,0,.20);
+      backdrop-filter:blur(10px);
+    }
+    .brand .mark{
+      width:38px; height:38px;
+      display:grid; place-items:center;
+      border-radius:14px;
+      background:rgba(0,0,0,.22);
+      border:1px solid rgba(180,220,255,.16);
+      font-size:18px;
+    }
+    .brand .name{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+    .brand .name strong{
+      font-weight:800;
+      letter-spacing:.3px;
+      font-size:14px;
+    }
+    .brand .name span{
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .pill{
+      font-size:12.5px;
+      color:rgba(255,235,185,.92);
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,213,140,.25);
+      background:rgba(0,0,0,.22);
+      backdrop-filter:blur(10px);
+      white-space:nowrap;
+    }
+
+    /* =========================================
+       Hero (ciel + montagnes)
+       ========================================= */
+    header.hero{
+      margin-top:14px;
+      border-radius:var(--r-lg);
+      border:1px solid rgba(180,220,255,.14);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      box-shadow:var(--shadow2);
+      overflow:hidden;
+      position:relative;
+    }
+
+    /* silhouette montagnes (SVG en background) */
+    header.hero::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(700px 360px at 15% 30%, rgba(170,210,255,.12), transparent 60%),
+        radial-gradient(680px 340px at 85% 20%, rgba(255,213,140,.10), transparent 60%);
+      pointer-events:none;
+    }
+    header.hero::after{
+      content:"";
+      position:absolute;
+      left:0; right:0; bottom:-1px;
+      height:190px;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 240'%3E%3Cpath fill='%23040A13' d='M0 195l120-62 92 56 115-88 128 96 148-140 170 158 160-114 142 96 125-62 0 160H0z'/%3E%3Cpath fill='%23020A12' opacity='.75' d='M0 220l180-92 112 80 115-70 160 100 190-160 205 178 238-140 0 164H0z'/%3E%3C/svg%3E");
+      background-size:cover;
+      background-repeat:no-repeat;
+      background-position:center bottom;
+      opacity:.95;
+      pointer-events:none;
+    }
+
+    .hero-inner{
+      padding:34px 18px 26px;
+      position:relative;
+      z-index:1;
+    }
+
+    .hero h1{
+      margin:0 0 10px;
+      font-size:clamp(34px, 4vw, 56px);
+      font-weight:850;
+      letter-spacing:.6px;
+      text-shadow:0 10px 30px rgba(0,0,0,.55);
+    }
+    .hero .subtitle{
+      max-width:78ch;
+      color:var(--muted);
+      margin-bottom:14px;
+    }
+
+    .hero .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      margin-top:12px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:16px;
+      border-left:2px solid var(--gold);
+      background:rgba(255,213,140,.09);
+      color:rgba(255,235,185,.95);
+      font-style:italic;
+    }
+
+    .divider{
+      height:1px;
+      margin:18px 0 0;
+      background:linear-gradient(90deg, transparent, rgba(170,210,255,.35), rgba(255,213,140,.25), transparent);
+      opacity:.9;
+    }
+
+    /* =========================================
+       Cards
+       ========================================= */
+    .section{
+      margin-top:26px;
+    }
+
+    .section-title{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:12px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size:20px;
+      letter-spacing:.2px;
+      color:rgba(235,245,255,.92);
+    }
+    .hint{
+      color:rgba(230,240,255,.70);
+      font-size:13px;
+    }
+
+    .card{
+      background:linear-gradient(180deg, var(--card), var(--card2));
+      border:1px solid var(--stroke);
+      border-radius:var(--r-md);
+      box-shadow:var(--shadow2);
+      backdrop-filter:blur(10px);
+      position:relative;
+      overflow:hidden;
+    }
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(420px 180px at 18% 20%, rgba(170, 210, 255, 0.16), transparent 60%),
+        radial-gradient(420px 180px at 85% 0%, rgba(255, 213, 140, 0.11), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .card > *{ position:relative; z-index:1; }
+
+    /* =========================================
+       Nouveau sujet
+       ========================================= */
+    .new-topic{
+      padding:18px;
+    }
+    .date{
+      display:inline-block;
+      font-size:13px;
+      color:rgba(215,235,255,.86);
+      border:1px solid rgba(180,220,255,.16);
+      background:rgba(0,0,0,.25);
+      padding:6px 10px;
+      border-radius:999px;
+      margin-bottom:10px;
+    }
+    .new-topic h3{
+      margin:0 0 8px;
+      font-size:18px;
+    }
+    .new-topic p{
+      margin:0 0 14px;
+      color:rgba(235,245,255,.85);
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,213,140,.35);
+      background:rgba(255,213,140,.10);
+      color:rgba(255,235,185,.95);
+      font-weight:750;
+      transition:transform 160ms ease, background 160ms ease, border-color 160ms ease;
+    }
+    .btn:hover{
+      transform:translateY(-2px);
+      background:rgba(255,213,140,.14);
+      border-color:rgba(255,213,140,.55);
+    }
+
+    /* =========================================
+       Sommaire (grid)
+       ========================================= */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+      gap:14px;
+    }
+
+    .hub{
+      padding:14px;
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      transition:transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+    .hub:hover{
+      transform:translateY(-3px);
+      border-color:rgba(255,213,140,.22);
+      background:linear-gradient(180deg, rgba(255,255,255,.085), rgba(255,255,255,.04));
+    }
+
+    .icon{
+      width:46px; height:46px;
+      display:grid; place-items:center;
+      border-radius:14px;
+      background:rgba(0,0,0,.25);
+      border:1px solid rgba(180,220,255,.16);
+      font-size:20px;
+      flex:0 0 auto;
+    }
+    .hub .content h3{
+      margin:0 0 6px;
+      font-size:16px;
+      font-weight:800;
+    }
+    .hub .content p{
+      margin:0;
+      color:rgba(230,240,255,.78);
+      font-size:13.5px;
+      line-height:1.35;
+    }
+    .arrow{
+      margin-left:auto;
+      color:rgba(255,235,185,.85);
+      font-weight:900;
+      font-size:18px;
+      align-self:center;
+    }
+
+    /* =========================================
+       Question du jour
+       ========================================= */
+    .question{
+      padding:18px;
+      text-align:center;
+      animation:air-current 7s ease-in-out infinite;
+    }
+    .question h3{
+      margin:0 0 10px;
+      color:rgba(255,235,185,.95);
+      letter-spacing:.2px;
+    }
+    #question{
+      margin:0;
+      color:rgba(245,248,255,.92);
+      font-size:1.05rem;
+    }
+    @keyframes air-current{
+      0%{ transform:translateY(-8px); }
+      50%{ transform:translateY(8px); }
+      100%{ transform:translateY(-8px); }
+    }
+
+    /* =========================================
+       Trésors de langue / Ressources
+       ========================================= */
+    .mini-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+      gap:12px;
+    }
+
+    .mini{
+      padding:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      background:rgba(0,0,0,.22);
+      border:1px solid rgba(180,220,255,.14);
+      border-radius:16px;
+      transition:transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+    .mini:hover{
+      transform:translateY(-3px);
+      border-color:rgba(255,213,140,.22);
+      background:rgba(255,213,140,.08);
+    }
+
+    .mini small{
+      color:rgba(230,240,255,.78);
+      font-weight:700;
+      letter-spacing:.2px;
+    }
+
+    /* =========================================
+       Footer
+       ========================================= */
+    footer{
+      margin:26px auto 28px;
+      width:min(1100px, calc(100% - 32px));
+      text-align:center;
+      color:rgba(230,240,255,.65);
+      font-size:.85rem;
+      padding:18px 14px;
+      border-radius:var(--r-lg);
+      border:1px solid rgba(180,220,255,.10);
+      background:rgba(0,0,0,.18);
+      backdrop-filter:blur(10px);
+    }
+
+    /* =========================================
+       Responsive
+       ========================================= */
+    @media (max-width:720px){
+      .topbar{ flex-direction:column; align-items:stretch; }
+      .pill{ text-align:center; }
+    }
+  </style>
 </head>
+
 <body>
 
-  <header>
-    <h1>Carnet de Culture</h1>
+  <div class="container">
 
-  <p class="site-intro">
-    Un espace personnel pour explorer, comprendre et relier les savoirs.
-    Les catégories se développent au fil des recherches et des lectures.
-  </p>
+    <div class="topbar">
+      <div class="brand" aria-label="Identité du site">
+        <div class="mark">🦅</div>
+        <div class="name">
+          <strong>Carnet de Culture</strong>
+          <span>Relier les savoirs — comme un vol au-dessus des crêtes</span>
+        </div>
+      </div>
 
-  <p class="site-rythme">
-  ✍️ Chaque dimanche, j’ajoute un nouveau sujet,
-  au rythme de mes lectures, de mes découvertes et de mes réflexions.
-  </p>
-  </header>
-<section class="nouveau-sujet">
-  <h2>🆕 Nouveau sujet</h2>
-
-  <div class="nouveau-sujet-card">
-    <span class="date">Dimanche 12 janvier 2026</span>
-    <h3>Pourquoi certaines villes sont construites autour de l’eau ?</h3>
-    <p>
-      De Venise à Amsterdam, l’eau façonne l’urbanisme, l’économie
-      et l’imaginaire des villes à travers l’histoire.
-    </p>
-<a href="pages/geo/chapitres/villes_autour_de_leau.html" class="lire-plus">
-      Lire le sujet →
-    </a>
-  </div>
-</section>
-<nav class="sommaire">
-  <h2>Sommaire</h2>
-  <p class="sommaire-hint">Choisis une catégorie pour explorer le carnet.</p>
-
-  <div class="sommaire-grid">
-
-  <a class="sommaire-card" href="pages/automobile/index.html">
-    <div class="sommaire-icon">🚗</div>
-    <div class="sommaire-content">
-      <h3>Automobile</h3>
-      <p>Histoire, technique, design, sport auto, culture.</p>
+      <div class="pill">⛰️ Exploration • Lecture • Connexions</div>
     </div>
-    <span class="sommaire-arrow">→</span>
-  </a>
 
-  <a class="sommaire-card" href="pages/geo/index.html">
-    <div class="sommaire-icon">🌍</div>
-    <div class="sommaire-content">
-      <h3>Géographie</h3>
-      <p>Physique, humaine, économique, environnement.</p>
-    </div>
-    <span class="sommaire-arrow">→</span>
-  </a>
+    <header class="hero" role="banner">
+      <div class="hero-inner">
+        <h1>Carnet de Culture</h1>
+        <p class="subtitle">
+          Un espace personnel pour explorer, comprendre et relier les savoirs.
+          Les catégories se développent au fil des recherches et des lectures.
+        </p>
 
-  <a class="sommaire-card" href="pages/histoire/index.html">
-    <div class="sommaire-icon">🏺</div>
-    <div class="sommaire-content">
-      <h3>Histoire</h3>
-      <p>Civilisations, périodes, découvertes, grands repères.</p>
-    </div>
-    <span class="sommaire-arrow">→</span>
-  </a>
+        <div class="meta">
+          <div class="badge">✍️ Chaque dimanche, j’ajoute un nouveau sujet — au rythme de mes découvertes.</div>
+        </div>
 
-  <a class="sommaire-card" href="pages/sciences/index.html">
-    <div class="sommaire-icon">⚗️</div>
-    <div class="sommaire-content">
-      <h3>Sciences</h3>
-      <p>Vivant, matière, Terre, cognition, maths, ingénierie.</p>
-    </div>
-    <span class="sommaire-arrow">→</span>
-  </a>
+        <div class="divider"></div>
+      </div>
+    </header>
 
-  <a class="sommaire-card" href="pages/exploration_voyages/index.html">
-    <div class="sommaire-icon">🧭</div>
-    <div class="sommaire-content">
-      <h3>Exploration & Voyages</h3>
-      <p>Territoires, récits, découvertes, cultures.</p>
-    </div>
-    <span class="sommaire-arrow">→</span>
-  </a>
+    <!-- =========================
+         NOUVEAU SUJET
+         ========================= -->
+    <section class="section" aria-labelledby="nouveau-sujet">
+      <div class="section-title">
+        <h2 id="nouveau-sujet">🆕 Nouveau sujet</h2>
+        <div class="hint">Dernière ascension intellectuelle</div>
+      </div>
 
-  <a class="sommaire-card" href="pages/langues_cultures/index.html">
-    <div class="sommaire-icon">🗣️</div>
-    <div class="sommaire-content">
-      <h3>Langues & Cultures étrangères</h3>
-      <p>Apprendre les langues, comprendre les cultures du monde.</p>
-    </div>
-    <span class="sommaire-arrow">→</span>
-  </a>
+      <article class="card new-topic">
+        <span class="date">Dimanche 12 janvier 2026</span>
+        <h3>Pourquoi certaines villes sont construites autour de l’eau ?</h3>
+        <p>
+          De Venise à Amsterdam, l’eau façonne l’urbanisme, l’économie
+          et l’imaginaire des villes à travers l’histoire.
+        </p>
+        <a class="btn" href="pages/geo/chapitres/villes_autour_de_leau.html">
+          Lire le sujet →
+        </a>
+      </article>
+    </section>
 
-  <a class="sommaire-card" href="pages/economie_politique/index.html">
-    <div class="sommaire-icon">🏛️</div>
-    <div class="sommaire-content">
-      <h3>Économie & Politique</h3>
-      <p>Marchés, États, pouvoirs et sociétés.</p>
-    </div>
-    <span class="sommaire-arrow">→</span>
-  </a>
+    <!-- =========================
+         SOMMAIRE
+         ========================= -->
+    <nav class="section" aria-labelledby="sommaire">
+      <div class="section-title">
+        <h2 id="sommaire">Sommaire</h2>
+        <div class="hint">Choisis une crête à explorer</div>
+      </div>
 
-  <a class="sommaire-card" href="pages/livres/index.html">
-    <div class="sommaire-icon">📚</div>
-    <div class="sommaire-content">
-      <h3>Livres</h3>
-      <p>Genres, fiches de lecture, auteurs, citations.</p>
-    </div>
-    <span class="sommaire-arrow">→</span>
-  </a>
+      <div class="grid">
+        <a class="card hub" href="pages/automobile/index.html">
+          <div class="icon">🚗</div>
+          <div class="content">
+            <h3>Automobile</h3>
+            <p>Histoire, technique, design, sport auto, culture.</p>
+          </div>
+          <div class="arrow">→</div>
+        </a>
 
-  <a class="sommaire-card" href="pages/art_culture/index.html">
-    <div class="sommaire-icon">🎭</div>
-    <div class="sommaire-content">
-      <h3>Art & Culture</h3>
-      <p>Arts, mouvements, artistes, œuvres, inspirations.</p>
-    </div>
-    <span class="sommaire-arrow">→</span>
-  </a>
+        <a class="card hub" href="pages/geo/index.html">
+          <div class="icon">🌍</div>
+          <div class="content">
+            <h3>Géographie</h3>
+            <p>Physique, humaine, économique, environnement.</p>
+          </div>
+          <div class="arrow">→</div>
+        </a>
 
-  <a class="sommaire-card" href="pages/technologie_informatique/index.html">
-    <div class="sommaire-icon">💻</div>
-    <div class="sommaire-content">
-      <h3>Technologie & Informatique</h3>
-      <p>Web, outils, IA, systèmes, curiosités tech.</p>
-    </div>
-    <span class="sommaire-arrow">→</span>
-  </a>
+        <a class="card hub" href="pages/histoire/index.html">
+          <div class="icon">🏺</div>
+          <div class="content">
+            <h3>Histoire</h3>
+            <p>Civilisations, périodes, découvertes, grands repères.</p>
+          </div>
+          <div class="arrow">→</div>
+        </a>
 
-  <a class="sommaire-card" href="pages/droit_justice_criminologie/index.html">
-    <div class="sommaire-icon">⚖️</div>
-    <div class="sommaire-content">
-      <h3>Droit, Justice & Criminologie</h3>
-      <p>Lois, crimes, enquêtes et fonctionnement de la justice.</p>
-    </div>
-    <span class="sommaire-arrow">→</span>
-  </a>
+        <a class="card hub" href="pages/sciences/index.html">
+          <div class="icon">⚗️</div>
+          <div class="content">
+            <h3>Sciences</h3>
+            <p>Vivant, matière, Terre, cognition, maths, ingénierie.</p>
+          </div>
+          <div class="arrow">→</div>
+        </a>
 
-  <a class="sommaire-card" href="pages/personnalites/index.html">
-    <div class="sommaire-icon">👤</div>
-    <div class="sommaire-content">
-      <h3>Personnalités marquantes</h3>
-      <p>Femmes et hommes qui ont marqué l’histoire, la science et la culture.</p>
-    </div>
-    <span class="sommaire-arrow">→</span>
-  </a>
+        <a class="card hub" href="pages/exploration_voyages/index.html">
+          <div class="icon">🧭</div>
+          <div class="content">
+            <h3>Exploration & Voyages</h3>
+            <p>Territoires, récits, découvertes, cultures.</p>
+          </div>
+          <div class="arrow">→</div>
+        </a>
 
-</div>
+        <a class="card hub" href="pages/langues_cultures/index.html">
+          <div class="icon">🗣️</div>
+          <div class="content">
+            <h3>Langues & Cultures étrangères</h3>
+            <p>Apprendre les langues, comprendre les cultures du monde.</p>
+          </div>
+          <div class="arrow">→</div>
+        </a>
 
-</nav>
+        <a class="card hub" href="pages/economie_politique/index.html">
+          <div class="icon">🏛️</div>
+          <div class="content">
+            <h3>Économie & Politique</h3>
+            <p>Marchés, États, pouvoirs et sociétés.</p>
+          </div>
+          <div class="arrow">→</div>
+        </a>
 
+        <a class="card hub" href="pages/livres/index.html">
+          <div class="icon">📚</div>
+          <div class="content">
+            <h3>Livres</h3>
+            <p>Genres, fiches de lecture, auteurs, citations.</p>
+          </div>
+          <div class="arrow">→</div>
+        </a>
 
-  <section class="questionnement">
-    <div class="bulle-question">
-      <h3>🧠 Question du jour</h3>
-      <p id="question"></p>
-    </div>
-  </section>
+        <a class="card hub" href="pages/art_culture/index.html">
+          <div class="icon">🎭</div>
+          <div class="content">
+            <h3>Art & Culture</h3>
+            <p>Arts, mouvements, artistes, œuvres, inspirations.</p>
+          </div>
+          <div class="arrow">→</div>
+        </a>
 
-<section class="tresors-langue">
-  <h3>💎 Trésors de Langue</h3>
-  <div class="langue-cards">
-    <a href="#langue_francaise" class="langue-card">
-      <div class="flag france"></div>
-      <span>Langue Française</span>
-    </a>
+        <a class="card hub" href="pages/technologie_informatique/index.html">
+          <div class="icon">💻</div>
+          <div class="content">
+            <h3>Technologie & Informatique</h3>
+            <p>Web, outils, IA, systèmes, curiosités tech.</p>
+          </div>
+          <div class="arrow">→</div>
+        </a>
 
-    <a href="#langue_polonaise" class="langue-card">
-      <div class="flag pologne"></div>
-      <span>Langue Polonaise</span>
-    </a>
+        <a class="card hub" href="pages/droit_justice_criminologie/index.html">
+          <div class="icon">⚖️</div>
+          <div class="content">
+            <h3>Droit, Justice & Criminologie</h3>
+            <p>Lois, crimes, enquêtes et fonctionnement de la justice.</p>
+          </div>
+          <div class="arrow">→</div>
+        </a>
 
-    <a href="#langue_anglaise" class="langue-card">
-      <div class="flag royaume-uni"></div>
-      <span>Langue Anglaise</span>
-    </a>
-  </div>
-</section>
+        <a class="card hub" href="pages/personnalites/index.html">
+          <div class="icon">👤</div>
+          <div class="content">
+            <h3>Personnalités marquantes</h3>
+            <p>Femmes et hommes qui ont marqué l’histoire, la science et la culture.</p>
+          </div>
+          <div class="arrow">→</div>
+        </a>
 
+        <a class="card hub" href="dictionnaire.html">
+          <div class="icon">📖</div>
+          <div class="content">
+            <h3>Dictionnaire général</h3>
+            <p>Définitions, notions clés et vocabulaire transversal.</p>
+          </div>
+          <div class="arrow">→</div>
+        </a>
+      </div>
+    </nav>
 
+    <!-- =========================
+         QUESTION DU JOUR
+         ========================= -->
+    <section class="section" aria-labelledby="question-du-jour">
+      <div class="section-title">
+        <h2 id="question-du-jour">🧠 Question du jour</h2>
+        <div class="hint">Un battement d’aile pour réfléchir</div>
+      </div>
 
-<section class="ressources-utilisees">
-  <h3>🧭 Ressources utilisées</h3>
-  <div class="ressource-cards">
-<a href="articles.html" class="ressource-card">
-  <span class="icon">📰</span>
-  <span class="text">Articles</span>
-</a>
-    <a href="videos_podcasts.html" target="_blank" class="ressource-card">
-      <span class="icon">🎬🎧</span>
-      <span class="text">Vidéos & Podcasts</span>
-    </a>
-    <a href="sites_web.html" class="ressource-card">
-      <span class="icon">💻</span>
-      <span class="text">Sites Web</span>
-    </a>
-  </div>
-</section>
+      <div class="card question">
+        <h3>🦅 En altitude, une question résonne…</h3>
+        <p id="question"></p>
+      </div>
+    </section>
 
+    <!-- =========================
+         TRÉSORS DE LANGUE
+         ========================= -->
+    <section class="section" aria-labelledby="tresors">
+      <div class="section-title">
+        <h2 id="tresors">💎 Trésors de langue</h2>
+        <div class="hint">Mots précieux, polis par le temps</div>
+      </div>
 
-<script>
-  const questions = [
-    "Pourquoi la glace flotte-t-elle sur l’eau ?",
-    "Comment les lois de la physique influencent-elles le fonctionnement du corps humain ?",
-    "Pourquoi la cellule est-elle considérée comme l’unité fondamentale de la vie ?",
-    "Quels sont les liens entre l’observation scientifique et la compréhension philosophique du monde ?",
-    "Qu’est-ce qui différencie une théorie scientifique d’une simple hypothèse ?",
-    "Comment l’énergie se transforme-t-elle dans les systèmes vivants ?",
-    "Peut-on vraiment tout expliquer par la science ?",
-    "Quelle est la limite entre le vivant et le non-vivant ?",
-    "Pourquoi la lumière est-elle à la fois onde et particule ?"
-  ];
+      <div class="mini-grid">
+        <a class="card mini" href="#langue_francaise">
+          <span>🇫🇷</span> <small>Langue Française</small>
+        </a>
+        <a class="card mini" href="#langue_polonaise">
+          <span>🇵🇱</span> <small>Langue Polonaise</small>
+        </a>
+        <a class="card mini" href="#langue_anglaise">
+          <span>🇬🇧</span> <small>Langue Anglaise</small>
+        </a>
+      </div>
+    </section>
 
-  const randomIndex = Math.floor(Math.random() * questions.length);
-  document.getElementById("question").textContent = questions[randomIndex];
-</script>
-<footer>
-  © Carnet de Culture — Accueil 2026
-</footer>
+    <!-- =========================
+         RESSOURCES
+         ========================= -->
+    <section class="section" aria-labelledby="ressources">
+      <div class="section-title">
+        <h2 id="ressources">🧭 Ressources utilisées</h2>
+        <div class="hint">Cartes, traces, et outils de route</div>
+      </div>
+
+      <div class="mini-grid">
+        <a class="card mini" href="articles.html">
+          <span>📰</span> <small>Articles</small>
+        </a>
+
+        <a class="card mini" href="videos_podcasts.html" target="_blank" rel="noopener">
+          <span>🎬🎧</span> <small>Vidéos & Podcasts</small>
+        </a>
+
+        <a class="card mini" href="sites_web.html">
+          <span>💻</span> <small>Sites Web</small>
+        </a>
+      </div>
+    </section>
+
+  </div><!-- /container -->
+
+  <script>
+    const questions = [
+      "Pourquoi la glace flotte-t-elle sur l’eau ?",
+      "Comment les lois de la physique influencent-elles le fonctionnement du corps humain ?",
+      "Pourquoi la cellule est-elle considérée comme l’unité fondamentale de la vie ?",
+      "Quels sont les liens entre l’observation scientifique et la compréhension philosophique du monde ?",
+      "Qu’est-ce qui différencie une théorie scientifique d’une simple hypothèse ?",
+      "Comment l’énergie se transforme-t-elle dans les systèmes vivants ?",
+      "Peut-on vraiment tout expliquer par la science ?",
+      "Quelle est la limite entre le vivant et le non-vivant ?",
+      "Pourquoi la lumière est-elle à la fois onde et particule ?"
+    ];
+
+    const randomIndex = Math.floor(Math.random() * questions.length);
+    document.getElementById("question").textContent = questions[randomIndex];
+  </script>
+
+  <footer>
+    © Carnet de Culture — Accueil 2026
+  </footer>
+
 </body>
 </html>
