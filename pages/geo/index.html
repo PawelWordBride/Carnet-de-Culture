@@ -3,501 +3,161 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Géographie - Carnet de Culture</title>
+  <title>Géographie — Carnet de Culture</title>
 
-  <style>
-    /* =========================================
-       GEOGRAPHIE — THEME ATLAS (carte du monde)
-       ADN commun : verre glacé, nuit, reflets
-       Signature : océan/latitudes + “carte”
-       ========================================= */
-
-    :root{
-      /* Base nuit (cohérence avec ton accueil) */
-      --bg0:#050A12;
-      --bg1:#0A1424;
-
-      /* Accent GEO (océan + turquoise + sable) */
-      --accent:#57D3FF;       /* eau */
-      --accent2:#43FFA8;      /* vert-terre */
-      --sand:#FFD58C;         /* sable doux */
-
-      --text:rgba(245,248,255,.92);
-      --muted:rgba(230,240,255,.78);
-
-      --card:rgba(255,255,255,.06);
-      --card2:rgba(255,255,255,.035);
-      --stroke:rgba(180,220,255,.14);
-
-      --shadow:0 18px 60px rgba(0,0,0,.35);
-      --shadow2:0 10px 30px rgba(0,0,0,.25);
-
-      --r-lg:22px;
-      --r-md:18px;
-      --r-sm:14px;
-    }
-
-    *{ box-sizing:border-box; }
-    html, body{ height:100%; }
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color:var(--text);
-      background:
-        radial-gradient(1200px 700px at 12% 10%, rgba(87, 211, 255, 0.18), transparent 60%),
-        radial-gradient(900px 600px at 88% 20%, rgba(67, 255, 168, 0.10), transparent 55%),
-        radial-gradient(700px 500px at 70% 85%, rgba(255, 213, 140, 0.08), transparent 60%),
-        linear-gradient(180deg, var(--bg1) 0%, var(--bg0) 72%, #03050A 100%);
-      overflow-x:hidden;
-    }
-
-    /* texture “latitudes” + étoiles */
-    body::before{
-      content:"";
-      position:fixed; inset:0;
-      pointer-events:none;
-      background:
-        repeating-linear-gradient(
-          0deg,
-          rgba(255,255,255,0.035) 0px,
-          rgba(255,255,255,0.035) 1px,
-          transparent 1px,
-          transparent 14px
-        );
-      mix-blend-mode:overlay;
-      opacity:.16;
-    }
-    body::after{
-      content:"";
-      position:fixed; inset:-40px;
-      pointer-events:none;
-      background:
-        radial-gradient(circle at 18% 30%, rgba(255,255,255,0.06) 0 1px, transparent 2px),
-        radial-gradient(circle at 74% 22%, rgba(255,255,255,0.05) 0 1px, transparent 2px),
-        radial-gradient(circle at 55% 70%, rgba(255,255,255,0.04) 0 1px, transparent 2px);
-      opacity:.26;
-    }
-
-    a{ color:inherit; text-decoration:none; }
-    p{ margin:0; line-height:1.6; }
-
-    .container{
-      width:min(1100px, calc(100% - 32px));
-      margin:0 auto;
-    }
-
-    /* =========================================
-       Header atlas
-       ========================================= */
-    header{
-      margin-top:18px;
-      border-radius:var(--r-lg);
-      border:1px solid rgba(180,220,255,.14);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      box-shadow:var(--shadow2);
-      overflow:hidden;
-      position:relative;
-    }
-
-    /* Carte du monde (SVG inline en data-uri) */
-    header::before{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        radial-gradient(700px 360px at 15% 20%, rgba(87,211,255,.16), transparent 60%),
-        radial-gradient(680px 340px at 85% 25%, rgba(67,255,168,.10), transparent 60%),
-        radial-gradient(520px 260px at 60% 85%, rgba(255,213,140,.08), transparent 60%),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='420' viewBox='0 0 1200 420'%3E%3Cdefs%3E%3CradialGradient id='o' cx='50%25' cy='40%25' r='70%25'%3E%3Cstop offset='0%25' stop-color='%230B2035'/%3E%3Cstop offset='100%25' stop-color='%23070F1D'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='1200' height='420' fill='url(%23o)'/%3E%3Cg opacity='.35'%3E%3Cpath fill='%2357D3FF' d='M176 256c40-44 92-58 140-44 24 7 48 22 62 44 18 29 13 62-10 84-30 30-78 40-124 30-55-12-98-56-68-114z'/%3E%3Cpath fill='%2343FFA8' d='M460 210c30-52 95-78 154-66 52 10 90 46 96 86 8 52-38 100-104 112-74 13-158-32-146-132z'/%3E%3Cpath fill='%2343FFA8' d='M760 170c52-42 128-52 186-30 54 20 82 66 64 110-22 54-96 82-170 76-78-7-150-52-80-156z'/%3E%3Cpath fill='%2357D3FF' d='M930 282c18-32 58-52 98-50 44 2 76 28 78 62 2 38-32 70-78 76-50 6-114-22-98-88z'/%3E%3C/g%3E%3Cg opacity='.22'%3E%3Cpath stroke='%23FFFFFF' stroke-width='2' fill='none' d='M0 120 C220 80 380 160 600 120 C820 80 980 160 1200 120'/%3E%3Cpath stroke='%23FFFFFF' stroke-width='2' fill='none' d='M0 220 C220 180 380 260 600 220 C820 180 980 260 1200 220'/%3E%3Cpath stroke='%23FFFFFF' stroke-width='2' fill='none' d='M0 320 C220 280 380 360 600 320 C820 280 980 360 1200 320'/%3E%3C/g%3E%3C/svg%3E");
-      background-size:cover;
-      background-position:center;
-      pointer-events:none;
-      filter:saturate(1.1);
-    }
-
-    header::after{
-      content:"";
-      position:absolute;
-      left:18px; right:18px; bottom:16px;
-      height:1px;
-      background:linear-gradient(90deg, transparent, rgba(87,211,255,.35), rgba(67,255,168,.25), rgba(255,213,140,.20), transparent);
-      opacity:.95;
-      pointer-events:none;
-    }
-
-    .header-inner{
-      padding:22px 18px 20px;
-      position:relative;
-      z-index:1;
-    }
-
-    .topline{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-bottom:10px;
-    }
-
-    .title{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-
-    .title h1{
-      margin:0;
-      font-size:clamp(26px, 2.6vw, 34px);
-      letter-spacing:.4px;
-      font-weight:850;
-      text-shadow:0 10px 30px rgba(0,0,0,.55);
-    }
-
-    .pill{
-      font-size:12.5px;
-      color:rgba(220,250,255,.92);
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(87,211,255,.25);
-      background:rgba(0,0,0,.22);
-      backdrop-filter:blur(10px);
-      white-space:nowrap;
-    }
-
-    nav a{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 14px;
-      border-radius:14px;
-      border:1px solid rgba(255,213,140,.25);
-      background:rgba(255,213,140,.10);
-      color:rgba(255,235,185,.95);
-      font-weight:800;
-      transition:transform 160ms ease, background 160ms ease, border-color 160ms ease;
-    }
-    nav a:hover{
-      transform:translateY(-2px);
-      background:rgba(255,213,140,.14);
-      border-color:rgba(255,213,140,.5);
-    }
-
-    .subtitle{
-      max-width:78ch;
-      color:var(--muted);
-    }
-
-    /* =========================================
-       Main
-       ========================================= */
-    main{
-      width:min(1100px, calc(100% - 32px));
-      margin:0 auto;
-      padding:22px 0 54px;
-    }
-
-    .intro{
-      border-radius:var(--r-lg);
-      border:1px solid rgba(180,220,255,.14);
-      background:linear-gradient(180deg, var(--card), var(--card2));
-      box-shadow:var(--shadow2);
-      backdrop-filter:blur(10px);
-      padding:18px;
-      position:relative;
-      overflow:hidden;
-    }
-    .intro::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(520px 220px at 12% 25%, rgba(87,211,255,.16), transparent 60%),
-        radial-gradient(520px 220px at 88% 15%, rgba(67,255,168,.10), transparent 60%);
-      opacity:.9;
-      pointer-events:none;
-    }
-    .intro > *{ position:relative; z-index:1; }
-
-    .intro h2{
-      margin:0 0 8px;
-      font-size:1.2rem;
-      letter-spacing:.2px;
-      color:rgba(235,245,255,.92);
-    }
-    .intro p{
-      color:rgba(235,245,255,.85);
-      line-height:1.5;
-    }
-    .hint{
-      margin-top:12px;
-      font-size:.92rem;
-      color:rgba(230,240,255,.70);
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
-      gap:14px;
-      margin-top:16px;
-    }
-
-    .card{
-      text-decoration:none;
-      border-radius:var(--r-md);
-      border:1px solid rgba(180,220,255,.14);
-      background:linear-gradient(180deg, var(--card), var(--card2));
-      box-shadow:var(--shadow2);
-      backdrop-filter:blur(10px);
-      padding:16px;
-      display:flex;
-      align-items:center;
-      gap:12px;
-      transition:transform 160ms ease, border-color 160ms ease, background 160ms ease;
-      cursor:pointer;
-      position:relative;
-      overflow:hidden;
-      color:rgba(245,248,255,.92);
-    }
-    .card::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(260px 120px at 12% 15%, rgba(87,211,255,.12), transparent 60%),
-        radial-gradient(260px 120px at 90% 0%, rgba(67,255,168,.09), transparent 60%);
-      opacity:.9;
-      pointer-events:none;
-    }
-    .card > *{ position:relative; z-index:1; }
-
-    .card:hover{
-      transform:translateY(-3px);
-      border-color: rgba(255,213,140,.22);
-      background:linear-gradient(180deg, rgba(255,255,255,.085), rgba(255,255,255,.04));
-    }
-
-    .icon{
-      width:46px;
-      height:46px;
-      border-radius:14px;
-      background:rgba(0,0,0,.25);
-      border:1px solid rgba(180,220,255,.16);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:1.3rem;
-      flex:0 0 auto;
-    }
-
-    .card h3{
-      margin:0 0 6px;
-      font-size:1.05rem;
-      font-weight:850;
-      letter-spacing:.15px;
-    }
-    .card p{
-      margin:0;
-      font-size:.92rem;
-      color:rgba(230,240,255,.78);
-      line-height:1.35;
-    }
-
-    .arrow{
-      margin-left:auto;
-      font-weight:900;
-      color:rgba(255,235,185,.85);
-      font-size:1.2rem;
-      opacity:.95;
-    }
-
-    #page-content{
-      display:none;
-      margin-top:18px;
-      border-radius:var(--r-lg);
-      border:1px solid rgba(180,220,255,.14);
-      background:linear-gradient(180deg, var(--card), var(--card2));
-      box-shadow:var(--shadow);
-      backdrop-filter:blur(10px);
-      padding:18px;
-      color:rgba(235,245,255,.86);
-    }
-
-    .card.is-active{
-      outline:3px solid rgba(87,211,255,.25);
-      border-color: rgba(87,211,255,.28);
-    }
-
-    /* petites finitions dans le contenu injecté */
-    #page-content h1, #page-content h2, #page-content h3{
-      color:rgba(245,248,255,.92);
-      letter-spacing:.2px;
-    }
-    #page-content a{
-      color:rgba(220,250,255,.92);
-      text-decoration:underline;
-      text-underline-offset:3px;
-    }
-
-    @media (max-width:720px){
-      nav a{ width:100%; justify-content:center; }
-      .pill{ width:100%; text-align:center; }
-    }
-  </style>
+  <link rel="stylesheet" href="../../assets/css/style.css" />
 </head>
 
 <body>
-  <div class="container">
 
-    <header>
-      <div class="header-inner">
-        <div class="topline">
-          <div class="title">
-            <div class="pill">🗺️ Atlas • Cartes • Territoires</div>
-            <h1>🌍 Géographie</h1>
+  <main class="shell">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <section class="card brand" aria-label="Identité du site">
+        <div class="brand-top">
+          <div class="mark" aria-hidden="true">🗺️</div>
+          <div class="brand-text">
+            <h1>Géographie</h1>
+            <p>Atlas • cartes • territoires</p>
           </div>
-
-          <nav>
-            <a href="../../index.html">⬅ Retour au sommaire</a>
-          </nav>
         </div>
+      </section>
 
-        <p class="subtitle">
-          Reliefs, climats, populations, économies, territoires et enjeux contemporains —
-          comme un atlas vivant.
+      <section class="card search" aria-label="Recherche">
+        <label for="search">🔎 Rechercher (mots, lieux, thèmes)</label>
+        <input id="search" type="search" placeholder="Ex : climats, désert, migrations, Nil..." autocomplete="off">
+        <div class="search-results card" id="search-results" hidden></div>
+      </section>
+
+      <section class="card quick" aria-label="Navigation">
+        <h2>Navigation</h2>
+        <div class="quick-grid">
+          <a class="chip" href="../../index.html">⬅ Sommaire</a>
+          <a class="chip" href="../histoire/index.html">🏺 Histoire</a>
+          <a class="chip" href="../sciences/index.html">⚗️ Sciences</a>
+          <a class="chip" href="../automobile/index.html">🚗 Auto</a>
+        </div>
+      </section>
+
+      <div class="pill">🌍 Reliefs • populations • enjeux</div>
+
+    </aside>
+
+    <!-- MAIN -->
+    <section class="main geo-page">
+
+      <header class="card hero" role="banner">
+        <h2>🌍 Section Géographie</h2>
+        <p>
+          Du relief aux métropoles, des routes commerciales aux risques naturels :
+          clique sur une sous-catégorie pour afficher le contenu à droite.
         </p>
+      </header>
+
+      <div class="section-title">
+        <h3>Sous-catégories</h3>
+        <span class="hint">Clique pour ouvrir</span>
       </div>
-    </header>
 
-    <main>
-      <section class="intro">
-        <h2>Bienvenue dans la section Géographie</h2>
-        <p>Reliefs, climats, populations, économies, territoires, enjeux contemporains.</p>
-        <p class="hint">Clique sur une sous-catégorie pour afficher son contenu.</p>
+      <nav class="grid" id="cards" aria-label="Sous-catégories Géographie">
+
+        <a class="card hub load-page" href="chapitres/geographie_physique.html"
+           data-keywords="physique reliefs montagnes climats océans volcans séismes écosystèmes">
+          <div class="icon" aria-hidden="true">🏔️</div>
+          <div class="hub-text">
+            <h4>Géographie physique</h4>
+            <p>Reliefs, climats, océans, risques, écosystèmes.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/geographie_humaine.html"
+           data-keywords="humaine population urbanisation métropoles migrations frontières cultures religions langues">
+          <div class="icon" aria-hidden="true">👥</div>
+          <div class="hub-text">
+            <h4>Géographie humaine</h4>
+            <p>Peuplement, villes, migrations, frontières, cultures.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/geographie_economique.html"
+           data-keywords="économique routes commerciales ressources inégalités tourisme développement durable">
+          <div class="icon" aria-hidden="true">📈</div>
+          <div class="hub-text">
+            <h4>Géographie économique</h4>
+            <p>Routes, ressources, inégalités, tourisme.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/geographie_environnementale.html"
+           data-keywords="environnementale climat déforestation aires protégées catastrophes montée des océans résilience">
+          <div class="icon" aria-hidden="true">🌿</div>
+          <div class="hub-text">
+            <h4>Géographie environnementale</h4>
+            <p>Climat, biodiversité, catastrophes, littoraux.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/geographie_regionale.html"
+           data-keywords="régionale fleuves nil amazone gange danube déserts sahara gobi montagnes himalaya andes alpes archipels">
+          <div class="icon" aria-hidden="true">🗺️</div>
+          <div class="hub-text">
+            <h4>Géographie régionale</h4>
+            <p>Fleuves, déserts, montagnes, archipels, focus.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/geographie_historique.html"
+           data-keywords="historique route de la soie transsaharien cartographie découvertes civilisations frontières traités accords">
+          <div class="icon" aria-hidden="true">🧭</div>
+          <div class="hub-text">
+            <h4>Géographie historique</h4>
+            <p>Routes, cartes, découvertes, frontières, civilisations.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/geographie_et_technologies.html"
+           data-keywords="technologies satellites sig google earth big data géolocalisation énergies renouvelables">
+          <div class="icon" aria-hidden="true">🛰️</div>
+          <div class="hub-text">
+            <h4>Géographie & technologies</h4>
+            <p>SIG, satellites, data, mobilités.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/pays_regions_et_villes.html"
+           data-keywords="pays régions villes études urbaines swot comparaisons amzonie sahel inde brésil canada">
+          <div class="icon" aria-hidden="true">📌</div>
+          <div class="hub-text">
+            <h4>Pays, régions & villes</h4>
+            <p>Études par pays/région, urbain, SWOT, comparaisons.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+      </nav>
+
+      <section class="card reader" id="page-content" aria-live="polite">
+        <div class="reader-empty">
+          <h3>Ouvre une sous-catégorie</h3>
+          <p>Le contenu s’affichera ici, sans quitter la page.</p>
+        </div>
       </section>
 
-      <section class="grid" aria-label="Sous-catégories Géographie">
-        <a class="card load-page" href="geographie_physique.html">
-          <div class="icon">🏔️</div>
-          <div>
-            <h3>Géographie physique</h3>
-            <p>Reliefs, climat, océans, volcans, écosystèmes.</p>
-          </div>
-          <span class="arrow">→</span>
-        </a>
+    </section>
 
-        <a class="card load-page" href="geographie_humaine.html">
-          <div class="icon">👥</div>
-          <div>
-            <h3>Géographie humaine</h3>
-            <p>Peuplement, métropoles, migrations, frontières.</p>
-          </div>
-          <span class="arrow">→</span>
-        </a>
+  </main>
 
-        <a class="card load-page" href="geographie_economique.html">
-          <div class="icon">📈</div>
-          <div>
-            <h3>Géographie économique</h3>
-            <p>Ressources, échanges, réseaux, tourisme.</p>
-          </div>
-          <span class="arrow">→</span>
-        </a>
+  <footer class="footer">© Carnet de Culture — Géographie</footer>
 
-        <a class="card load-page" href="geographie_environnementale.html">
-          <div class="icon">🌿</div>
-          <div>
-            <h3>Géographie environnementale</h3>
-            <p>Climat, biodiversité, transition, résilience.</p>
-          </div>
-          <span class="arrow">→</span>
-        </a>
-
-        <a class="card load-page" href="geographie_regionale.html">
-          <div class="icon">🗺️</div>
-          <div>
-            <h3>Géographie régionale</h3>
-            <p>Fleuves, déserts, ensembles régionaux, focus.</p>
-          </div>
-          <span class="arrow">→</span>
-        </a>
-
-        <a class="card load-page" href="geographie_historique.html">
-          <div class="icon">🧭</div>
-          <div>
-            <h3>Géographie historique</h3>
-            <p>Cartographie, routes, frontières, civilisations.</p>
-          </div>
-          <span class="arrow">→</span>
-        </a>
-
-        <a class="card load-page" href="geographie_et_technologies.html">
-          <div class="icon">🛰️</div>
-          <div>
-            <h3>Géographie et technologies</h3>
-            <p>SIG, satellites, géolocalisation, big data.</p>
-          </div>
-          <span class="arrow">→</span>
-        </a>
-
-        <a class="card load-page" href="pays_regions_et_villes.html">
-          <div class="icon">📌</div>
-          <div>
-            <h3>Pays, régions et villes</h3>
-            <p>Études par pays, comparaisons, fiches territoriales.</p>
-          </div>
-          <span class="arrow">→</span>
-        </a>
-      </section>
-
-      <section id="page-content" aria-live="polite"></section>
-    </main>
-
-  </div>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const content = document.getElementById("page-content");
-      let currentUrl = null;
-
-      const clearActive = () => {
-        document.querySelectorAll(".load-page.is-active")
-          .forEach(c => c.classList.remove("is-active"));
-      };
-
-      document.addEventListener("click", async (e) => {
-        const link = e.target.closest("a.load-page");
-        if (!link) return;
-
-        e.preventDefault();
-        const url = link.getAttribute("href");
-
-        if (currentUrl === url) {
-          content.innerHTML = "";
-          content.style.display = "none";
-          currentUrl = null;
-          clearActive();
-          return;
-        }
-
-        try {
-          const res = await fetch(url);
-          if (!res.ok) throw new Error("HTTP " + res.status);
-          const html = await res.text();
-
-          content.innerHTML = html;
-          content.style.display = "block";
-          currentUrl = url;
-
-          clearActive();
-          link.classList.add("is-active");
-          content.scrollIntoView({ behavior: "smooth", block: "start" });
-
-        } catch (err) {
-          content.innerHTML = "<p>Erreur lors du chargement de la page.</p>";
-          content.style.display = "block";
-          currentUrl = null;
-          clearActive();
-        }
-      });
-    });
-  </script>
+  <script src="../../assets/js/app.js" defer></script>
 </body>
 </html>

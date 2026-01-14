@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dictionnaire — Carnet de Culture</title>
+
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+<main class="shell">
+
+  <aside class="sidebar">
+
+    <section class="card brand">
+      <div class="brand-top">
+        <div class="mark">📖</div>
+        <div class="brand-text">
+          <h1>Dictionnaire</h1>
+          <p>Notions • définitions • liens</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card search">
+      <label for="search">🔎 Rechercher un mot / notion</label>
+      <input id="search" type="search" placeholder="Ex : urbanisme, capillarité, féodalité..." autocomplete="off">
+      <div class="search-results card" id="search-results" hidden></div>
+    </section>
+
+    <section class="card quick">
+      <h2>Navigation</h2>
+      <div class="quick-grid">
+        <a class="chip" href="../index.html">🏠 Accueil</a>
+        <a class="chip" href="../pages/geo/index.html">🌍 Géographie</a>
+        <a class="chip" href="../pages/histoire/index.html">🏺 Histoire</a>
+        <a class="chip" href="../pages/sciences/index.html">⚗️ Sciences</a>
+        <a class="chip" href="../pages/ingenierie/index.html">📐 Ingénierie</a>
+      </div>
+    </section>
+
+    <div class="pill">🧠 Définitions transversales</div>
+
+  </aside>
+
+  <section class="main dict-page">
+
+    <header class="card hero">
+      <h2>📖 Dictionnaire général</h2>
+      <p>
+        Une base de notions (sciences, histoire, géo, tech, droit…).
+        Chaque entrée est une page : facile à enrichir et à retrouver.
+      </p>
+    </header>
+
+<div class="section-title">
+  <h3>Alphabet</h3>
+  <span class="hint">Clique sur une lettre</span>
+</div>
+
+<nav class="alpha" aria-label="Alphabet du dictionnaire">
+  <!-- Mets data-letter pour gérer l'actif -->
+  <a class="alpha__item load-page" data-letter="A" href=".../a/a.html" aria-label="Lettre A">A</a>
+  <a class="alpha__item load-page" data-letter="B" href="b.html" aria-label="Lettre B">B</a>
+  <a class="alpha__item load-page" data-letter="C" href="c.html" aria-label="Lettre C">C</a>
+  <a class="alpha__item load-page" data-letter="D" href="d.html" aria-label="Lettre D">D</a>
+  <a class="alpha__item load-page" data-letter="E" href="e.html" aria-label="Lettre E">E</a>
+  <a class="alpha__item load-page" data-letter="F" href="lettres/f.html" aria-label="Lettre F">F</a>
+  <a class="alpha__item load-page" data-letter="G" href="lettres/g.html" aria-label="Lettre G">G</a>
+  <a class="alpha__item load-page" data-letter="H" href="lettres/h.html" aria-label="Lettre H">H</a>
+  <a class="alpha__item load-page" data-letter="I" href="lettres/i.html" aria-label="Lettre I">I</a>
+  <a class="alpha__item load-page" data-letter="J" href="lettres/j.html" aria-label="Lettre J">J</a>
+  <a class="alpha__item load-page" data-letter="K" href="lettres/k.html" aria-label="Lettre K">K</a>
+  <a class="alpha__item load-page" data-letter="L" href="lettres/l.html" aria-label="Lettre L">L</a>
+  <a class="alpha__item load-page" data-letter="M" href="lettres/m.html" aria-label="Lettre M">M</a>
+  <a class="alpha__item load-page" data-letter="N" href="lettres/n.html" aria-label="Lettre N">N</a>
+  <a class="alpha__item load-page" data-letter="O" href="lettres/o.html" aria-label="Lettre O">O</a>
+  <a class="alpha__item load-page" data-letter="P" href="lettres/p.html" aria-label="Lettre P">P</a>
+  <a class="alpha__item load-page" data-letter="Q" href="lettres/q.html" aria-label="Lettre Q">Q</a>
+  <a class="alpha__item load-page" data-letter="R" href="lettres/r.html" aria-label="Lettre R">R</a>
+  <a class="alpha__item load-page" data-letter="S" href="lettres/s.html" aria-label="Lettre S">S</a>
+  <a class="alpha__item load-page" data-letter="T" href="lettres/t.html" aria-label="Lettre T">T</a>
+  <a class="alpha__item load-page" data-letter="U" href="lettres/u.html" aria-label="Lettre U">U</a>
+  <a class="alpha__item load-page" data-letter="V" href="lettres/v.html" aria-label="Lettre V">V</a>
+  <a class="alpha__item load-page" data-letter="W" href="lettres/w.html" aria-label="Lettre W">W</a>
+  <a class="alpha__item load-page" data-letter="X" href="lettres/x.html" aria-label="Lettre X">X</a>
+  <a class="alpha__item load-page" data-letter="Y" href="lettres/y.html" aria-label="Lettre Y">Y</a>
+  <a class="alpha__item load-page" data-letter="Z" href="lettres/z.html" aria-label="Lettre Z">Z</a>
+</nav>
+
+
+
+    </nav>
+
+    <section class="card reader" id="page-content" aria-live="polite">
+      <div class="reader-empty">
+        <h3>Ouvre une entrée</h3>
+        <p>La définition s’affichera ici.</p>
+      </div>
+    </section>
+
+  </section>
+
+</main>
+
+<footer class="footer">© Carnet de Culture — Dictionnaire</footer>
+
+<script src="../assets/js/app.js" defer></script>
+</body>
+</html>

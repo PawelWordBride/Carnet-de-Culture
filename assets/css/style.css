@@ -1,0 +1,1382 @@
+html{
+  background:
+    radial-gradient(1200px 700px at 12% 10%, rgba(169, 198, 255, 0.14), transparent 60%),
+    radial-gradient(900px 600px at 88% 20%, rgba(255, 213, 140, 0.10), transparent 55%),
+    radial-gradient(700px 500px at 70% 85%, rgba(140, 180, 255, 0.10), transparent 60%),
+    linear-gradient(180deg, var(--bg1) 0%, var(--bg0) 72%, #03050A 100%);
+}
+
+:root{
+  --bg0:#050A12;
+  --bg1:#0A1424;
+
+  --accent:#FFD58C;
+  --accent2:#A9C6FF;
+
+  --text:rgba(245,248,255,.92);
+  --muted:rgba(230,240,255,.74);
+
+  --card:rgba(255,255,255,.06);
+  --card2:rgba(255,255,255,.035);
+  --stroke:rgba(180,220,255,.14);
+
+  --shadow2:0 10px 30px rgba(0,0,0,.25);
+
+  --r-lg:22px;
+  --r-md:18px;
+
+  --page-width:1620px;
+}
+
+*{ box-sizing:border-box; }
+html, body{ height:100%; }
+html, body{
+  overflow-x: hidden;   /* plus compatible que clip */
+  width: 100%;
+}
+img, svg, video, canvas{
+  max-width:100%;
+  height:auto;
+  display:block;
+}
+
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  color:var(--text);
+  background:
+    radial-gradient(1200px 700px at 12% 10%, rgba(169, 198, 255, 0.14), transparent 60%),
+    radial-gradient(900px 600px at 88% 20%, rgba(255, 213, 140, 0.10), transparent 55%),
+    radial-gradient(700px 500px at 70% 85%, rgba(140, 180, 255, 0.10), transparent 60%),
+    linear-gradient(180deg, var(--bg1) 0%, var(--bg0) 72%, #03050A 100%);
+}
+
+/* overlay léger, propre */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.05) 0 1px, transparent 2px),
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.04) 0 1px, transparent 2px),
+    radial-gradient(circle at 55% 65%, rgba(255,255,255,0.035) 0 1px, transparent 2px);
+  opacity:.22;
+}
+
+a{ color:inherit; text-decoration:none; }
+p{ margin:0; line-height:1.6; }
+
+/* ===== Layout ===== */
+.shell{
+  width:min(var(--page-width), calc(100% - 32px));
+  margin:18px auto 18px;
+  display:grid;
+  grid-template-columns:300px 1fr;
+  gap:16px;
+  align-items:start;
+}
+@media (max-width:980px){
+  .shell{ grid-template-columns:1fr; }
+}
+
+.card{
+  background:linear-gradient(180deg, var(--card), var(--card2));
+  border:1px solid var(--stroke);
+  border-radius:var(--r-md);
+  box-shadow:var(--shadow2);
+  backdrop-filter:blur(10px);
+  overflow:hidden;
+}
+
+/* ===== Sidebar ===== */
+.sidebar{
+  position:sticky;
+  top:16px;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+@media (max-width:980px){
+  .sidebar{ position:static; }
+}
+
+.brand{ padding:16px; border-radius:var(--r-lg); }
+.brand-top{ display:flex; gap:12px; align-items:center; }
+.mark{
+  width:48px; height:48px;
+  display:grid; place-items:center;
+  border-radius:16px;
+  background:rgba(0,0,0,.25);
+  border:1px solid rgba(180,220,255,.16);
+  font-size:22px;
+  flex:0 0 auto;
+}
+.brand-text h1{
+  margin:0;
+  font-size:16px;
+  font-weight:900;
+  letter-spacing:.2px;
+}
+.brand-text p{
+  margin-top:6px;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.search{ padding:14px; }
+.search label{
+  display:block;
+  font-size:13px;
+  color:rgba(230,240,255,.80);
+  margin-bottom:8px;
+  font-weight:800;
+}
+.search input{
+  width:100%;
+  padding:12px 12px;
+  border-radius:14px;
+  border:1px solid rgba(180,220,255,.18);
+  background:rgba(0,0,0,.25);
+  color:var(--text);
+  outline:none;
+}
+.search input::placeholder{ color:rgba(230,240,255,.55); }
+
+.quick{ padding:14px; }
+.quick h2{
+  margin:0 0 10px;
+  font-size:14px;
+  color:rgba(235,245,255,.90);
+  letter-spacing:.2px;
+}
+.quick-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.chip{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:10px 10px;
+  border-radius:14px;
+  border:1px solid rgba(180,220,255,.14);
+  background:rgba(0,0,0,.18);
+  transition:transform 160ms ease, border-color 160ms ease, background 160ms ease;
+  font-size:13px;
+  color:rgba(230,240,255,.86);
+  font-weight:800;
+  white-space:nowrap;
+}
+.chip:hover{
+  transform:translateY(-2px);
+  border-color:rgba(255,213,140,.22);
+  background:rgba(255,213,140,.06);
+}
+
+.pill{
+  font-size:12.5px;
+  color:rgba(255,235,185,.92);
+  padding:8px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,213,140,.25);
+  background:rgba(0,0,0,.22);
+  text-align:center;
+}
+
+/* ===== Main ===== */
+.main{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.hero{
+  padding:18px;
+  border-radius:var(--r-lg);
+}
+.hero h2{
+  margin:0 0 8px;
+  font-size:clamp(22px, 2.2vw, 30px);
+  font-weight:950;
+  letter-spacing:.3px;
+}
+.hero p{ color:var(--muted); max-width:80ch; }
+
+.section-title{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:12px;
+  padding:0 2px;
+}
+.section-title h3{
+  margin:0;
+  font-size:16px;
+  letter-spacing:.2px;
+  color:rgba(235,245,255,.92);
+}
+.section-title .hint{
+  color:rgba(230,240,255,.70);
+  font-size:13px;
+  white-space:nowrap;
+}
+
+/* grid cartes */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+  gap:12px;
+}
+
+.hub{
+  padding:14px;
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  transition:transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+.hub:hover{
+  transform:translateY(-3px);
+  border-color:rgba(255,213,140,.18);
+  background:linear-gradient(180deg, rgba(255,255,255,.085), rgba(255,255,255,.04));
+}
+
+.icon{
+  width:46px; height:46px;
+  display:grid; place-items:center;
+  border-radius:14px;
+  background:rgba(0,0,0,.25);
+  border:1px solid rgba(180,220,255,.16);
+  font-size:20px;
+  flex:0 0 auto;
+}
+.hub-text h4{
+  margin:0 0 6px;
+  font-size:1.05rem;
+  font-weight:950;
+  letter-spacing:.15px;
+}
+.hub-text p{
+  margin:0;
+  color:rgba(230,240,255,.78);
+  font-size:13.5px;
+  line-height:1.35;
+}
+.arrow{
+  margin-left:auto;
+  color:rgba(255,235,185,.85);
+  font-weight:950;
+  font-size:18px;
+  align-self:center;
+}
+
+/* footer */
+.footer{
+  width:min(var(--page-width), calc(100% - 32px));
+  margin:0 auto 22px;
+  text-align:center;
+  color:rgba(230,240,255,.65);
+  font-size:.85rem;
+  padding:16px 14px;
+  border-radius:var(--r-lg);
+  border:1px solid rgba(180,220,255,.10);
+  background:rgba(0,0,0,.18);
+  backdrop-filter:blur(10px);
+}
+
+/* ===== Sections (blocs ajoutés) ===== */
+.section{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+/* ===== Feature blocks ===== */
+.feature{
+  padding:16px;
+  border-radius:var(--r-lg);
+}
+
+.meta-line{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:10px;
+}
+
+.date{
+  display:inline-block;
+  font-size:13px;
+  color:rgba(215,235,255,.86);
+  border:1px solid rgba(180,220,255,.16);
+  background:rgba(0,0,0,.22);
+  padding:6px 10px;
+  border-radius:999px;
+}
+
+.feature-title{
+  margin:0 0 8px;
+  font-size:18px;
+  font-weight:950;
+  letter-spacing:.2px;
+  color:rgba(235,245,255,.92);
+}
+
+.feature-text{
+  margin:0 0 14px;
+  color:rgba(235,245,255,.84);
+  line-height:1.55;
+  max-width:85ch;
+}
+
+/* ===== Buttons ===== */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 14px;
+  border-radius:14px;
+  border:1px solid rgba(255,213,140,.35);
+  background:rgba(255,213,140,.10);
+  color:rgba(255,235,185,.95);
+  font-weight:900;
+  cursor:pointer;
+  transition:transform 160ms ease, background 160ms ease, border-color 160ms ease;
+  width:fit-content;
+}
+.btn:hover{
+  transform:translateY(-2px);
+  background:rgba(255,213,140,.14);
+  border-color:rgba(255,213,140,.55);
+}
+.btn:active{ transform:translateY(0px); }
+
+.btn-ghost{
+  border:1px solid rgba(180,220,255,.18);
+  background:rgba(0,0,0,.20);
+  color:rgba(230,240,255,.86);
+}
+.btn-ghost:hover{
+  border-color:rgba(180,220,255,.30);
+  background:rgba(0,0,0,.26);
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+/* ===== Duo sections (Nouveau sujet + Question) ===== */
+.duo-sections{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  align-items:start;
+}
+
+/* Responsive : une colonne */
+@media (max-width: 980px){
+  .duo-sections{
+    grid-template-columns:1fr;
+  }
+}
+
+/* ===== Reader (contenu chargé) ===== */
+.reader{
+  padding:16px;
+  border-radius:var(--r-lg);
+  min-height: 220px;
+}
+
+.reader-empty h3{
+  margin:0 0 6px;
+  font-size:16px;
+  color:rgba(235,245,255,.92);
+}
+.reader-empty p{
+  margin:0;
+  color:rgba(230,240,255,.74);
+}
+
+/* contenu injecté */
+#page-content h1, #page-content h2, #page-content h3{
+  color:rgba(245,248,255,.92);
+  letter-spacing:.2px;
+}
+#page-content a{
+  color:rgba(255,235,185,.92);
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+#page-content ul{ padding-left: 18px; }
+#page-content li{ margin: 6px 0; }
+
+a.load-page.is-active{
+  outline:3px solid rgba(255,213,140,.18);
+  border-color: rgba(255,213,140,.25);
+}
+
+/* ===============================
+   HISTOIRE — STYLE DES CHAPITRES
+   =============================== */
+
+.reader{
+  position:relative;
+}
+
+/* Bandeau discret en haut du chapitre */
+.reader::before{
+  content:"";
+  position:absolute;
+  top:0; left:0; right:0;
+  height:4px;
+  background:linear-gradient(
+    90deg,
+    rgba(255,213,140,.6),
+    rgba(169,198,255,.6),
+    rgba(255,213,140,.6)
+  );
+  opacity:.85;
+}
+
+/* Titre de chapitre */
+#page-content h2{
+  margin:6px 0 14px;
+  font-size:1.6rem;
+  font-weight:950;
+  letter-spacing:.4px;
+  color:rgba(255,235,185,.96);
+  border-bottom:1px solid rgba(255,213,140,.35);
+  padding-bottom:8px;
+}
+
+/* Sous-sections */
+#page-content h3{
+  margin:22px 0 10px;
+  font-size:1.15rem;
+  font-weight:900;
+  color:rgba(235,245,255,.94);
+  position:relative;
+  padding-left:14px;
+}
+
+/* Marqueur vertical “archive” */
+#page-content h3::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:2px;
+  width:4px;
+  height:1.1em;
+  background:rgba(255,213,140,.7);
+  border-radius:2px;
+}
+
+/* Listes */
+#page-content ul{
+  margin:10px 0 6px 0;
+  padding-left:22px;
+}
+
+#page-content li{
+  margin:8px 0;
+  line-height:1.5;
+  color:rgba(230,240,255,.85);
+}
+
+/* Mots-clés en gras */
+#page-content strong{
+  color:rgba(255,235,185,.95);
+  font-weight:900;
+}
+
+/* Effet “carte d’archive” sur chaque section */
+#page-content h3 + ul{
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.04),
+    rgba(255,255,255,.015)
+  );
+  border:1px solid rgba(180,220,255,.14);
+  border-left:4px solid rgba(255,213,140,.45);
+  border-radius:14px;
+  padding:14px 16px;
+  box-shadow:0 6px 18px rgba(0,0,0,.25);
+}
+
+/* ===== Recherche : résultats ===== */
+.search-results{
+  margin-top:10px;
+  padding:10px;
+  border-radius:16px;
+  max-height:320px;
+  overflow:auto;
+}
+
+.search-results .sr-title{
+  margin:0 0 8px;
+  font-size:13px;
+  color:rgba(230,240,255,.80);
+  font-weight:900;
+}
+
+.search-results .sr-item{
+  display:block;
+  padding:10px 10px;
+  border-radius:14px;
+  border:1px solid rgba(180,220,255,.14);
+  background:rgba(0,0,0,.18);
+  margin:8px 0;
+  transition:transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.search-results .sr-item:hover{
+  transform:translateY(-2px);
+  border-color:rgba(255,213,140,.22);
+  background:rgba(255,213,140,.06);
+}
+
+.search-results .sr-item strong{
+  display:block;
+  font-size:13px;
+  color:rgba(255,235,185,.92);
+  margin-bottom:4px;
+}
+
+.search-results .sr-item small{
+  display:block;
+  color:rgba(230,240,255,.72);
+  line-height:1.35;
+}
+
+/* ===============================
+   GEOGRAPHIE — IDENTITÉ ATLAS
+   =============================== */
+
+.geo-page{
+  position:relative;
+}
+.geo-page .hero{
+  position:relative;
+  overflow:hidden;
+}
+
+.geo-page .hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(600px 320px at 20% 30%, rgba(87,211,255,.18), transparent 60%),
+    radial-gradient(520px 300px at 80% 25%, rgba(67,255,168,.12), transparent 60%);
+  pointer-events:none;
+}
+
+.geo-page .hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,.035) 0px,
+      rgba(255,255,255,.035) 1px,
+      transparent 1px,
+      transparent 18px
+    );
+  opacity:.25;
+  pointer-events:none;
+}
+/* Cartes Géographie */
+.geo-page a.load-page .icon{
+  background:rgba(0,0,0,.25);
+  border:1px solid rgba(87,211,255,.28);
+  color:rgba(220,250,255,.95);
+}
+
+.geo-page a.load-page:hover .icon{
+  background:rgba(87,211,255,.20);
+}
+
+/* Hover plus fluide */
+.geo-page a.load-page:hover{
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.09),
+      rgba(255,255,255,.045)
+    );
+  border-color:rgba(87,211,255,.28);
+}
+.geo-page a.load-page.is-active{
+  border-color:rgba(87,211,255,.40);
+  box-shadow:
+    0 0 0 3px rgba(87,211,255,.18),
+    0 14px 34px rgba(0,0,0,.35);
+}
+/* ===============================
+   GEOGRAPHIE — CONTENU CHAPITRES
+   =============================== */
+
+.geo-page #page-content::before{
+  content:"";
+  position:absolute;
+  top:0; left:0; right:0;
+  height:4px;
+  background:linear-gradient(
+    90deg,
+    rgba(87,211,255,.8),
+    rgba(67,255,168,.6),
+    rgba(255,213,140,.5)
+  );
+}
+
+/* Titres principaux */
+.geo-page #page-content h2{
+  margin:6px 0 14px;
+  font-size:1.55rem;
+  font-weight:900;
+  letter-spacing:.3px;
+  color:rgba(220,250,255,.95);
+  border-bottom:1px solid rgba(87,211,255,.35);
+  padding-bottom:8px;
+}
+
+/* Sous-sections */
+.geo-page #page-content h3{
+  margin:22px 0 10px;
+  font-size:1.15rem;
+  font-weight:850;
+  color:rgba(235,245,255,.94);
+  position:relative;
+  padding-left:16px;
+}
+
+/* Marqueur cartographique */
+.geo-page #page-content h3::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:3px;
+  width:6px;
+  height:1em;
+  background:linear-gradient(
+    180deg,
+    rgba(87,211,255,.85),
+    rgba(67,255,168,.65)
+  );
+  border-radius:3px;
+}
+.geo-page #page-content ul{
+  margin:10px 0 8px;
+  padding-left:22px;
+}
+
+.geo-page #page-content li{
+  margin:8px 0;
+  line-height:1.55;
+  color:rgba(230,240,255,.88);
+}
+
+/* Bloc carte par section */
+.geo-page #page-content h3 + ul{
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.045),
+      rgba(255,255,255,.02)
+    );
+  border:1px solid rgba(180,220,255,.18);
+  border-left:5px solid rgba(87,211,255,.55);
+  border-radius:16px;
+  padding:14px 16px;
+  box-shadow:0 6px 18px rgba(0,0,0,.28);
+}
+.geo-page #page-content strong{
+  color:rgba(220,250,255,.98);
+  font-weight:900;
+}
+
+/* ===============================
+   AUTOMOBILE — IDENTITÉ ATELIER
+   =============================== */
+
+.auto-page .hero{
+  position:relative;
+  overflow:hidden;
+}
+
+.auto-page .hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(620px 320px at 18% 30%, rgba(255,213,140,.14), transparent 60%),
+    radial-gradient(520px 300px at 82% 25%, rgba(169,198,255,.10), transparent 60%);
+  pointer-events:none;
+}
+
+/* petit motif “carbone” discret */
+.auto-page .hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      rgba(255,255,255,.03) 0px,
+      rgba(255,255,255,.03) 1px,
+      transparent 1px,
+      transparent 10px
+    );
+  opacity:.18;
+  pointer-events:none;
+}
+
+.auto-page a.load-page .icon{
+  background:rgba(0,0,0,.25);
+  border:1px solid rgba(255,213,140,.28);
+  color:rgba(255,235,185,.95);
+}
+
+.auto-page a.load-page:hover .icon{
+  background:rgba(255,213,140,.18);
+}
+
+.auto-page a.load-page.is-active{
+  border-color:rgba(255,213,140,.38);
+  box-shadow:
+    0 0 0 3px rgba(255,213,140,.16),
+    0 14px 34px rgba(0,0,0,.35);
+}
+
+
+/* ===============================
+   INGÉNIERIE — BLEU TECH / PLAN
+   Grille / traits / surlignage
+   =============================== */
+
+.ing-page .hero{
+  position:relative;
+  overflow:hidden;
+}
+
+.ing-page .hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(760px 360px at 18% 28%, rgba(87,211,255,.14), transparent 60%),
+    radial-gradient(560px 340px at 82% 26%, rgba(169,198,255,.10), transparent 60%),
+    radial-gradient(520px 340px at 60% 88%, rgba(255,213,140,.07), transparent 60%);
+  pointer-events:none;
+}
+
+/* grille “plan technique” subtile */
+.ing-page .hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, transparent 1px 18px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.012) 0 1px, transparent 1px 24px);
+  opacity:.18;
+  pointer-events:none;
+}
+
+.ing-page a.load-page .icon{
+  background:rgba(0,0,0,.25);
+  border:1px solid rgba(87,211,255,.26);
+  color:rgba(220,250,255,.95);
+}
+
+.ing-page a.load-page:hover .icon{
+  background:rgba(87,211,255,.14);
+}
+
+.ing-page a.load-page.is-active{
+  border-color:rgba(87,211,255,.34);
+  box-shadow:
+    0 0 0 3px rgba(87,211,255,.14),
+    0 14px 34px rgba(0,0,0,.35);
+}
+
+/* Contenu chapitres */
+.ing-page #page-content::before{
+  content:"";
+  position:absolute;
+  top:0; left:0; right:0;
+  height:4px;
+  background:linear-gradient(
+    90deg,
+    rgba(87,211,255,.80),
+    rgba(169,198,255,.55),
+    rgba(255,213,140,.45)
+  );
+}
+
+.ing-page #page-content h2{
+  margin:6px 0 14px;
+  font-size:1.55rem;
+  font-weight:950;
+  letter-spacing:.3px;
+  color:rgba(220,250,255,.96);
+  border-bottom:1px solid rgba(87,211,255,.28);
+  padding-bottom:8px;
+}
+
+.ing-page #page-content h3{
+  margin:22px 0 10px;
+  font-size:1.15rem;
+  font-weight:900;
+  color:rgba(245,248,255,.94);
+  position:relative;
+  padding-left:16px;
+}
+
+.ing-page #page-content h3::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:4px;
+  width:7px;
+  height:1em;
+  background:linear-gradient(180deg, rgba(87,211,255,.85), rgba(169,198,255,.45));
+  border-radius:3px;
+}
+
+.ing-page #page-content h3 + ul{
+  background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
+  border:1px solid rgba(180,220,255,.16);
+  border-left:5px solid rgba(87,211,255,.40);
+  border-radius:16px;
+  padding:14px 16px;
+  box-shadow:0 6px 18px rgba(0,0,0,.28);
+}
+
+.ing-page #page-content li{
+  margin:8px 0;
+  line-height:1.55;
+  color:rgba(230,240,255,.88);
+}
+
+
+/* ===============================
+   SCIENCES — IDENTITÉ LABO / NÉON
+   =============================== */
+
+.sciences-page .hero{
+  position:relative;
+  overflow:hidden;
+}
+
+.sciences-page .hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(700px 360px at 18% 30%, rgba(87,211,255,.16), transparent 60%),
+    radial-gradient(560px 320px at 82% 22%, rgba(67,255,168,.12), transparent 60%),
+    radial-gradient(520px 320px at 60% 88%, rgba(255,213,140,.09), transparent 60%);
+  pointer-events:none;
+}
+
+/* motif “grille labo” ultra discret */
+.sciences-page .hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 1px, transparent 1px 18px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.018) 0 1px, transparent 1px 24px);
+  opacity:.18;
+  pointer-events:none;
+}
+
+.sciences-page a.load-page .icon{
+  background:rgba(0,0,0,.25);
+  border:1px solid rgba(67,255,168,.26);
+  color:rgba(220,255,235,.92);
+}
+
+.sciences-page a.load-page:hover .icon{
+  background:rgba(67,255,168,.16);
+}
+
+.sciences-page a.load-page.is-active{
+  border-color:rgba(67,255,168,.35);
+  box-shadow:
+    0 0 0 3px rgba(67,255,168,.14),
+    0 14px 34px rgba(0,0,0,.35);
+}
+
+/* ===============================
+   SCIENCES — CONTENU CHAPITRES
+   =============================== */
+
+.sciences-page #page-content::before{
+  content:"";
+  position:absolute;
+  top:0; left:0; right:0;
+  height:4px;
+  background:linear-gradient(
+    90deg,
+    rgba(67,255,168,.85),
+    rgba(87,211,255,.70),
+    rgba(255,213,140,.55)
+  );
+}
+
+.sciences-page #page-content h2{
+  margin:6px 0 14px;
+  font-size:1.55rem;
+  font-weight:950;
+  letter-spacing:.3px;
+  color:rgba(220,255,235,.96);
+  border-bottom:1px solid rgba(67,255,168,.28);
+  padding-bottom:8px;
+}
+
+.sciences-page #page-content h3{
+  margin:22px 0 10px;
+  font-size:1.15rem;
+  font-weight:900;
+  color:rgba(235,245,255,.94);
+  position:relative;
+  padding-left:16px;
+}
+
+.sciences-page #page-content h3::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:3px;
+  width:6px;
+  height:1em;
+  background:linear-gradient(180deg, rgba(67,255,168,.85), rgba(87,211,255,.55));
+  border-radius:3px;
+}
+
+.sciences-page #page-content h3 + ul{
+  background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
+  border:1px solid rgba(180,220,255,.18);
+  border-left:5px solid rgba(67,255,168,.45);
+  border-radius:16px;
+  padding:14px 16px;
+  box-shadow:0 6px 18px rgba(0,0,0,.28);
+}
+
+.sciences-page #page-content li{
+  margin:8px 0;
+  line-height:1.55;
+  color:rgba(230,240,255,.88);
+}
+
+.sciences-page #page-content strong{
+  color:rgba(220,255,235,.98);
+  font-weight:900;
+}
+
+/* ===============================
+   ART & CULTURE — IDENTITÉ GALERIE
+   Velours / doré / lumière musée
+   =============================== */
+
+.art-page .hero{
+  position:relative;
+  overflow:hidden;
+}
+
+/* halos “lumière de galerie” */
+.art-page .hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(720px 360px at 18% 30%, rgba(255,213,140,.16), transparent 60%),
+    radial-gradient(560px 340px at 82% 28%, rgba(231,161,107,.12), transparent 60%),
+    radial-gradient(520px 340px at 60% 88%, rgba(169,198,255,.08), transparent 60%);
+  pointer-events:none;
+}
+
+/* texture “toile” très subtile */
+.art-page .hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.02) 0 1px, transparent 1px 18px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.015) 0 1px, transparent 1px 26px);
+  opacity:.18;
+  pointer-events:none;
+}
+
+/* Icônes : doré + velours */
+.art-page a.load-page .icon{
+  background:rgba(0,0,0,.26);
+  border:1px solid rgba(255,213,140,.28);
+  color:rgba(255,235,185,.96);
+}
+
+.art-page a.load-page:hover .icon{
+  background:rgba(255,213,140,.16);
+}
+
+.art-page a.load-page.is-active{
+  border-color:rgba(255,213,140,.38);
+  box-shadow:
+    0 0 0 3px rgba(255,213,140,.14),
+    0 14px 34px rgba(0,0,0,.35);
+}
+
+/* ===============================
+   ART & CULTURE — CONTENU CHAPITRES
+   =============================== */
+
+.art-page #page-content::before{
+  content:"";
+  position:absolute;
+  top:0; left:0; right:0;
+  height:4px;
+  background:linear-gradient(
+    90deg,
+    rgba(255,213,140,.85),
+    rgba(231,161,107,.55),
+    rgba(169,198,255,.45)
+  );
+}
+
+.art-page #page-content h2{
+  margin:6px 0 14px;
+  font-size:1.55rem;
+  font-weight:950;
+  letter-spacing:.3px;
+  color:rgba(255,235,185,.96);
+  border-bottom:1px solid rgba(255,213,140,.32);
+  padding-bottom:8px;
+}
+
+.art-page #page-content h3{
+  margin:22px 0 10px;
+  font-size:1.15rem;
+  font-weight:900;
+  color:rgba(245,248,255,.94);
+  position:relative;
+  padding-left:16px;
+}
+
+/* marqueur “trait de pinceau” */
+.art-page #page-content h3::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:4px;
+  width:7px;
+  height:1em;
+  background:linear-gradient(
+    180deg,
+    rgba(255,213,140,.85),
+    rgba(231,161,107,.45)
+  );
+  border-radius:3px;
+}
+
+.art-page #page-content h3 + ul{
+  background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
+  border:1px solid rgba(180,220,255,.16);
+  border-left:5px solid rgba(255,213,140,.45);
+  border-radius:16px;
+  padding:14px 16px;
+  box-shadow:0 6px 18px rgba(0,0,0,.28);
+}
+
+.art-page #page-content li{
+  margin:8px 0;
+  line-height:1.55;
+  color:rgba(230,240,255,.88);
+}
+
+.art-page #page-content strong{
+  color:rgba(255,235,185,.98);
+  font-weight:950;
+}
+
+/* ===============================
+   LANGUES & CULTURES — CARNET VOYAGE
+   Tampons / papier / horizon
+   =============================== */
+
+.langues-page .hero{
+  position:relative;
+  overflow:hidden;
+}
+
+/* halos + ambiance voyage */
+.langues-page .hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(720px 360px at 16% 28%, rgba(255,213,140,.16), transparent 60%),
+    radial-gradient(560px 340px at 82% 22%, rgba(87,211,255,.13), transparent 60%),
+    radial-gradient(520px 340px at 58% 88%, rgba(67,255,168,.10), transparent 60%);
+  pointer-events:none;
+}
+
+/* texture “papier + tampon” */
+.langues-page .hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,.018) 0 1px, transparent 1px 20px),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.012) 0 1px, transparent 1px 28px);
+  opacity:.18;
+  pointer-events:none;
+}
+
+.langues-page a.load-page .icon{
+  background:rgba(0,0,0,.25);
+  border:1px solid rgba(255,213,140,.26);
+  color:rgba(255,235,185,.95);
+}
+
+.langues-page a.load-page:hover .icon{
+  background:rgba(255,213,140,.16);
+}
+
+.langues-page a.load-page.is-active{
+  border-color:rgba(255,213,140,.36);
+  box-shadow:
+    0 0 0 3px rgba(255,213,140,.14),
+    0 14px 34px rgba(0,0,0,.35);
+}
+
+/* ===============================
+   LANGUES & CULTURES — CONTENU
+   =============================== */
+
+.langues-page #page-content::before{
+  content:"";
+  position:absolute;
+  top:0; left:0; right:0;
+  height:4px;
+  background:linear-gradient(
+    90deg,
+    rgba(255,213,140,.85),
+    rgba(87,211,255,.65),
+    rgba(67,255,168,.50)
+  );
+}
+
+.langues-page #page-content h2{
+  margin:6px 0 14px;
+  font-size:1.55rem;
+  font-weight:950;
+  letter-spacing:.3px;
+  color:rgba(255,235,185,.96);
+  border-bottom:1px solid rgba(255,213,140,.32);
+  padding-bottom:8px;
+}
+
+.langues-page #page-content h3{
+  margin:22px 0 10px;
+  font-size:1.15rem;
+  font-weight:900;
+  color:rgba(245,248,255,.94);
+  position:relative;
+  padding-left:16px;
+}
+
+/* marqueur “tampon” */
+.langues-page #page-content h3::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:4px;
+  width:7px;
+  height:1em;
+  background:linear-gradient(
+    180deg,
+    rgba(255,213,140,.80),
+    rgba(87,211,255,.45)
+  );
+  border-radius:3px;
+}
+
+.langues-page #page-content h3 + ul{
+  background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
+  border:1px solid rgba(180,220,255,.16);
+  border-left:5px solid rgba(255,213,140,.40);
+  border-radius:16px;
+  padding:14px 16px;
+  box-shadow:0 6px 18px rgba(0,0,0,.28);
+}
+
+.langues-page #page-content li{
+  margin:8px 0;
+  line-height:1.55;
+  color:rgba(230,240,255,.88);
+}
+
+.langues-page #page-content strong{
+  color:rgba(255,235,185,.98);
+  font-weight:950;
+}
+
+/* ===== Disposition des blocs (Nouveau sujet / Question du jour) ===== */
+.dashboard-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  align-items: start;
+}
+
+@media (max-width: 900px){
+  .dashboard-row{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Nouveau sujet : on ne masque rien, on ajoute juste de l’air ===== */
+.card.feature.new-topic{
+  /* Important : on évite tout display/overflow qui pourrait cacher le contenu */
+  position: relative;
+  padding-bottom: 2rem; /* espace pour les bulles en bas */
+}
+
+/* ===== Bulles de navigation en bas du bloc ===== */
+.topic-dots{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.8rem;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+/* Les boutons-bulles */
+.topic-dots button{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: none;
+  background: #9DB2BF;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
+}
+
+.topic-dots button:hover{
+  opacity: 0.85;
+}
+
+.topic-dots button.active{
+  opacity: 1;
+  background: #27374D;
+  transform: scale(1.25);
+}
+
+.ressources-intro{
+  font-size:.95rem;
+  opacity:.9;
+  margin-bottom:14px;
+}
+
+.ressource-sousbloc{
+  margin-top:16px;
+  padding-top:12px;
+  border-top:1px dashed rgba(39,55,77,.15);
+}
+
+.ressource-sousbloc h4{
+  margin-top:0;
+  color:#526D82;
+}
+
+.note{
+  display:block;
+  font-size:.9rem;
+  opacity:60px;
+  margin-top:4px;
+}
+
+.alphabet{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:18px;
+}
+
+.alphabet .chip{
+  width:38px;
+  height:38px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  font-weight:800;
+  font-size:0.95rem;
+}
+
+/* Dictionnaire — Alphabet */
+.alpha{
+  display:grid;
+  grid-template-columns:repeat(13, minmax(0, 1fr));
+  gap:10px;
+  margin: 10px 0 18px;
+}
+
+@media (max-width: 900px){
+  .alpha{ grid-template-columns:repeat(9, 1fr); }
+}
+@media (max-width: 560px){
+  .alpha{ grid-template-columns:repeat(6, 1fr); }
+}
+
+.alpha__item{
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:14px;
+  font-weight:900;
+  letter-spacing:.5px;
+  text-decoration:none;
+  border:1px solid rgba(180,220,255,.14);
+  background:rgba(0,0,0,.20);
+  backdrop-filter:blur(10px);
+  transition:transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.alpha__item:hover{
+  transform:translateY(-2px);
+  border-color:rgba(255,213,140,.22);
+  background:rgba(255,213,140,.08);
+}
+
+.alpha__item:focus-visible{
+  outline:3px solid rgba(87,211,255,.28);
+  outline-offset:2px;
+}
+
+/* lettre active */
+.alpha__item.is-active{
+  border-color:rgba(87,211,255,.35);
+  background:rgba(87,211,255,.10);
+  box-shadow:0 0 0 3px rgba(87,211,255,.12);
+}
+
+/* optionnel : lettres désactivées (si tu n’as pas encore créé la page) */
+.alpha__item.is-disabled{
+  opacity:.35;
+  pointer-events:none;
+  filter:saturate(.4);
+}

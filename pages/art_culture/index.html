@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Art & Culture — Carnet de Culture</title>
+
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+
+<body>
+
+  <main class="shell">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <section class="card brand" aria-label="Identité du site">
+        <div class="brand-top">
+          <div class="mark" aria-hidden="true">🎭</div>
+          <div class="brand-text">
+            <h1>Art & Culture</h1>
+            <p>Galerie • récits • symboles</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card search" aria-label="Recherche">
+        <label for="search">🔎 Rechercher (artistes, œuvres, mythes, loup…)</label>
+        <input id="search" type="search" placeholder="Ex : sculpture sur bois, mythologie, poésie..." autocomplete="off">
+        <div class="search-results card" id="search-results" hidden></div>
+      </section>
+
+      <section class="card quick" aria-label="Navigation">
+        <h2>Navigation</h2>
+        <div class="quick-grid">
+          <a class="chip" href="../../index.html">⬅ Sommaire</a>
+          <a class="chip" href="../histoire/index.html">🏺 Histoire</a>
+          <a class="chip" href="../sciences/index.html">⚗️ Sciences</a>
+          <a class="chip" href="../geo/index.html">🌍 Géographie</a>
+        </div>
+      </section>
+
+      <div class="pill">✨ Œuvres • idées • patrimoine</div>
+
+    </aside>
+
+    <!-- MAIN -->
+    <section class="main art-page">
+
+      <header class="card hero" role="banner">
+        <h2>🎨 Section Art & Culture</h2>
+        <p>
+          Arts visuels, histoire de l’art, littérature, arts vivants, patrimoines et symbolique —
+          clique sur une sous-catégorie pour afficher le contenu.
+        </p>
+      </header>
+
+      <div class="section-title">
+        <h3>Sous-catégories</h3>
+        <span class="hint">Clique pour ouvrir</span>
+      </div>
+
+      <nav class="grid" aria-label="Sous-catégories Art & Culture">
+
+        <a class="card hub load-page" href="chapitres/arts_visuels.html"
+           data-keywords="arts visuels dessin illustration peinture sculpture bois photographie art numérique concept art 3d modélisation">
+          <div class="icon" aria-hidden="true">🖌️</div>
+          <div class="hub-text">
+            <h4>1. Arts visuels</h4>
+            <p>Dessin, peinture, sculpture (bois), photo, numérique, 3D.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/histoire_de_lart.html"
+           data-keywords="histoire art périodes courants mouvements œuvres majeures artistes art société époque">
+          <div class="icon" aria-hidden="true">🏛️</div>
+          <div class="hub-text">
+            <h4>2. Histoire de l’art</h4>
+            <p>Périodes, mouvements, œuvres, artistes, contexte.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/litterature_ecriture.html"
+           data-keywords="littérature écriture romans essais poésie mythes symboles métaphores citations analyse écriture personnelle">
+          <div class="icon" aria-hidden="true">📚</div>
+          <div class="hub-text">
+            <h4>3. Littérature & écriture</h4>
+            <p>Œuvres, analyses, citations, écriture personnelle.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/arts_vivants.html"
+           data-keywords="arts vivants théâtre cinéma musique danse performance">
+          <div class="icon" aria-hidden="true">🎭</div>
+          <div class="hub-text">
+            <h4>4. Arts vivants</h4>
+            <p>Théâtre, cinéma, musique, danse, performance.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/culture_patrimoines.html"
+           data-keywords="culture générale patrimoines cultures du monde traditions savoir-faire artisanat patrimoine matériel immatériel">
+          <div class="icon" aria-hidden="true">🌍</div>
+          <div class="hub-text">
+            <h4>5. Culture générale & patrimoines</h4>
+            <p>Cultures du monde, traditions, artisanat, patrimoine.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/symbolique_imaginaire.html"
+           data-keywords="symbolique imaginaire animaux symboliques loup mythologie archétypes spiritualité imaginaire collectif">
+          <div class="icon" aria-hidden="true">🐺</div>
+          <div class="hub-text">
+            <h4>6. Symbolique & imaginaire</h4>
+            <p>Animaux, mythologie, archétypes, spiritualité, loup.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+      </nav>
+
+      <section class="card reader" id="page-content" aria-live="polite">
+        <div class="reader-empty">
+          <h3>Ouvre une sous-catégorie</h3>
+          <p>Le contenu s’affichera ici, sans quitter la page.</p>
+        </div>
+      </section>
+
+    </section>
+
+  </main>
+
+  <footer class="footer">© Carnet de Culture — Art & Culture</footer>
+
+  <script src="../../assets/js/app.js" defer></script>
+</body>
+</html>

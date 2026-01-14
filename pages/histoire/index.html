@@ -3,512 +3,163 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Histoire - Carnet de Culture</title>
+  <title>Histoire — Carnet de Culture</title>
 
-  <style>
-    /* =========================================
-       HISTOIRE — THEME ARCHIVES (parchemin + frise)
-       ADN commun : verre glacé, nuit, reflets
-       Signature : texture parchemin + frise antique + sceau
-       ========================================= */
-
-    :root{
-      /* Base nuit */
-      --bg0:#050A12;
-      --bg1:#0A1424;
-
-      /* Accent HISTOIRE (or / cuivre / parchemin) */
-      --gold:#FFD58C;
-      --copper:#E7A16B;
-      --ink:#A9C6FF; /* léger bleuté “encre froide” */
-
-      --text:rgba(245,248,255,.92);
-      --muted:rgba(230,240,255,.78);
-
-      --card:rgba(255,255,255,.06);
-      --card2:rgba(255,255,255,.035);
-      --stroke:rgba(200, 190, 160, 0.18); /* plus “minéral/parchemin” */
-
-      --shadow:0 18px 60px rgba(0,0,0,.35);
-      --shadow2:0 10px 30px rgba(0,0,0,.25);
-
-      --r-lg:22px;
-      --r-md:18px;
-    }
-
-    *{ box-sizing:border-box; }
-    html, body{ height:100%; }
-
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color:var(--text);
-      background:
-        radial-gradient(1200px 700px at 12% 10%, rgba(255, 213, 140, 0.16), transparent 60%),
-        radial-gradient(900px 600px at 88% 20%, rgba(231, 161, 107, 0.10), transparent 55%),
-        radial-gradient(700px 500px at 65% 88%, rgba(169, 198, 255, 0.09), transparent 60%),
-        linear-gradient(180deg, var(--bg1) 0%, var(--bg0) 72%, #03050A 100%);
-      overflow-x:hidden;
-    }
-
-    /* Texture “papier ancien” (subtile) + poussière */
-    body::before{
-      content:"";
-      position:fixed; inset:0;
-      pointer-events:none;
-      background:
-        /* fibre papier */
-        repeating-linear-gradient(
-          90deg,
-          rgba(255,255,255,0.02) 0px,
-          rgba(255,255,255,0.02) 1px,
-          transparent 1px,
-          transparent 16px
-        ),
-        /* micro grain */
-        repeating-linear-gradient(
-          0deg,
-          rgba(255,255,255,0.015) 0px,
-          rgba(255,255,255,0.015) 1px,
-          transparent 1px,
-          transparent 22px
-        );
-      mix-blend-mode:overlay;
-      opacity:.18;
-    }
-    body::after{
-      content:"";
-      position:fixed; inset:-40px;
-      pointer-events:none;
-      background:
-        radial-gradient(circle at 18% 30%, rgba(255,255,255,0.06) 0 1px, transparent 2px),
-        radial-gradient(circle at 74% 22%, rgba(255,255,255,0.05) 0 1px, transparent 2px),
-        radial-gradient(circle at 55% 70%, rgba(255,255,255,0.04) 0 1px, transparent 2px);
-      opacity:.22;
-    }
-
-    a{ color:inherit; text-decoration:none; }
-    p{ margin:0; line-height:1.6; }
-
-    .container{
-      width:min(1100px, calc(100% - 32px));
-      margin:0 auto;
-    }
-
-    /* =========================================
-       Header “Archives”
-       ========================================= */
-    .page-header{
-      margin-top:18px;
-      border-radius:var(--r-lg);
-      border:1px solid rgba(200,190,160,.22);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      box-shadow:var(--shadow2);
-      overflow:hidden;
-      position:relative;
-    }
-
-    /* Fond : frise + sceau + parchemin (SVG) */
-    .page-header::before{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        radial-gradient(700px 360px at 15% 20%, rgba(255,213,140,.14), transparent 60%),
-        radial-gradient(680px 340px at 85% 25%, rgba(231,161,107,.10), transparent 60%),
-        radial-gradient(520px 260px at 62% 88%, rgba(169,198,255,.08), transparent 60%),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='420' viewBox='0 0 1200 420'%3E%3Cdefs%3E%3ClinearGradient id='p' x1='0' x2='0' y1='0' y2='1'%3E%3Cstop offset='0' stop-color='%230B1628'/%3E%3Cstop offset='1' stop-color='%23070F1D'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='420' fill='url(%23p)'/%3E%3C!-- frise antique --%3E%3Cg opacity='.28'%3E%3Cpath fill='%23FFD58C' d='M0 70h1200v22H0z'/%3E%3Cpath fill='%23FFD58C' d='M0 330h1200v18H0z'/%3E%3Cpath fill='%23FFFFFF' opacity='.22' d='M0 92h1200v2H0z'/%3E%3Cpath fill='%23FFFFFF' opacity='.18' d='M0 348h1200v2H0z'/%3E%3C/g%3E%3C!-- motifs de frise --%3E%3Cg opacity='.22' fill='%23FFFFFF'%3E%3Cpath d='M80 76h30v10H80zM140 76h30v10h-30zM200 76h30v10h-30zM260 76h30v10h-30zM320 76h30v10h-30z'/%3E%3Cpath d='M80 336h30v8H80zM140 336h30v8h-30zM200 336h30v8h-30zM260 336h30v8h-30zM320 336h30v8h-30z'/%3E%3C/g%3E%3C!-- sceau (coin) --%3E%3Cg opacity='.32'%3E%3Ccircle cx='1040' cy='150' r='64' fill='%23E7A16B'/%3E%3Ccircle cx='1040' cy='150' r='52' fill='%23000000' opacity='.28'/%3E%3Cpath d='M1012 150c12-18 44-18 56 0-12 18-44 18-56 0z' fill='%23FFD58C' opacity='.9'/%3E%3C/g%3E%3C!-- texture parchemin (taches légères) --%3E%3Cg opacity='.10'%3E%3Ccircle cx='220' cy='210' r='120' fill='%23FFD58C'/%3E%3Ccircle cx='520' cy='250' r='170' fill='%23E7A16B'/%3E%3Ccircle cx='760' cy='210' r='130' fill='%23FFD58C'/%3E%3C/g%3E%3C/svg%3E");
-      background-size:cover;
-      background-position:center;
-      pointer-events:none;
-      filter:saturate(1.05);
-    }
-
-    /* Ligne “horizon” */
-    .page-header::after{
-      content:"";
-      position:absolute;
-      left:18px; right:18px; bottom:16px;
-      height:1px;
-      background:linear-gradient(90deg, transparent, rgba(255,213,140,.30), rgba(231,161,107,.24), rgba(169,198,255,.18), transparent);
-      opacity:.95;
-      pointer-events:none;
-    }
-
-    .header-inner{
-      padding:22px 18px 20px;
-      position:relative;
-      z-index:1;
-    }
-
-    .topline{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-bottom:10px;
-    }
-
-    .title{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    .pill{
-      font-size:12.5px;
-      color:rgba(255,235,185,.92);
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,213,140,.25);
-      background:rgba(0,0,0,.22);
-      backdrop-filter:blur(10px);
-      white-space:nowrap;
-    }
-
-    .title h1{
-      margin:0;
-      font-size:clamp(26px, 2.6vw, 34px);
-      letter-spacing:.4px;
-      font-weight:900;
-      text-shadow:0 10px 30px rgba(0,0,0,.55);
-    }
-
-    nav a{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 14px;
-      border-radius:14px;
-      border:1px solid rgba(255,213,140,.25);
-      background:rgba(255,213,140,.10);
-      color:rgba(255,235,185,.95);
-      font-weight:850;
-      transition:transform 160ms ease, background 160ms ease, border-color 160ms ease;
-    }
-    nav a:hover{
-      transform:translateY(-2px);
-      background:rgba(255,213,140,.14);
-      border-color:rgba(255,213,140,.5);
-    }
-
-    .subtitle{
-      max-width:78ch;
-      color:var(--muted);
-    }
-
-    /* =========================================
-       Main
-       ========================================= */
-    main{
-      width:min(1100px, calc(100% - 32px));
-      margin:0 auto;
-      padding:22px 0 54px;
-    }
-
-    .intro{
-      border-radius:var(--r-lg);
-      border:1px solid rgba(200,190,160,.22);
-      background:linear-gradient(180deg, var(--card), var(--card2));
-      box-shadow:var(--shadow2);
-      backdrop-filter:blur(10px);
-      padding:18px;
-      position:relative;
-      overflow:hidden;
-    }
-    .intro::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(520px 220px at 12% 25%, rgba(255,213,140,.14), transparent 60%),
-        radial-gradient(520px 220px at 88% 15%, rgba(231,161,107,.10), transparent 60%);
-      opacity:.9;
-      pointer-events:none;
-    }
-    .intro > *{ position:relative; z-index:1; }
-
-    .intro h2{
-      margin:0 0 8px;
-      font-size:1.2rem;
-      letter-spacing:.2px;
-      color:rgba(235,245,255,.92);
-    }
-    .intro p{
-      color:rgba(235,245,255,.85);
-      line-height:1.5;
-    }
-    .hint{
-      margin-top:12px;
-      font-size:.92rem;
-      color:rgba(230,240,255,.70);
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
-      gap:14px;
-      margin-top:16px;
-    }
-
-    .card{
-      border-radius:var(--r-md);
-      border:1px solid rgba(200,190,160,.20);
-      background:linear-gradient(180deg, var(--card), var(--card2));
-      box-shadow:var(--shadow2);
-      backdrop-filter:blur(10px);
-      padding:16px;
-      display:flex;
-      align-items:center;
-      gap:12px;
-      transition:transform 160ms ease, border-color 160ms ease, background 160ms ease;
-      cursor:pointer;
-      position:relative;
-      overflow:hidden;
-      color:rgba(245,248,255,.92);
-    }
-    .card::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(260px 120px at 12% 15%, rgba(255,213,140,.10), transparent 60%),
-        radial-gradient(260px 120px at 90% 0%, rgba(231,161,107,.09), transparent 60%);
-      opacity:.9;
-      pointer-events:none;
-    }
-    .card > *{ position:relative; z-index:1; }
-
-    .card:hover{
-      transform:translateY(-3px);
-      border-color: rgba(255,213,140,.25);
-      background:linear-gradient(180deg, rgba(255,255,255,.085), rgba(255,255,255,.04));
-    }
-
-    .icon{
-      width:46px;
-      height:46px;
-      border-radius:14px;
-      background:rgba(0,0,0,.25);
-      border:1px solid rgba(200,190,160,.22);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:1.3rem;
-      flex:0 0 auto;
-    }
-
-    .card h3{
-      margin:0 0 6px;
-      font-size:1.05rem;
-      font-weight:900;
-      letter-spacing:.15px;
-    }
-    .card p{
-      margin:0;
-      font-size:.92rem;
-      color:rgba(230,240,255,.78);
-      line-height:1.35;
-    }
-
-    .arrow{
-      margin-left:auto;
-      font-weight:900;
-      color:rgba(255,235,185,.85);
-      font-size:1.2rem;
-      opacity:.95;
-    }
-
-    #page-content{
-      display:none;
-      margin-top:18px;
-      border-radius:var(--r-lg);
-      border:1px solid rgba(200,190,160,.22);
-      background:linear-gradient(180deg, var(--card), var(--card2));
-      box-shadow:var(--shadow);
-      backdrop-filter:blur(10px);
-      padding:18px;
-      color:rgba(235,245,255,.86);
-    }
-
-    .card.is-active{
-      outline:3px solid rgba(255,213,140,.20);
-      border-color: rgba(255,213,140,.28);
-    }
-
-    /* rendu sympa pour contenu injecté */
-    #page-content h1, #page-content h2, #page-content h3{
-      color:rgba(245,248,255,.92);
-      letter-spacing:.2px;
-    }
-    #page-content a{
-      color:rgba(255,235,185,.92);
-      text-decoration:underline;
-      text-underline-offset:3px;
-    }
-
-    @media (max-width:720px){
-      nav a{ width:100%; justify-content:center; }
-      .pill{ width:100%; text-align:center; }
-    }
-    
-  </style>
+  <link rel="stylesheet" href="../../assets/css/style.css" />
 </head>
 
 <body>
-  <div class="container">
 
-    <header class="page-header">
-      <div class="header-inner">
-        <div class="topline">
-          <div class="title">
-            <div class="pill">📜 Archives • Frises • Mémoire</div>
-            <h1>🏛️ Histoire</h1>
+  <main class="shell">
+
+    <!-- SIDEBAR (même que l’index, avec chemins relatifs) -->
+    <aside class="sidebar">
+
+      <section class="card brand" aria-label="Identité du site">
+        <div class="brand-top">
+          <div class="mark" aria-hidden="true">🏺</div>
+          <div class="brand-text">
+            <h1>Histoire</h1>
+            <p>Archives • frises • mémoire</p>
           </div>
-
-          <nav>
-            <a href="../../index.html">⬅ Retour au sommaire</a>
-          </nav>
         </div>
-
-        <p class="subtitle">
-          Civilisations, périodes, révolutions, guerres, mythes, environnement et méthodes —
-          comme une bibliothèque d’archives.
-        </p>
-      </div>
-    </header>
-
-    <main>
-      <section class="intro">
-        <h2>Bienvenue dans la section Histoire</h2>
-        <p>Civilisations, périodes, révolutions, guerres, mythes, environnement et méthodes historiques.</p>
-        <p class="hint">Clique sur un chapitre pour afficher son contenu.</p>
       </section>
 
-      <section class="grid" aria-label="Chapitres Histoire">
-        <a class="card load-page" href="grandes_civilisations.html">
-          <div class="icon">🏺</div>
-          <div>
-            <h3>Grandes civilisations</h3>
+
+
+      <section class="card quick" aria-label="Navigation">
+        <h2>Navigation</h2>
+        <div class="quick-grid">
+          <a class="chip" href="../../index.html">⬅ Sommaire</a>
+          <a class="chip" href="../geo/index.html">🌍 Géographie</a>
+          <a class="chip" href="../sciences/index.html">⚗️ Sciences</a>
+          <a class="chip" href="../automobile/index.html">🚗 Auto</a>
+        </div>
+      </section>
+      <section class="card search" aria-label="Recherche">
+        <label for="search">🔎 Rechercher un chapitre</label>
+        <input id="search" type="search" placeholder="Ex : guerres, mythes, civilisations..." autocomplete="off">
+        <div class="search-results card" id="search-results" hidden></div>
+      </section>
+      <div class="pill">📜 Civilisations • périodes • méthodes</div>
+
+    </aside>
+
+    <!-- MAIN -->
+    <section class="main">
+
+      <header class="card hero" role="banner">
+        <h2>🏛️ Section Histoire</h2>
+        <p>
+          Civilisations, périodes, révolutions, guerres, mythes, environnement et méthodes.
+          Clique sur un chapitre pour afficher son contenu à droite.
+        </p>
+      </header>
+
+      <!-- Grille chapitres -->
+      <div class="section-title">
+        <h3>Chapitres</h3>
+        <span class="hint">Clique pour ouvrir</span>
+      </div>
+
+      <nav class="grid" id="cards" aria-label="Chapitres Histoire">
+
+        <a class="card hub load-page" href="chapitres/grandes_civilisations.html"
+           data-keywords="grandes civilisations mésopotamie égypte grèce rome chine">
+          <div class="icon" aria-hidden="true">🏺</div>
+          <div class="hub-text">
+            <h4>Grandes civilisations</h4>
             <p>Premières civilisations, empires classiques, mondes précolombiens.</p>
           </div>
-          <span class="arrow">→</span>
+          <div class="arrow" aria-hidden="true">→</div>
         </a>
 
-        <a class="card load-page" href="histoire_medievale.html">
-          <div class="icon">🏰</div>
-          <div>
-            <h3>Histoire médiévale</h3>
+        <a class="card hub load-page" href="chapitres/histoire_medievale.html"
+           data-keywords="médiévale féodalité croisades dynasties religions">
+          <div class="icon" aria-hidden="true">🏰</div>
+          <div class="hub-text">
+            <h4>Histoire médiévale</h4>
             <p>Féodalité, religions, dynasties, croisades, société.</p>
           </div>
-          <span class="arrow">→</span>
+          <div class="arrow" aria-hidden="true">→</div>
         </a>
 
-        <a class="card load-page" href="age_des_decouvertes.html">
-          <div class="icon">⛵</div>
-          <div>
-            <h3>Âge des découvertes</h3>
+        <a class="card hub load-page" href="chapitres/age_des_decouvertes.html"
+           data-keywords="découvertes explorations cartographie colonisation routes maritimes">
+          <div class="icon" aria-hidden="true">⛵</div>
+          <div class="hub-text">
+            <h4>Âge des découvertes</h4>
             <p>Explorations, routes maritimes, cartographie, colonisation.</p>
           </div>
-          <span class="arrow">→</span>
+          <div class="arrow" aria-hidden="true">→</div>
         </a>
 
-        <a class="card load-page" href="revolutions_et_changements.html">
-          <div class="icon">🔥</div>
-          <div>
-            <h3>Révolutions et changements</h3>
+        <a class="card hub load-page" href="chapitres/revolutions_et_changements.html"
+           data-keywords="révolutions renaissance lumières industrie changements">
+          <div class="icon" aria-hidden="true">🔥</div>
+          <div class="hub-text">
+            <h4>Révolutions et changements</h4>
             <p>Renaissance, Lumières, révolutions politiques et industrielles.</p>
           </div>
-          <span class="arrow">→</span>
+          <div class="arrow" aria-hidden="true">→</div>
         </a>
 
-        <a class="card load-page" href="guerres_et_conflits.html">
-          <div class="icon">⚔️</div>
-          <div>
-            <h3>Guerres et conflits</h3>
+        <a class="card hub load-page" href="chapitres/guerres_et_conflits.html"
+           data-keywords="guerres conflits stratégie conséquences armées">
+          <div class="icon" aria-hidden="true">⚔️</div>
+          <div class="hub-text">
+            <h4>Guerres et conflits</h4>
             <p>Conflits majeurs, stratégies, conséquences humaines et culturelles.</p>
           </div>
-          <span class="arrow">→</span>
+          <div class="arrow" aria-hidden="true">→</div>
         </a>
 
-        <a class="card load-page" href="mythes_et_histoire.html">
-          <div class="icon">🐺</div>
-          <div>
-            <h3>Mythes et Histoire</h3>
+        <a class="card hub load-page" href="chapitres/mythes_et_histoire.html"
+           data-keywords="mythes légendes folklore symboles mémoire loup">
+          <div class="icon" aria-hidden="true">🐺</div>
+          <div class="hub-text">
+            <h4>Mythes et Histoire</h4>
             <p>Légendes, folklore, symboles, récits et mémoire collective.</p>
           </div>
-          <span class="arrow">→</span>
+          <div class="arrow" aria-hidden="true">→</div>
         </a>
 
-        <a class="card load-page" href="histoire_et_environnement.html">
-          <div class="icon">🌍</div>
-          <div>
-            <h3>Histoire et environnement</h3>
+        <a class="card hub load-page" href="chapitres/histoire_et_environnement.html"
+           data-keywords="environnement climat ressources catastrophes nature">
+          <div class="icon" aria-hidden="true">🌍</div>
+          <div class="hub-text">
+            <h4>Histoire et environnement</h4>
             <p>Climat, catastrophes, ressources, relations hommes-nature.</p>
           </div>
-          <span class="arrow">→</span>
+          <div class="arrow" aria-hidden="true">→</div>
         </a>
 
-        <a class="card load-page" href="methodes_historiques.html">
-          <div class="icon">🧠</div>
-          <div>
-            <h3>Méthodes historiques</h3>
+        <a class="card hub load-page" href="chapitres/methodes_historiques.html"
+           data-keywords="méthodes sources critique chronologies archéologie">
+          <div class="icon" aria-hidden="true">🧠</div>
+          <div class="hub-text">
+            <h4>Méthodes historiques</h4>
             <p>Sources, critique, chronologies, archéologie, outils numériques.</p>
           </div>
-          <span class="arrow">→</span>
+          <div class="arrow" aria-hidden="true">→</div>
         </a>
+
+      </nav>
+
+      <!-- Zone affichage contenu -->
+      <section class="card reader" id="page-content" aria-live="polite">
+        <div class="reader-empty">
+          <h3>Ouvre un chapitre</h3>
+          <p>Le contenu s’affichera ici, sans quitter la page.</p>
+        </div>
       </section>
 
-      <section id="page-content" aria-live="polite"></section>
-    </main>
+    </section>
 
-  </div>
+  </main>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const content = document.getElementById("page-content");
-      let currentUrl = null;
+  <footer class="footer">© Carnet de Culture — Histoire</footer>
 
-      const clearActive = () => {
-        document.querySelectorAll(".load-page.is-active")
-          .forEach(c => c.classList.remove("is-active"));
-      };
-
-      document.addEventListener("click", async (e) => {
-        const link = e.target.closest("a.load-page");
-        if (!link) return;
-
-        e.preventDefault();
-        const url = link.getAttribute("href");
-
-        if (currentUrl === url) {
-          content.innerHTML = "";
-          content.style.display = "none";
-          currentUrl = null;
-          clearActive();
-          return;
-        }
-
-        try {
-          const res = await fetch(url);
-          if (!res.ok) throw new Error("HTTP " + res.status);
-          const html = await res.text();
-
-          content.innerHTML = html;
-          content.style.display = "block";
-          currentUrl = url;
-
-          clearActive();
-          link.classList.add("is-active");
-          content.scrollIntoView({ behavior: "smooth", block: "start" });
-
-        } catch (err) {
-          content.innerHTML = "<p>Erreur lors du chargement de la page.</p>";
-          content.style.display = "block";
-          currentUrl = null;
-          clearActive();
-        }
-      });
-    });
-  </script>
+  <script src="../../assets/js/app.js" defer></script>
 </body>
 </html>

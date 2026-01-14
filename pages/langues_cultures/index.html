@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Langues & Cultures étrangères — Carnet de Culture</title>
+
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+
+<body>
+
+  <main class="shell">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <section class="card brand" aria-label="Identité du site">
+        <div class="brand-top">
+          <div class="mark" aria-hidden="true">🗣️</div>
+          <div class="brand-text">
+            <h1>Langues & Cultures</h1>
+            <p>Voyages • sons • traditions</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card search" aria-label="Recherche">
+        <label for="search">🔎 Rechercher (vocabulaire, grammaire, traditions…)</label>
+        <input id="search" type="search" placeholder="Ex : faux amis, polonais, gastronomie..." autocomplete="off">
+        <div class="search-results card" id="search-results" hidden></div>
+      </section>
+
+      <section class="card quick" aria-label="Navigation">
+        <h2>Navigation</h2>
+        <div class="quick-grid">
+          <a class="chip" href="../../index.html">⬅ Sommaire</a>
+          <a class="chip" href="../geo/index.html">🌍 Géographie</a>
+          <a class="chip" href="../exploration_voyages/index.html">🧭 Voyages</a>
+          <a class="chip" href="../art_culture/index.html">🎭 Art & Culture</a>
+        </div>
+      </section>
+
+      <div class="pill">🌍 Carnet de langues</div>
+
+    </aside>
+
+    <!-- MAIN -->
+    <section class="main langues-page">
+
+      <header class="card hero" role="banner">
+        <h2>🌍 Langues & Cultures étrangères</h2>
+        <p>
+          Apprentissage, langues spécifiques, cultures, voyages, multilinguisme —
+          clique sur une sous-catégorie pour afficher le contenu.
+        </p>
+      </header>
+
+      <div class="section-title">
+        <h3>Sous-catégories</h3>
+        <span class="hint">Clique pour ouvrir</span>
+      </div>
+
+      <nav class="grid" aria-label="Sous-catégories Langues & Cultures">
+
+        <a class="card hub load-page" href="chapitres/apprentissage_des_langues.html"
+           data-keywords="apprentissage langues vocabulaire grammaire conjugaison expressions idiomatiques proverbes phonétique prononciation traductions faux amis écoute compréhension orale podcasts vidéos chansons lecture compréhension écrite pratique orale écrite dialogues textes">
+          <div class="icon" aria-hidden="true">📘</div>
+          <div class="hub-text">
+            <h4>1. Apprentissage des langues</h4>
+            <p>Vocabulaire, grammaire, prononciation, pratique.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/langues_specifiques.html"
+           data-keywords="langues spécifiques anglais polonais espagnol allemand italien japonais arabe apprentissage par langue">
+          <div class="icon" aria-hidden="true">🗂️</div>
+          <div class="hub-text">
+            <h4>2. Langues spécifiques étudiées</h4>
+            <p>Une page par langue, avec les mêmes rubriques.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/civilisations_et_cultures.html"
+           data-keywords="civilisations cultures fêtes traditions religions spiritualités histoire figures clés cuisine gastronomie arts musique coutumes codes culturels différences interculturelles langues minoritaires autochtones">
+          <div class="icon" aria-hidden="true">🏛️</div>
+          <div class="hub-text">
+            <h4>3. Civilisations et cultures</h4>
+            <p>Traditions, histoire, cuisine, arts, codes sociaux.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/voyages_et_rencontres.html"
+           data-keywords="voyages rencontres carnets de voyage chocs culturels anecdotes préparation linguistique culturelle séjour pays villes">
+          <div class="icon" aria-hidden="true">🧳</div>
+          <div class="hub-text">
+            <h4>4. Voyages & rencontres</h4>
+            <p>Carnets, anecdotes, préparation avant un séjour.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/multilinguisme_sociolinguistique.html"
+           data-keywords="multilinguisme sociolinguistique langues en danger préservation langues identité politiques linguistiques apprentissage parallèle">
+          <div class="icon" aria-hidden="true">🧠</div>
+          <div class="hub-text">
+            <h4>5. Multilinguisme & sociolinguistique</h4>
+            <p>Langues, identité, politiques, préservation.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+      </nav>
+
+      <section class="card reader" id="page-content" aria-live="polite">
+        <div class="reader-empty">
+          <h3>Ouvre une sous-catégorie</h3>
+          <p>Le contenu s’affichera ici, sans quitter la page.</p>
+        </div>
+      </section>
+
+    </section>
+
+  </main>
+
+  <footer class="footer">© Carnet de Culture — Langues & Cultures</footer>
+
+  <script src="../../assets/js/app.js" defer></script>
+</body>
+</html>

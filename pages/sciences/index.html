@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sciences — Carnet de Culture</title>
+
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+
+<body>
+
+  <main class="shell">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <section class="card brand" aria-label="Identité du site">
+        <div class="brand-top">
+          <div class="mark" aria-hidden="true">⚗️</div>
+          <div class="brand-text">
+            <h1>Sciences</h1>
+            <p>Hypothèses • preuves • modèles</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card search" aria-label="Recherche">
+        <label for="search">🔎 Rechercher (thèmes, notions, mots-clés)</label>
+        <input id="search" type="search" placeholder="Ex : thermodynamique, génétique, glaciers, IA..." autocomplete="off">
+        <div class="search-results card" id="search-results" hidden></div>
+      </section>
+
+      <section class="card quick" aria-label="Navigation">
+        <h2>Navigation</h2>
+        <div class="quick-grid">
+          <a class="chip" href="../../index.html">⬅ Sommaire</a>
+          <a class="chip" href="../histoire/index.html">🏺 Histoire</a>
+          <a class="chip" href="../geo/index.html">🌍 Géographie</a>
+          <a class="chip" href="../automobile/index.html">🚗 Auto</a>
+        </div>
+      </section>
+
+      <div class="pill">🔬 Vivant • matière • univers</div>
+
+    </aside>
+
+    <!-- MAIN -->
+    <section class="main sciences-page">
+
+      <header class="card hero" role="banner">
+        <h2>⚗️ Section Sciences</h2>
+        <p>
+          Du vivant à la matière, de la Terre à l’Univers, de l’esprit aux maths :
+          clique sur une sous-catégorie pour afficher le contenu.
+        </p>
+      </header>
+
+      <div class="section-title">
+        <h3>Sous-catégories</h3>
+        <span class="hint">Clique pour ouvrir</span>
+      </div>
+
+      <nav class="grid" aria-label="Sous-catégories Sciences">
+
+        <a class="card hub load-page" href="chapitres/sciences_de_la_vie.html"
+           data-keywords="sciences vie biologie évolution génétique microbiologie botanique zoologie écologie physiologie">
+          <div class="icon" aria-hidden="true">🔬</div>
+          <div class="hub-text">
+            <h4>1. Sciences de la Vie</h4>
+            <p>Biologie, évolution, génétique, microbiologie, écosystèmes.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/sciences_physiques.html"
+           data-keywords="sciences physiques chimie organique inorganique physique biochimie mécanique thermo électromagnétisme optique quantique relativité eau glace tension superficielle capillarité solubilité">
+          <div class="icon" aria-hidden="true">⚗️</div>
+          <div class="hub-text">
+            <h4>2. Sciences Physiques</h4>
+            <p>Chimie, physique, propriétés de l’eau.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/sciences_terre_univers.html"
+           data-keywords="terre univers géologie sismologie océanographie climatologie astronomie cosmologie planétologie">
+          <div class="icon" aria-hidden="true">🌍</div>
+          <div class="hub-text">
+            <h4>3. Sciences de la Terre & de l’Univers</h4>
+            <p>Géologie, climat, océans, astronomie, cosmologie.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/sciences_cognitives_humaines.html"
+           data-keywords="cognitives humaines neurosciences psychologie comportement intelligence artificielle neurosymbolique réseaux neuronaux">
+          <div class="icon" aria-hidden="true">🧠</div>
+          <div class="hub-text">
+            <h4>4. Sciences Cognitives & Humaines</h4>
+            <p>Neurosciences, psychologie, comportement, IA.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/mathematiques_logique.html"
+           data-keywords="mathématiques logique arithmétique algèbre géométrie analyse statistiques probabilités logique mathématique">
+          <div class="icon" aria-hidden="true">🧮</div>
+          <div class="hub-text">
+            <h4>5. Mathématiques & Logique</h4>
+            <p>Analyse, stats, proba, algèbre, logique.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/sciences_appliquees_interdisciplinaires.html"
+           data-keywords="appliquées interdisciplinaires ingénierie informatique scientifique médecine biotechnologies environnement agronomie">
+          <div class="icon" aria-hidden="true">🧪</div>
+          <div class="hub-text">
+            <h4>6. Sciences Appliquées & Interdisciplinaires</h4>
+            <p>Ingénierie, informatique scientifique, médecine, biotech.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/anatomie_physiologie.html"
+           data-keywords="anatomie physiologie systèmes vitaux digestif respiratoire urinaire reproducteur parties intimes physiologie humaine animale">
+          <div class="icon" aria-hidden="true">🫀</div>
+          <div class="hub-text">
+            <h4>7. Anatomie & Physiologie</h4>
+            <p>Systèmes vitaux, systèmes corporels, physiologie.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+      </nav>
+
+      <section class="card reader" id="page-content" aria-live="polite">
+        <div class="reader-empty">
+          <h3>Ouvre une sous-catégorie</h3>
+          <p>Le contenu s’affichera ici, sans quitter la page.</p>
+        </div>
+      </section>
+
+    </section>
+
+  </main>
+
+  <footer class="footer">© Carnet de Culture — Sciences</footer>
+
+  <script src="../../assets/js/app.js" defer></script>
+</body>
+</html>

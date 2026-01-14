@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ingénierie — Carnet de Culture</title>
+
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+</head>
+
+<body>
+
+  <main class="shell">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <section class="card brand" aria-label="Identité du site">
+        <div class="brand-top">
+          <div class="mark" aria-hidden="true">📐</div>
+          <div class="brand-text">
+            <h1>Ingénierie</h1>
+            <p>Plans • systèmes • normes</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card search" aria-label="Recherche">
+        <label for="search">🔎 Rechercher (moteur, avionique, structures…)</label>
+        <input id="search" type="search" placeholder="Ex : aérodynamique, résistance, circuits..." autocomplete="off">
+        <div class="search-results card" id="search-results" hidden></div>
+      </section>
+
+      <section class="card quick" aria-label="Navigation">
+        <h2>Navigation</h2>
+        <div class="quick-grid">
+          <a class="chip" href="../../index.html">⬅ Sommaire</a>
+          <a class="chip" href="../sciences/index.html">⚗️ Sciences</a>
+          <a class="chip" href="../technologie_informatique/index.html">💻 Tech</a>
+          <a class="chip" href="../automobile/index.html">🚗 (Ancienne page auto)</a>
+        </div>
+      </section>
+
+      <div class="pill">🧩 Conception • calcul • sécurité</div>
+
+    </aside>
+
+    <!-- MAIN -->
+    <section class="main ing-page">
+
+      <header class="card hero" role="banner">
+        <h2>📐 Section Ingénierie</h2>
+        <p>
+          Mécanique, électricité, génie civil, aéronautique et automobile —
+          une carte des disciplines techniques (avec systèmes, matériaux, normes).
+        </p>
+      </header>
+
+      <div class="section-title">
+        <h3>Sous-catégories</h3>
+        <span class="hint">Clique pour ouvrir</span>
+      </div>
+
+      <nav class="grid" aria-label="Sous-catégories Ingénierie">
+
+        <a class="card hub load-page" href="chapitres/mecanique.html"
+           data-keywords="mécanique forces statique dynamique cinématique matériaux résistance vibrations fatigue mécanique des fluides thermodynamique">
+          <div class="icon" aria-hidden="true">⚙️</div>
+          <div class="hub-text">
+            <h4>Mécanique</h4>
+            <p>Forces, mouvements, matériaux, systèmes, vibrations.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/electricite.html"
+           data-keywords="électricité électronique circuits courant tension puissance composants capteurs signaux automatisme commande contrôle">
+          <div class="icon" aria-hidden="true">⚡</div>
+          <div class="hub-text">
+            <h4>Électricité</h4>
+            <p>Circuits, puissance, électronique, automatismes.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/civil.html"
+           data-keywords="génie civil structures béton acier ponts bâtiments fondations normes calcul structure matériaux chantier">
+          <div class="icon" aria-hidden="true">🏗️</div>
+          <div class="hub-text">
+            <h4>Génie civil</h4>
+            <p>Structures, matériaux, bâtiments, infrastructures.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/aeronautique.html"
+           data-keywords="aéronautique avion moteurs aéronautiques turboréacteur turbofan aérodynamique structures matériaux composites avionique navigation réglementation histoire">
+          <div class="icon" aria-hidden="true">✈️</div>
+          <div class="hub-text">
+            <h4>Aéronautique</h4>
+            <p>Moteurs, aéro, matériaux, avionique, navigation, règles.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="card hub load-page" href="chapitres/automobile.html"
+           data-keywords="automobile véhicule moteurs thermique hybride électrique adas châssis suspension freins transmission design compétition mobilité écologie entretien">
+          <div class="icon" aria-hidden="true">🚗</div>
+          <div class="hub-text">
+            <h4>Automobile</h4>
+            <p>Ingénierie véhicule, systèmes, sport auto, mobilité.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+      </nav>
+
+      <section class="card reader" id="page-content" aria-live="polite">
+        <div class="reader-empty">
+          <h3>Ouvre une sous-catégorie</h3>
+          <p>Le contenu s’affichera ici, sans quitter la page.</p>
+        </div>
+      </section>
+
+    </section>
+
+  </main>
+
+  <footer class="footer">© Carnet de Culture — Ingénierie</footer>
+
+  <script src="../../assets/js/app.js" defer></script>
+</body>
+</html>
