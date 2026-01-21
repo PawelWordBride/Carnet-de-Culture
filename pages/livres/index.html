@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Livres — Carnet de Culture</title>
+
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+
+</head>
+
+<body>
+<main class="shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <section class="card brand">
+      <div class="brand-top">
+        <div class="mark">📚</div>
+        <div class="brand-text">
+          <h1>Livres</h1>
+          <p>Genres • auteurs • fiches • citations</p>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section class="card quick" aria-label="Navigation">
+      <h2>Navigation</h2>
+      <div class="quick-grid">
+        <a class="chip" href="../../index.html">🏠 Accueil</a>
+        <a class="chip" href="../histoire/index.html">🏺 Histoire</a>
+        <a class="chip" href="../geo/index.html">🌍 Géographie</a>
+        <a class="chip" href="../sciences/index.html">⚗️ Sciences</a>
+        <a class="chip" href="../art_culture/index.html">🎭 Art & Culture</a>
+        <a class="chip" href="../livres/index.html">📚 Livres</a>
+      </div>
+    </section>
+    <section class="card search">
+      <label for="search">🔎 Rechercher</label>
+      <input id="search" type="search" placeholder="Ex : Camus, dystopie, tragédie..." autocomplete="off">
+      <div class="search-results card" id="search-results" hidden></div>
+    </section>
+    <div class="pill">📌 Construire une bibliothèque vivante</div>
+
+  </aside>
+
+  <!-- MAIN -->
+  <section class="main">
+
+    <header class="card hero">
+      <h2>📚 Bibliothèque</h2>
+      <p>
+        Ici tu ranges tes lectures : genres, auteurs, fiches de lecture et citations.
+        Tout est pensé pour être rempli progressivement.
+      </p>
+    </header>
+
+    <section class="section-title">
+      <h3>Tableau de bord</h3>
+      <span class="hint">Choisis un axe</span>
+    </section>
+
+    <nav class="grid" aria-label="Sommaire Livres">
+      <a class="card hub load-page" href="chapitres/genres.html">
+        <div class="icon">🧩</div>
+        <div class="hub-text">
+          <h4>Genres</h4>
+          <p>Romance, classique, SF, thriller…</p>
+        </div>
+        <div class="arrow">→</div>
+      </a>
+
+      <a class="card hub load-page" href="chapitres/auteurs.html">
+        <div class="icon">👤</div>
+        <div class="hub-text">
+          <h4>Auteurs</h4>
+          <p>Par nationalité + fiches auteurs.</p>
+        </div>
+        <div class="arrow">→</div>
+      </a>
+
+      <a class="card hub load-page" href="chapitres/fiches_de_lecture.html">
+        <div class="icon">📝</div>
+        <div class="hub-text">
+          <h4>Fiches de lecture</h4>
+          <p>Résumé, thèmes, avis, citations.</p>
+        </div>
+        <div class="arrow">→</div>
+      </a>
+
+      <a class="card hub load-page" href="chapitres/citations.html">
+        <div class="icon">💬</div>
+        <div class="hub-text">
+          <h4>Citations</h4>
+          <p>Extraits par thèmes et auteurs.</p>
+        </div>
+        <div class="arrow">→</div>
+      </a>
+    </nav>
+
+    <section class="card reader" id="page-content" aria-live="polite">
+      <div class="reader-empty">
+        <h3>Ouvre un bloc</h3>
+        <p>Le contenu s’affichera ici (sans changer de page).</p>
+      </div>
+    </section>
+
+  </section>
+
+</main>
+
+<footer class="footer">
+  <nav class="footer-nav">
+    <a href="../../index.html">Accueil</a>
+    <a href="a_propos.html">À propos</a>
+    <a href="methode.html">Méthode</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <p class="footer-copy">© Carnet de Culture — Explorer • comprendre • relier les savoirs</p>
+</footer>
+
+<script src="db/livres.romance.db.js" defer></script>
+<script src="js/romance.render.js" defer></script>
+<script src="../../assets/js/app.js" defer></script>
+<template id="book-card-template">
+  <article class="book-card">
+    <a class="book-cover-link" href="#" target="_blank" rel="noopener">
+      <img class="book-cover" src="" alt="" loading="lazy">
+    </a>
+    <div class="book-meta">
+      <h4 class="book-title"></h4>
+      <p class="book-author"></p>
+      <div class="book-tags"></div>
+    </div>
+  </article>
+</template>
+
+</body>
+</html>
