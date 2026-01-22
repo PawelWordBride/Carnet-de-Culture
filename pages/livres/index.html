@@ -107,7 +107,10 @@
         <p>Le contenu s’affichera ici (sans changer de page).</p>
       </div>
     </section>
-
+<aside class="saviez-vous" data-scope="livres" role="note" aria-label="Le saviez-vous">
+  <div class="saviez-badge">💡 Le saviez-vous ?</div>
+  <p class="saviez-texte"></p>
+</aside>
   </section>
 
 </main>
@@ -122,9 +125,9 @@
   <p class="footer-copy">© Carnet de Culture — Explorer • comprendre • relier les savoirs</p>
 </footer>
 
-<script src="db/livres.romance.db.js" defer></script>
-<script src="js/romance.render.js" defer></script>
 <script src="../../assets/js/app.js" defer></script>
+  <script src="../../assets/js/facts.js" defer></script>
+<script src="../../assets/js/saviezvous.js" defer></script>
 <template id="book-card-template">
   <article class="book-card">
     <a class="book-cover-link" href="#" target="_blank" rel="noopener">

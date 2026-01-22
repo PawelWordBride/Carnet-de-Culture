@@ -1595,3 +1595,32 @@ a.load-page.is-active{
   font-style: italic;
   opacity: 0.75;
 }
+
+/* =========================
+   LE SAVIEZ-VOUS
+   ========================= */
+.saviez-vous {
+  margin: 18px 0;
+  padding: 14px 14px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+}
+
+.saviez-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.12);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.saviez-vous p {
+  margin: 0;
+  line-height: 1.6;
+  opacity: 0.92;
+}

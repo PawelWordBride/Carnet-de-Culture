@@ -395,3 +395,49 @@
   });
 
 })();
+
+
+  // =====================================================
+  //  Saviez vous bloc
+  // =====================================================
+
+
+(function () {
+  const banks = {
+    home: [
+      "Un carnet de savoir est plus efficace quand il relie les idées plutôt que d’accumuler des pages.",
+      "La mémoire humaine retient mieux une information quand elle est associée à une histoire ou une image.",
+      "Les liens entre disciplines (sciences, histoire, arts) améliorent la compréhension à long terme."
+    ],
+    ingenierie: [
+      "En ingénierie, une grande partie des pannes viennent des interfaces entre systèmes, pas des pièces seules.",
+      "Le cycle en V sert surtout à garantir la traçabilité entre exigences et tests.",
+      "Une estimation d’ordre de grandeur évite souvent des erreurs de conception coûteuses."
+    ],
+    geographie: [
+      "La géographie étudie autant les sociétés que les milieux : c’est une science des relations.",
+      "Les fleuves ont structuré les réseaux urbains bien avant les routes modernes.",
+      "Les frontières sont souvent des constructions politiques plus que des limites naturelles."
+    ],
+    histoire: [
+      "Les sources historiques ne racontent pas le passé : elles donnent des traces à interpréter.",
+      "La même période peut être vécue très différemment selon les régions du monde.",
+      "Comprendre une époque, c’est aussi comprendre ses techniques et ses ressources."
+    ]
+    // Ajoute les autres catégories ici quand tu veux.
+  };
+
+  function pickRandom(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  document.querySelectorAll(".saviez-vous").forEach((box) => {
+    const scope = box.dataset.scope || "home";
+    const facts = banks[scope] || banks.home;
+
+    const textEl = box.querySelector(".saviez-texte");
+    if (!textEl) return;
+
+    textEl.textContent = pickRandom(facts);
+  });
+})();
