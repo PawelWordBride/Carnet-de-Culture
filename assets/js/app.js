@@ -85,13 +85,13 @@
         date: "Dimanche 11 janvier 2026",
         title: "Pourquoi certaines villes sont construites autour de l’eau ?",
         desc: "De Venise à Amsterdam, l’eau façonne l’urbanisme, l’économie et l’imaginaire des villes à travers l’histoire.",
-        link: "../villes_autour_de_leau.html"
+        link: "pages/geo/chapitres_pays_regions_et_villes/villes_autour_de_leau.html"
       },
       {
         date: "Dimanche 18 janvier 2026",
-        title: "sujet à venir",
-        desc: "patience",
-        link: "#"
+        title: "Les États-Unis : géographie, population, puissance",
+        desc: "Puissance mondiale, territoire-continent et mosaïque de régions aux dynamiques contrastées.",
+        link: "pages/geo/chapitres_pays_regions_et_villes/usa.html"
       },
       {
         date: "Dimanche 25 janvier 2026",
