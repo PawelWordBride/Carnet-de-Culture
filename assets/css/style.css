@@ -651,68 +651,13 @@ a.load-page.is-active{
    GEOGRAPHIE — CONTENU CHAPITRES
    =============================== */
 
-.geo-page #page-content::before{
-  content:"";
-  position:absolute;
-  top:0; left:0; right:0;
-  height:4px;
-  background:linear-gradient(
-    90deg,
-    rgba(87,211,255,.8),
-    rgba(67,255,168,.6),
-    rgba(255,213,140,.5)
-  );
-}
-
-/* Titres principaux */
-.geo-page #page-content h2{
-  margin:6px 0 14px;
-  font-size:1.55rem;
-  font-weight:900;
-  letter-spacing:.3px;
-  color:rgba(220,250,255,.95);
-  border-bottom:1px solid rgba(87,211,255,.35);
-  padding-bottom:8px;
-}
-
-/* Sous-sections */
-.geo-page #page-content h3{
-  margin:22px 0 10px;
-  font-size:1.15rem;
-  font-weight:850;
-  color:rgba(235,245,255,.94);
-  position:relative;
-  padding-left:16px;
-}
-
-/* Marqueur cartographique */
-.geo-page #page-content h3::before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:3px;
-  width:6px;
-  height:1em;
-  background:linear-gradient(
-    180deg,
-    rgba(87,211,255,.85),
-    rgba(67,255,168,.65)
-  );
-  border-radius:3px;
-}
-.geo-page #page-content ul{
-  margin:10px 0 8px;
-  padding-left:22px;
-}
-
-.geo-page #page-content li{
-  margin:8px 0;
-  line-height:1.55;
-  color:rgba(230,240,255,.88);
-}
-
-/* Bloc carte par section */
-.geo-page #page-content h3 + ul{
+/* Grille des pays */
+.geo-page #page-content .countries-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
+  gap:16px;
+  margin:12px 0 18px;
+  padding:16px;
   background:
     linear-gradient(
       180deg,
@@ -722,12 +667,337 @@ a.load-page.is-active{
   border:1px solid rgba(180,220,255,.18);
   border-left:5px solid rgba(87,211,255,.55);
   border-radius:16px;
-  padding:14px 16px;
   box-shadow:0 6px 18px rgba(0,0,0,.28);
 }
-.geo-page #page-content strong{
-  color:rgba(220,250,255,.98);
+
+/* Carte pays */
+.geo-page #page-content .country-card{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:120px;
+  padding:16px 12px;
+  text-decoration:none;
+  border-radius:14px;
+  border:1px solid rgba(180,220,255,.16);
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.05),
+    rgba(255,255,255,.02)
+  );
+  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+/* Hover */
+.geo-page #page-content .country-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 22px rgba(0,0,0,.30);
+  border-color:rgba(87,211,255,.35);
+}
+
+.geo-page #page-content .flag{
+  width:48px;
+  height:32px;
+  object-fit:cover;
+  border-radius:4px;
+  margin-bottom:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,.35);
+}
+
+/* Nom du pays */
+.geo-page #page-content .country-name{
+  font-size:.98rem;
+  font-weight:800;
+  text-align:center;
+  color:rgba(235,245,255,.94);
+  line-height:1.3;
+}
+
+/* Liens dans la section géographie */
+.geo-page #page-content a{
+  color:rgba(140,225,255,.95);
+  text-decoration:none;
+  transition:color .2s ease;
+}
+
+.geo-page #page-content a:hover{
+  color:rgba(255,255,255,.98);
+}
+
+.geo-page #page-content .country-header{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  margin-bottom:28px;
+}
+
+.geo-page #page-content .country-hero{
+  display:grid;
+  grid-template-columns:110px 1fr;
+  gap:18px;
+  align-items:start;
+  padding:18px;
+  border:1px solid rgba(180,220,255,.18);
+  border-left:5px solid rgba(87,211,255,.55);
+  border-radius:18px;
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.05),
+    rgba(255,255,255,.02)
+  );
+  box-shadow:0 6px 18px rgba(0,0,0,.28);
+}
+
+.geo-page #page-content .country-flag{
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+}
+
+.geo-page #page-content .country-flag img{
+  width:82px;
+  height:auto;
+  border-radius:8px;
+  box-shadow:0 4px 12px rgba(0,0,0,.35);
+}
+
+.geo-page #page-content .country-title-block h1{
+  margin:0 0 6px;
+  font-size:2rem;
   font-weight:900;
+  color:rgba(240,250,255,.98);
+}
+
+.geo-page #page-content .country-subtitle{
+  margin:0 0 12px;
+  font-size:1rem;
+  font-weight:700;
+  color:rgba(140,225,255,.95);
+}
+
+.geo-page #page-content .country-intro{
+  margin:0;
+  line-height:1.7;
+  color:rgba(230,240,255,.9);
+}
+
+.geo-page #page-content .country-identity-card{
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.045),
+    rgba(255,255,255,.02)
+  );
+  border:1px solid rgba(180,220,255,.18);
+  border-left:5px solid rgba(67,255,168,.5);
+  border-radius:18px;
+  padding:16px 18px;
+  box-shadow:0 6px 18px rgba(0,0,0,.28);
+}
+
+.geo-page #page-content .country-identity-card h2{
+  margin-top:0;
+}
+
+.geo-page #page-content .country-section{
+  margin-bottom:26px;
+}
+
+.geo-page #page-content .city-block,
+.geo-page #page-content .timeline-item,
+.geo-page #page-content .swot-card{
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.045),
+    rgba(255,255,255,.02)
+  );
+  border:1px solid rgba(180,220,255,.14);
+  border-radius:14px;
+  padding:14px 16px;
+  margin:12px 0;
+  box-shadow:0 4px 14px rgba(0,0,0,.22);
+}
+
+.geo-page #page-content .city-block h3,
+.geo-page #page-content .timeline-item strong,
+.geo-page #page-content .swot-card h3{
+  color:rgba(235,245,255,.96);
+}
+
+.geo-page #page-content .timeline{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.geo-page #page-content .swot-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+  gap:14px;
+  margin-top:12px;
+}
+
+.geo-page #page-content .related-pages{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+  gap:12px;
+  margin-top:12px;
+}
+
+.geo-page #page-content .related-link{
+  display:block;
+  padding:14px 16px;
+  border-radius:14px;
+  text-decoration:none;
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.05),
+    rgba(255,255,255,.02)
+  );
+  border:1px solid rgba(180,220,255,.16);
+  color:rgba(220,245,255,.95);
+  font-weight:800;
+  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.geo-page #page-content .related-link:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 18px rgba(0,0,0,.28);
+  border-color:rgba(87,211,255,.35);
+}
+
+@media (max-width: 700px){
+  .geo-page #page-content .country-hero{
+    grid-template-columns:1fr;
+  }
+
+  .geo-page #page-content .country-flag{
+    justify-content:flex-start;
+  }
+}
+
+.geo-page #page-content .regions-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+  gap:18px;
+  margin-top:18px;
+}
+
+.geo-page #page-content .region-card{
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.05),
+    rgba(255,255,255,.02)
+  );
+  border:1px solid rgba(180,220,255,.16);
+  border-left:5px solid rgba(87,211,255,.55);
+  border-radius:16px;
+  padding:16px 18px;
+  box-shadow:0 6px 18px rgba(0,0,0,.28);
+}
+
+.geo-page #page-content .region-card h3{
+  margin-top:0;
+}
+
+.geo-page #page-content .region-card ul{
+  padding-left:18px;
+}
+
+.geo-page #page-content .cities-grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+gap:18px;
+margin-top:18px;
+
+}
+
+.geo-page #page-content .city-card{
+
+background:linear-gradient(
+180deg,
+rgba(255,255,255,.05),
+rgba(255,255,255,.02)
+);
+
+border:1px solid rgba(180,220,255,.16);
+border-left:5px solid rgba(67,255,168,.6);
+border-radius:16px;
+
+padding:16px 18px;
+
+box-shadow:0 6px 18px rgba(0,0,0,.28);
+
+}
+
+.geo-page #page-content .city-card h3{
+
+margin-top:0;
+
+}
+
+.geo-page #page-content .city-card ul{
+
+padding-left:18px;
+
+}
+
+.geo-page #page-content .city-header{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  margin-bottom:28px;
+}
+
+.geo-page #page-content .city-hero{
+  padding:18px;
+  border:1px solid rgba(180,220,255,.18);
+  border-left:5px solid rgba(255,213,140,.55);
+  border-radius:18px;
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.05),
+    rgba(255,255,255,.02)
+  );
+  box-shadow:0 6px 18px rgba(0,0,0,.28);
+}
+
+.geo-page #page-content .city-title-block h1{
+  margin:0 0 6px;
+  font-size:2rem;
+  font-weight:900;
+  color:rgba(240,250,255,.98);
+}
+
+.geo-page #page-content .city-subtitle{
+  margin:0 0 12px;
+  font-size:1rem;
+  font-weight:700;
+  color:rgba(255,213,140,.95);
+}
+
+.geo-page #page-content .city-intro{
+  margin:0;
+  line-height:1.7;
+  color:rgba(230,240,255,.9);
+}
+
+.geo-page #page-content .city-identity-card{
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.045),
+    rgba(255,255,255,.02)
+  );
+  border:1px solid rgba(180,220,255,.18);
+  border-left:5px solid rgba(255,213,140,.45);
+  border-radius:18px;
+  padding:16px 18px;
+  box-shadow:0 6px 18px rgba(0,0,0,.28);
+}
+
+.geo-page #page-content .city-section{
+  margin-bottom:26px;
 }
 
 /* ===============================
