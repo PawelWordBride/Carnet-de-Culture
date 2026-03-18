@@ -31,9 +31,9 @@
         <h2>Accès rapides</h2>
         <div class="quick-grid">
           <a class="chip" href="dictionnaire/index.html">📖 Dico</a>
-          <a class="chip" href="articles.html">📰 Articles</a>
-          <a class="chip" href="videos_podcasts.html">🎬 Podcasts</a>
-          <a class="chip" href="sites_web.html">💻 Sites</a>
+          <a class="chip" href="#">📰 Articles</a>
+          <a class="chip" href="#">🎬 Podcasts</a>
+          <a class="chip" href="#">💻 Sites</a>
         </div>
       </section>
       <section class="card search" aria-label="Recherche">
@@ -61,33 +61,27 @@
 
   <!-- NOUVEAU SUJET -->
   <section class="section">
-    <div class="section-title">
-      <h3>🆕 Nouveau sujet</h3>
-      <span class="hint">Dernière ascension intellectuelle</span>
+  <div class="section-title">
+    <h3>🆕 Nouveauté</h3>
+    <span class="hint">Dernière ascension</span>
+  </div>
+
+  <article class="card feature new-topic" aria-live="polite">
+
+    <div class="new-topic-content">
+      <div class="meta-line">
+        <span class="date" id="latest-date">—</span>
+      </div>
+
+      <h4 class="feature-title" id="latest-title">—</h4>
+
+      <p class="feature-text" id="latest-desc">—</p>
     </div>
 
-    <article class="card feature new-topic" aria-live="polite">
-
-      <div class="new-topic-content">
-        <div class="meta-line">
-          <span class="date" id="latest-date">—</span>
-        </div>
-
-        <h4 class="feature-title" id="latest-title">—</h4>
-
-        <p class="feature-text" id="latest-desc">—</p>
-
-        <a class="btn" id="latest-link" href="#">
-          Lire le sujet →
-        </a>
-      </div>
-
-      <!-- Footer : navigation par bulles -->
-      <div class="new-topic-footer">
-        <div class="topic-dots" id="topic-dots" aria-label="Navigation des sujets">
-          <!-- Générées en JS -->
-        </div>
-      </div>
+    <!-- Navigation par bulles -->
+    <div class="new-topic-footer">
+      <div class="topic-dots" id="topic-dots" aria-label="Navigation des sujets"></div>
+    </div>
 
     </article>
   </section>
@@ -160,7 +154,7 @@
           <div class="arrow" aria-hidden="true">→</div>
         </a>
 
-        <a class="card hub" href="pages/exploration_voyages/index.html" data-keywords="voyages exploration récits destinations cultures">
+        <a class="card hub" href="#" data-keywords="voyages exploration récits destinations cultures">
           <div class="icon" aria-hidden="true">🧭</div>
           <div class="hub-text">
             <h4>Exploration & Voyages</h4>
@@ -178,7 +172,7 @@
           <div class="arrow" aria-hidden="true">→</div>
         </a>
 
-        <a class="card hub" href="pages/economie_politique/index.html" data-keywords="économie politique états marchés sociétés">
+        <a class="card hub" href="#" data-keywords="économie politique états marchés sociétés">
           <div class="icon" aria-hidden="true">🏛️</div>
           <div class="hub-text">
             <h4>Économie & Politique</h4>
@@ -205,7 +199,7 @@
           <div class="arrow" aria-hidden="true">→</div>
         </a>
 
-        <a class="card hub" href="pages/technologie_informatique/index.html" data-keywords="technologie informatique web ia systèmes">
+        <a class="card hub" href="#" data-keywords="technologie informatique web ia systèmes">
           <div class="icon" aria-hidden="true">💻</div>
           <div class="hub-text">
             <h4>Technologie & Informatique</h4>
@@ -214,7 +208,7 @@
           <div class="arrow" aria-hidden="true">→</div>
         </a>
 
-        <a class="card hub" href="pages/droit_justice_criminologie/index.html" data-keywords="droit justice criminologie enquêtes lois">
+        <a class="card hub" href="#" data-keywords="droit justice criminologie enquêtes lois">
           <div class="icon" aria-hidden="true">⚖️</div>
           <div class="hub-text">
             <h4>Droit, Justice & Criminologie</h4>
@@ -223,7 +217,7 @@
           <div class="arrow" aria-hidden="true">→</div>
         </a>
 
-        <a class="card hub" href="pages/personnalites/index.html" data-keywords="personnalités biographies histoire science culture">
+        <a class="card hub" href="p#" data-keywords="personnalités biographies histoire science culture">
           <div class="icon" aria-hidden="true">👤</div>
           <div class="hub-text">
             <h4>Personnalités marquantes</h4>

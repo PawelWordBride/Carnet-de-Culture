@@ -9,7 +9,16 @@ window.CDC_FACTS = {
   ingenierie: [
     "En ingénierie, de nombreuses pannes viennent des interfaces entre systèmes, pas des composants seuls.",
     "Le cycle en V sert surtout à garantir la traçabilité entre exigences, conception et tests.",
-    "Les ordres de grandeur évitent souvent des erreurs de conception très coûteuses."
+    "Les ordres de grandeur évitent souvent des erreurs de conception très coûteuses.",
+    "Les scientifiques utilisent souvent des analogies pour comprendre des phénomènes complexes.",
+    "Une idée devient plus claire quand on essaie de l’expliquer avec ses propres mots.",
+    "Relier un concept à plusieurs domaines augmente la compréhension et la mémorisation.",
+    "Les grandes découvertes sont souvent nées de questions simples mais profondes.",
+    "Observer le monde quotidiennement est une forme d’apprentissage scientifique.",
+    "Les cartes, schémas et diagrammes aident le cerveau à organiser l’information.",
+    "Poser de bonnes questions est souvent plus important que trouver immédiatement la réponse.",
+    "Les carnets de recherche sont utilisés par les scientifiques pour suivre leurs idées et hypothèses.",
+    "Un concept compris dans plusieurs contextes devient une connaissance durable."
   ],
 
   geographie: [

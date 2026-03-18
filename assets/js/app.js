@@ -80,36 +80,38 @@
     // ==============================
     // 3) Nouveau sujet (bulles)
     // ==============================
-    const topics = [
-      {
-        date: "Dimanche 11 janvier 2026",
-        title: "Pourquoi certaines villes sont construites autour de l’eau ?",
-        desc: "De Venise à Amsterdam, l’eau façonne l’urbanisme, l’économie et l’imaginaire des villes à travers l’histoire.",
-        link: "pages/geo/chapitres_pays_regions_et_villes/villes_autour_de_leau.html"
-      },
-      {
-        date: "Dimanche 18 janvier 2026",
-        title: "Les États-Unis : géographie, population, puissance",
-        desc: "Puissance mondiale, territoire-continent et mosaïque de régions aux dynamiques contrastées.",
-        link: "pages/geo/chapitres_pays_regions_et_villes/usa.html"
-      },
-      {
-        date: "Dimanche 25 janvier 2026",
-        title: "sujet à venir",
-        desc: "patience",
-        link: "#"
-      }
-    ];
+const topics = [
+  {
+    date: "Dimanche 11 janvier 2026",
+    title: "Pourquoi certaines villes sont construites autour de l’eau ?",
+    desc: "De Venise à Amsterdam, l’eau façonne l’urbanisme et l’histoire des villes."
+  },
+  {
+    date: "Dimanche 18 janvier 2026",
+    title: "Les États-Unis : géographie, population, puissance",
+    desc: "Puissance mondiale et territoire-continent aux dynamiques contrastées."
+  },
+  {
+    date: "Dimanche 15 mars 2026",
+    title: "Mise à jour du dictionnaire",
+    desc: "Ajout de la lettre A dans le dictionnaire."
+  },
+    {
+    date: "Dimanche 8 mars 2026",
+    title: "Pologne",
+    desc: "Ajout du pays Pologne dans la section géographie",
+    link: "pages/geo/chapitres_pays_regions_et_villes/pologne/pologne.html"
+  }
+];
 
     let currentTopic = 0;
 
     const dateEl = $("#latest-date");
     const titleEl = $("#latest-title");
     const descEl = $("#latest-desc");
-    const linkEl = $("#latest-link");
     const dotsContainer = $("#topic-dots");
 
-    const hasTopicBlock = dateEl && titleEl && descEl && linkEl && dotsContainer;
+const hasTopicBlock = dateEl && titleEl && descEl && dotsContainer;
 
     function updateTopic(index) {
       if (!hasTopicBlock) return;
@@ -118,7 +120,6 @@
       dateEl.textContent = topic.date;
       titleEl.textContent = topic.title;
       descEl.textContent = topic.desc;
-      linkEl.href = topic.link;
 
       const dots = dotsContainer.querySelectorAll("button");
       dots.forEach((dot, i) => dot.classList.toggle("active", i === index));
@@ -441,3 +442,57 @@
     textEl.textContent = pickRandom(facts);
   });
 })();
+
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const content = $("#page-content");
+  if (!content) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const toOpen = params.get("open");
+  if (!toOpen) return;
+
+  const url = resolveUrl(toOpen);
+
+  try {
+    content.innerHTML = `
+      <div class="reader-empty">
+        <h3>Chargement…</h3>
+        <p>📄 ${toOpen}</p>
+      </div>`;
+
+    const res = await fetch(url, { cache: "no-store" });
+
+    if (!res.ok) {
+      content.innerHTML = `
+        <div class="reader-empty">
+          <h3>Erreur de chargement</h3>
+          <p>HTTP ${res.status} — ${res.statusText}</p>
+          <p><code>${url}</code></p>
+        </div>`;
+      return;
+    }
+
+    const html = await res.text();
+    content.innerHTML = html;
+
+    // Active le lien correspondant si présent sur la page
+    $$("a.load-page.is-active").forEach((a) => a.classList.remove("is-active"));
+
+    const targetLink = $$("a.load-page[href]").find((a) => {
+      return resolveUrl(a.getAttribute("href")) === url;
+    });
+
+    if (targetLink) targetLink.classList.add("is-active");
+
+    content.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  } catch (err) {
+    content.innerHTML = `
+      <div class="reader-empty">
+        <h3>Erreur lors du chargement</h3>
+        <p>${String(err)}</p>
+        <p><code>${url}</code></p>
+      </div>`;
+  }
+});
