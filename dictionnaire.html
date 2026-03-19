@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dictionnaire — Carnet de Culture</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --primary: #3f3122;
+      --secondary: #7b6241;
+      --light-blue: #a7b4b9;
+      --bg-soft: #e8dcc7;
+      --paper: #f6f1e7;
+      --paper-dark: #ebe3d3;
+      --paper-deep: #dcc9a6;
+      --text: #33291f;
+      --white: #fffdf8;
+      --border: #c9b89c;
+      --accent: #526d82;
+      --shadow: 0 10px 30px rgba(58, 49, 40, 0.10);
+      --shadow-soft: 0 6px 18px rgba(58, 49, 40, 0.08);
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-sm: 10px;
+      --max-width: 1200px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(123, 98, 65, 0.08), transparent 22%),
+        radial-gradient(circle at bottom right, rgba(82, 109, 130, 0.08), transparent 18%),
+        linear-gradient(rgba(255,255,255,0.12), rgba(255,255,255,0.04)),
+        var(--paper);
+      line-height: 1.6;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.08;
+      background-image:
+        linear-gradient(to right, rgba(80, 60, 35, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(80, 60, 35, 0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 70px 0;
+    }
+
+    .section-title {
+      font-family: "Cinzel", serif;
+      font-size: clamp(2rem, 4vw, 2.6rem);
+      color: var(--primary);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .section-subtitle {
+      max-width: 760px;
+      color: #5d5041;
+      margin-bottom: 36px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 24px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-weight: 600;
+      transition: 0.25s ease;
+      cursor: pointer;
+      font-family: "Inter", sans-serif;
+    }
+
+    .btn-outline {
+      background: rgba(255, 253, 248, 0.55);
+      border: 1px solid var(--border);
+      color: var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: rgba(201, 184, 156, 0.18);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(244, 236, 216, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(123, 98, 65, 0.22);
+      box-shadow: 0 4px 12px rgba(58, 49, 40, 0.05);
+    }
+
+    .header-inner {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      font-family: "Cinzel", serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      color: var(--primary);
+      font-weight: 600;
+      position: relative;
+    }
+
+    .nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0;
+      height: 1px;
+      background: var(--secondary);
+      transition: width 0.25s ease;
+    }
+
+    .nav a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      padding: 60px 0 40px;
+    }
+
+    .hero-card {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 36px;
+      align-items: center;
+      background:
+        linear-gradient(rgba(255,255,255,0.22), rgba(255,255,255,0.08)),
+        var(--paper-dark);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 48px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1px solid rgba(123, 98, 65, 0.18);
+      border-radius: 22px;
+      pointer-events: none;
+    }
+
+    .hero-content,
+    .hero-visual {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(123, 98, 65, 0.10);
+      color: var(--secondary);
+      border: 1px solid rgba(123, 98, 65, 0.18);
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-family: "Cinzel", serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1.02;
+      color: var(--primary);
+      margin-bottom: 18px;
+      text-transform: uppercase;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      max-width: 580px;
+      color: #4d4032;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .hero-visual {
+      min-height: 430px;
+      border-radius: 24px;
+      background:
+        linear-gradient(rgba(63, 49, 34, 0.22), rgba(63, 49, 34, 0.18)),
+        url("assets/img/patrick-tomasso-Oaqk7qqNh_c-unsplash.jpg") center/cover;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      border: 1px solid rgba(123, 98, 65, 0.25);
+    }
+
+    .hero-quote {
+      background: rgba(255, 251, 242, 0.92);
+      padding: 20px 22px;
+      border-radius: 16px;
+      max-width: 390px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(201, 184, 156, 0.9);
+      text-align: center;
+    }
+
+    .hero-quote strong {
+      color: var(--primary);
+      display: block;
+      margin-bottom: 10px;
+      font-family: "Cinzel", serif;
+      font-size: 1.2rem;
+    }
+
+    .dictionary-toolbar {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+      padding: 22px;
+      border-radius: 22px;
+      background:
+        linear-gradient(rgba(255,255,255,0.22), rgba(255,255,255,0.08)),
+        var(--paper-dark);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+    }
+
+    .dictionary-toolbar::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border: 1px solid rgba(123, 98, 65, 0.14);
+      border-radius: 14px;
+      pointer-events: none;
+    }
+
+    .search-input {
+      flex: 1 1 320px;
+      min-width: 240px;
+      padding: 14px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 251, 242, 0.9);
+      color: var(--primary);
+      font: inherit;
+      position: relative;
+      z-index: 1;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px rgba(123, 98, 65, 0.08);
+    }
+
+    .alphabet-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .alphabet-nav a {
+      width: 36px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid rgba(123, 98, 65, 0.16);
+      background: rgba(255, 251, 242, 0.72);
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: 0.25s ease;
+    }
+
+    .alphabet-nav a:hover {
+      background: rgba(201, 184, 156, 0.18);
+    }
+
+    .dictionary-groups {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .letter-group {
+      background:
+        linear-gradient(rgba(255,255,255,0.22), rgba(255,255,255,0.08)),
+        var(--paper-dark);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px 24px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+    }
+
+    .letter-group::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border: 1px solid rgba(123, 98, 65, 0.14);
+      border-radius: 16px;
+      pointer-events: none;
+    }
+
+    .letter-title {
+      font-family: "Cinzel", serif;
+      color: var(--primary);
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .entry-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .dictionary-entry {
+      background: rgba(255, 251, 242, 0.72);
+      border: 1px solid rgba(201, 184, 156, 0.95);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: var(--shadow-soft);
+      scroll-margin-top: 110px;
+    }
+
+    .entry-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .entry-head h3 {
+      font-family: "Cinzel", serif;
+      color: var(--primary);
+      font-size: 1.15rem;
+    }
+
+    .entry-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(123, 98, 65, 0.16);
+      background: rgba(123, 98, 65, 0.10);
+      color: var(--secondary);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .entry-definition {
+      color: #5b4f41;
+      margin-bottom: 12px;
+    }
+
+    .entry-meta {
+      font-size: 0.9rem;
+      color: #6a5d4d;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .cta-box {
+      text-align: center;
+      padding: 60px 28px;
+      border-radius: 28px;
+      background:
+        linear-gradient(rgba(255,255,255,0.22), rgba(255,255,255,0.08)),
+        var(--paper-dark);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .cta-box::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 1px solid rgba(123, 98, 65, 0.14);
+      border-radius: 18px;
+      pointer-events: none;
+    }
+
+    .dictionary-note {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .dictionary-note-title {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.7rem;
+      margin-bottom: 22px;
+      font-family: "Cinzel", serif;
+    }
+
+    .dictionary-note p {
+      font-size: 1.05rem;
+      color: #4e4132;
+    }
+
+    .site-footer {
+      padding: 36px 0 50px;
+      color: #5f4d3d;
+      text-align: center;
+      font-size: 0.95rem;
+      border-top: 1px solid rgba(123, 98, 65, 0.18);
+      background: rgba(244, 236, 216, 0.55);
+    }
+
+    .footer-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-card {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        min-height: 340px;
+      }
+
+      .entry-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .header-inner {
+        flex-direction: column;
+        justify-content: center;
+        padding: 16px 0;
+      }
+
+      .nav {
+        justify-content: center;
+      }
+
+      .hero-card,
+      .letter-group {
+        padding: 24px;
+      }
+
+      .section {
+        padding: 50px 0;
+      }
+
+      .hero {
+        padding-top: 30px;
+      }
+
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+
+      .alphabet-nav {
+        gap: 6px;
+      }
+
+      .alphabet-nav a {
+        width: 32px;
+        height: 32px;
+        font-size: 0.82rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="indexV2.html" class="logo">Carnet de Culture</a>
+
+      <nav class="nav">
+        <a href="indexV2.html#accueil">Accueil</a>
+        <a href="indexV2.html#categories">Catégories</a>
+        <a href="indexV2.html#articles">Articles</a>
+        <a href="indexV2.html#apropos">À propos</a>
+        <a href="methode.html">Méthode</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <div class="hero-content">
+            <span class="hero-tag">Lexique · Notions · Repères</span>
+            <h1>Dictionnaire<br>du carnet</h1>
+            <p>
+              Un espace pour regrouper les mots importants, les notions rencontrées
+              et les repères utilisés dans les différentes pages du site.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#contenu-dictionnaire" class="btn btn-primary">Voir les termes</a>
+              <a href="indexV2.html#ressources" class="btn btn-outline">Retour aux ressources</a>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="hero-quote">
+              <strong>Mini encyclopédie</strong>
+              <span>
+                Un lexique vivant pour centraliser les notions du carnet et créer des ponts entre les disciplines.
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contenu-dictionnaire">
+      <div class="container">
+        <h2 class="section-title">📖 Dictionnaire</h2>
+        <p class="section-subtitle">
+          Tous les termes rencontrés dans le carnet, organisés pour être retrouvés rapidement.
+        </p>
+
+        <div class="dictionary-toolbar">
+          <input
+            type="search"
+            id="dictionary-search"
+            class="search-input"
+            placeholder="Rechercher un mot..."
+            aria-label="Rechercher un mot dans le dictionnaire"
+          />
+
+          <nav class="alphabet-nav" aria-label="Navigation alphabétique">
+            <a href="#letter-a">A</a>
+            <a href="#letter-b">B</a>
+            <a href="#letter-c">C</a>
+            <a href="#letter-h">H</a>
+            <a href="#letter-r">R</a>
+          </nav>
+        </div>
+
+        <div class="dictionary-groups" id="dictionary-groups">
+          <section class="letter-group" id="letter-a">
+            <h3 class="letter-title">A</h3>
+            <div class="entry-grid">
+              <article id="atmosphere" class="dictionary-entry">
+                <div class="entry-head">
+                  <h3>Atmosphère</h3>
+                  <span class="entry-tag">Sciences</span>
+                </div>
+                <p class="entry-definition">
+                  Enveloppe gazeuse qui entoure une planète, notamment la Terre.
+                </p>
+                <div class="entry-meta">Lié à : climat, météorologie</div>
+              </article>
+            </div>
+          </section>
+
+          <section class="letter-group" id="letter-b">
+            <h3 class="letter-title">B</h3>
+            <div class="entry-grid">
+              <article id="biome" class="dictionary-entry">
+                <div class="entry-head">
+                  <h3>Biome</h3>
+                  <span class="entry-tag">Géographie</span>
+                </div>
+                <p class="entry-definition">
+                  Grand ensemble naturel caractérisé par un climat, une végétation et une faune dominants.
+                </p>
+                <div class="entry-meta">Lié à : climat, écosystème</div>
+              </article>
+            </div>
+          </section>
+
+          <section class="letter-group" id="letter-c">
+            <h3 class="letter-title">C</h3>
+            <div class="entry-grid">
+              <article id="climat" class="dictionary-entry">
+                <div class="entry-head">
+                  <h3>Climat</h3>
+                  <span class="entry-tag">Géographie</span>
+                </div>
+                <p class="entry-definition">
+                  Ensemble des conditions atmosphériques moyennes observées sur une longue période dans une région donnée.
+                </p>
+                <div class="entry-meta">À distinguer de : météo</div>
+              </article>
+            </div>
+          </section>
+
+          <section class="letter-group" id="letter-h">
+            <h3 class="letter-title">H</h3>
+            <div class="entry-grid">
+              <article id="hydrologie" class="dictionary-entry">
+                <div class="entry-head">
+                  <h3>Hydrologie</h3>
+                  <span class="entry-tag">Géographie</span>
+                </div>
+                <p class="entry-definition">
+                  Étude de l’eau sur Terre, de sa répartition et de ses mouvements.
+                </p>
+                <div class="entry-meta">Lié à : fleuve, bassin versant</div>
+              </article>
+            </div>
+          </section>
+
+          <section class="letter-group" id="letter-r">
+            <h3 class="letter-title">R</h3>
+            <div class="entry-grid">
+              <article id="relief" class="dictionary-entry">
+                <div class="entry-head">
+                  <h3>Relief</h3>
+                  <span class="entry-tag">Géographie</span>
+                </div>
+                <p class="entry-definition">
+                  Ensemble des formes de la surface terrestre : montagnes, plaines, vallées, plateaux.
+                </p>
+                <div class="entry-meta">Lié à : topographie, paysage</div>
+              </article>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-box">
+          <div class="dictionary-note">
+            <div class="dictionary-note-title">🗂️ Un repère transversal</div>
+            <p>
+              Le dictionnaire te permet de relier les mots, les notions et les thèmes du site
+              dans une logique plus structurée et évolutive.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-buttons">
+        <a href="indexV2.html#accueil" class="btn btn-outline">Accueil</a>
+        <a href="indexV2.html#categories" class="btn btn-outline">Catégories</a>
+        <a href="indexV2.html#apropos" class="btn btn-outline">À propos</a>
+        <a href="methode.html" class="btn btn-outline">Méthode</a>
+        <a href="indexV2.html#contact" class="btn btn-outline">Contact</a>
+      </div>
+
+      <p>© 2026 — Carnet de Culture — Explorer • comprendre • relier les savoirs</p>
+    </div>
+  </footer>
+
+  <script>
+    const searchInput = document.getElementById("dictionary-search");
+    const entries = document.querySelectorAll(".dictionary-entry");
+    const groups = document.querySelectorAll(".letter-group");
+
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.trim().toLowerCase();
+
+      entries.forEach((entry) => {
+        const text = entry.textContent.toLowerCase();
+        const match = text.includes(query);
+        entry.classList.toggle("hidden", !match);
+      });
+
+      groups.forEach((group) => {
+        const visibleEntries = group.querySelectorAll(".dictionary-entry:not(.hidden)");
+        group.classList.toggle("hidden", visibleEntries.length === 0);
+      });
+    });
+  </script>
+</body>
+</html>

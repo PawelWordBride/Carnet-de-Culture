@@ -522,6 +522,9 @@ body::before {
       .hero-visual {
         min-height: 340px;
       }
+      .resources-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
     }
 
     @media (max-width: 720px) {
@@ -556,6 +559,9 @@ body::before {
       .hero {
         padding-top: 30px;
       }
+      .resources-grid {
+  grid-template-columns: 1fr;
+}
     }
 
     .saviez-vous {
@@ -579,6 +585,62 @@ body::before {
 
 .footer-buttons {
   margin-bottom: 25px;
+}
+
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.resource-card {
+  background:
+    linear-gradient(rgba(255,255,255,0.22), rgba(255,255,255,0.08)),
+    var(--paper-dark);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  box-shadow: var(--shadow-soft);
+  transition: 0.25s ease;
+  position: relative;
+}
+
+.resource-card::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(123, 98, 65, 0.14);
+  border-radius: 14px;
+  pointer-events: none;
+}
+
+.resource-card:hover {
+  transform: translateY(-4px);
+}
+
+.resource-icon {
+  width: 68px;
+  height: 68px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  font-size: 1.8rem;
+  background: linear-gradient(135deg, #f0e6d3, #e0d0b1);
+  border: 1px solid rgba(123, 98, 65, 0.15);
+  margin-bottom: 18px;
+}
+
+.resource-card h3 {
+  font-size: 1.2rem;
+  color: var(--primary);
+  margin-bottom: 10px;
+  font-family: "Cinzel", serif;
+}
+
+.resource-card p {
+  color: #5d5041;
+  margin-bottom: 18px;
+  font-size: 0.97rem;
 }
   </style>
 </head>
@@ -817,7 +879,57 @@ Choisis une catégorie et entre dans mon deuxième cerveau.
         </div>
       </div>
     </section>
+<section class="section" id="ressources">
+  <div class="container">
+    <h2 class="section-title">Ressources</h2>
+    <p class="section-subtitle">
+      Une vue d’ensemble des supports utiles du carnet : podcasts, sites, dictionnaires et vidéos
+      pour prolonger l’exploration et retrouver facilement les contenus de référence.
+    </p>
 
+    <div class="resources-grid">
+      <article class="resource-card">
+        <div class="resource-icon">🎙️</div>
+        <h3>Podcasts</h3>
+        <p>
+          Émissions, entretiens et formats audio pour approfondir des thèmes, découvrir des analyses
+          et enrichir la réflexion.
+        </p>
+        <a href="#" class="btn btn-outline">Explorer</a>
+      </article>
+
+      <article class="resource-card">
+        <div class="resource-icon">🌐</div>
+        <h3>Sites</h3>
+        <p>
+          Références web, plateformes documentaires, archives, musées, institutions et ressources
+          fiables classées par thème.
+        </p>
+        <a href="#" class="btn btn-outline">Explorer</a>
+      </article>
+
+      <article class="resource-card">
+        <div class="resource-icon">📖</div>
+        <h3>Dictionnaires</h3>
+        <p>
+          Regroupement des mots, notions et termes rencontrés dans le carnet, pour garder une trace
+          claire du vocabulaire et des concepts.
+        </p>
+        <a href="dictionnaire.html" class="btn btn-outline">Explorer</a>
+      </article>
+
+      <article class="resource-card">
+        <div class="resource-icon">🎬</div>
+        <h3>Vidéos</h3>
+        <p>
+          Conférences, documentaires, analyses visuelles et contenus pédagogiques pour compléter
+          les fiches et les articles du site.
+        </p>
+        <a href="#" class="btn btn-outline">Explorer</a>
+      </article>
+    </div>
+  </div>
+</section>
     <section class="section">
       <div class="container">
 <div class="cta-box">
