@@ -719,7 +719,25 @@
           {
             title: "Thermique et énergie",
             text: "Étudier le refroidissement, le chauffage, la climatisation, la gestion batterie et les flux énergétiques."
-          }
+          },
+    {
+      title: "Constructeurs automobiles",
+      text: "Explorer les entreprises qui conçoivent, développent et produisent les véhicules, ainsi que leur rôle dans l’évolution technique et industrielle du secteur."
+    },
+    {
+      title: "Marques automobiles",
+      text: "Étudier les marques par pays, leur histoire, leur identité, leur positionnement et leurs spécificités stylistiques, techniques ou commerciales."
+    },
+    {
+      title: "Groupes automobiles",
+      text: "Analyser les grands groupes comme Stellantis, Renault Group, Volkswagen Group ou Toyota Group, leur organisation, leurs marques et leurs stratégies industrielles."
+    },
+{
+  title: "Modèles",
+  text: "Analyser les véhicules concrets à travers leurs caractéristiques techniques, leur conception et leurs usages.",
+  link: "modeles.html",
+  button: "Explorer"
+}
         ]
       },
 
@@ -851,12 +869,13 @@
       textEl.textContent = data.text;
 
       if (data.cards.length) {
-        cardsEl.innerHTML = data.cards.map(card => `
-          <article class="content-card">
-            <h3>${card.title}</h3>
-            <p>${card.text}</p>
-          </article>
-        `).join("");
+cardsEl.innerHTML = data.cards.map(card => `
+  <article class="content-card">
+    <h3>${card.title}</h3>
+    <p>${card.text}</p>
+    ${card.link ? `<a href="${card.link}" class="btn btn-outline">${card.button || "Explorer"}</a>` : ""}
+  </article>
+`).join("");
       } else {
         cardsEl.innerHTML = "";
       }
