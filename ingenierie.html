@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Géographie — Carnet de Culture</title>
+  <title>Ingénierie — Carnet de Culture</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -259,7 +259,7 @@
       border-radius: 24px;
       background:
         linear-gradient(rgba(63, 49, 34, 0.22), rgba(63, 49, 34, 0.18)),
-        url("assets/img/jan-kopriva-SCEywLgwj2E-unsplash.jpg") center/cover;
+        url("assets/img/patrick-tomasso-Oaqk7qqNh_c-unsplash.jpg") center/cover;
       box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
       display: flex;
       align-items: center;
@@ -290,19 +290,19 @@
       display: inline-flex;
     }
 
-    .geo-layout {
+    .eng-layout {
       padding: 20px 0 70px;
     }
 
-    .geo-grid {
+    .eng-grid {
       display: grid;
       grid-template-columns: 320px 1fr;
       gap: 24px;
       align-items: start;
     }
 
-    .geo-sidebar,
-    .geo-content {
+    .eng-sidebar,
+    .eng-content {
       background:
         linear-gradient(rgba(255,255,255,0.20), rgba(255,255,255,0.08)),
         var(--paper-dark);
@@ -312,8 +312,8 @@
       position: relative;
     }
 
-    .geo-sidebar::before,
-    .geo-content::before {
+    .eng-sidebar::before,
+    .eng-content::before {
       content: "";
       position: absolute;
       inset: 10px;
@@ -322,13 +322,13 @@
       pointer-events: none;
     }
 
-    .geo-sidebar {
+    .eng-sidebar {
       padding: 24px;
       position: sticky;
       top: 110px;
     }
 
-    .geo-sidebar h2 {
+    .eng-sidebar h2 {
       font-family: "Cinzel", serif;
       color: var(--primary);
       font-size: 1.45rem;
@@ -337,7 +337,7 @@
       z-index: 1;
     }
 
-    .geo-sidebar p {
+    .eng-sidebar p {
       font-size: 0.95rem;
       color: #5d5041;
       margin-bottom: 20px;
@@ -345,7 +345,7 @@
       z-index: 1;
     }
 
-    .geo-menu {
+    .eng-menu {
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -353,7 +353,7 @@
       z-index: 1;
     }
 
-    .geo-btn {
+    .eng-btn {
       width: 100%;
       text-align: left;
       padding: 14px 16px;
@@ -367,14 +367,14 @@
       font-family: "Inter", sans-serif;
     }
 
-    .geo-btn:hover,
-    .geo-btn.active {
+    .eng-btn:hover,
+    .eng-btn.active {
       background: linear-gradient(180deg, #8b6f47, #725737);
       color: #fffdf8;
       transform: translateX(4px);
     }
 
-    .geo-content {
+    .eng-content {
       padding: 32px;
       min-height: 560px;
     }
@@ -459,14 +459,14 @@
       pointer-events: none;
     }
 
-    .geo-note {
+    .eng-note {
       position: relative;
       z-index: 1;
       max-width: 760px;
       margin: 0 auto;
     }
 
-    .geo-note-title {
+    .eng-note-title {
       font-weight: 700;
       color: var(--primary);
       font-size: 1.7rem;
@@ -474,7 +474,7 @@
       font-family: "Cinzel", serif;
     }
 
-    .geo-note p {
+    .eng-note p {
       font-size: 1.05rem;
       color: #4e4132;
     }
@@ -507,11 +507,11 @@
     }
 
     @media (max-width: 920px) {
-      .geo-grid {
+      .eng-grid {
         grid-template-columns: 1fr;
       }
 
-      .geo-sidebar {
+      .eng-sidebar {
         position: static;
       }
 
@@ -532,8 +532,8 @@
       }
 
       .hero-card,
-      .geo-content,
-      .geo-sidebar {
+      .eng-content,
+      .eng-sidebar {
         padding: 24px;
       }
 
@@ -571,51 +571,62 @@
       <div class="container">
         <div class="hero-card">
           <div class="hero-content">
-            <span class="hero-tag">Atlas des territoires · Milieux · Sociétés</span>
-            <h1>Section<br>Géographie</h1>
+            <span class="hero-tag">Techniques · Systèmes · Conception</span>
+            <h1>Section<br>Ingénierie</h1>
             <p>
-              La géographie explore les relations entre les sociétés, les territoires et les milieux.
-              Cette section rassemble progressivement des repères pour comprendre l’organisation du monde,
-              des paysages naturels aux dynamiques humaines.
+              L’ingénierie relie la science, la technique et la conception pour comprendre,
+              améliorer et créer des systèmes utiles. Cette section rassemble progressivement
+              des repères sur les grands domaines techniques, leurs principes et leurs applications.
             </p>
 
             <div class="hero-actions">
-              <a href="#contenu-geographie" class="btn btn-primary">Explorer la section</a>
+              <a href="#contenu-ingenierie" class="btn btn-primary">Explorer la section</a>
               <a href="indexV2.html#categories" class="btn btn-outline">Retour aux catégories</a>
             </div>
           </div>
 
           <div class="hero-visual">
+            <div class="hero-quote">
+              <strong>Approche</strong>
+              <span>
+                Cette section a pour but de structurer les bases de l’ingénierie :
+                comprendre comment les systèmes sont pensés, fabriqués, reliés et améliorés,
+                du mécanique au numérique.
+              </span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="geo-layout" id="contenu-geographie">
+    <section class="eng-layout" id="contenu-ingenierie">
       <div class="container">
-        <div class="geo-grid">
-          <aside class="geo-sidebar">
+        <div class="eng-grid">
+          <aside class="eng-sidebar">
             <h2>Sommaire</h2>
             <p>Choisis une sous-catégorie pour afficher une fiche de contenu dynamique.</p>
 
-            <div class="geo-menu">
-              <button class="geo-btn" data-category="geographie_physique">Géographie physique</button>
-              <button class="geo-btn" data-category="geographie_humaine">Géographie humaine</button>
-              <button class="geo-btn" data-category="geographie_economique">Géographie économique</button>
-              <button class="geo-btn" data-category="geographie_environnementale">Géographie environnementale</button>
-              <button class="geo-btn" data-category="geographie_regionale">Géographie régionale</button>
-              <button class="geo-btn" data-category="populations">À venir</button>
+            <div class="eng-menu">
+              <button class="eng-btn" data-category="ingenierie_mecanique">Ingénierie mécanique</button>
+              <button class="eng-btn" data-category="ingenierie_automobile">Ingénierie automobile</button>
+              <button class="eng-btn" data-category="ingenierie_aeronautique">Ingénierie aéronautique</button>
+              <button class="eng-btn" data-category="ingenierie_electrique">Ingénierie électrique</button>
+              <button class="eng-btn" data-category="ingenierie_civile">Ingénierie civile</button>
+              <button class="eng-btn" data-category="conception_systemes">Conception & systèmes</button>
             </div>
           </aside>
 
-          <section class="geo-content">
+          <section class="eng-content">
             <span class="content-label" id="content-label">Introduction</span>
-            <h2 class="content-title" id="content-title">Explorer la géographie</h2>
+            <h2 class="content-title" id="content-title">Explorer l’ingénierie</h2>
             <p class="content-text" id="content-text">
-              La géographie permet de comprendre l’organisation du monde à travers les relations entre les sociétés et leurs territoires.
-              Elle analyse les paysages, les <span class="term" data-term="Climat">climats</span>, les populations et les dynamiques économiques afin de mieux saisir les enjeux contemporains.
+              L’ingénierie permet d’analyser, concevoir et améliorer des objets, des structures
+              et des systèmes complexes. Elle s’appuie sur des principes scientifiques,
+              des méthodes de calcul, des contraintes de fabrication et une logique de résolution
+              de problèmes.
               <br><br>
-              Ce carnet propose une approche progressive, en explorant différentes sous-catégories pour construire une vision globale et structurée des espaces géographiques.
+              Ce carnet propose une approche progressive des grands domaines techniques afin
+              de construire une vision structurée et cohérente de l’ingénierie.
             </p>
 
             <div class="content-card-grid" id="content-cards"></div>
@@ -627,11 +638,12 @@
     <section class="section">
       <div class="container">
         <div class="cta-box">
-          <div class="geo-note">
-            <div class="geo-note-title">🗺️ Une lecture progressive des territoires</div>
+          <div class="eng-note">
+            <div class="eng-note-title">⚙️ Une lecture progressive des systèmes techniques</div>
             <p>
-              Cette section se construit pas à pas, en reliant milieux naturels, dynamiques humaines
-              et formes d’organisation de l’espace pour former une vision plus claire du monde.
+              Cette section se construit pas à pas, en reliant principes physiques,
+              conception, matériaux, production et usages pour mieux comprendre
+              les objets techniques et les systèmes du monde réel.
             </p>
           </div>
         </div>
@@ -654,166 +666,184 @@
   </footer>
 
   <script>
-    const geoData = {
-      geographie_physique: {
-        label: "🌿 Monde naturel",
-        title: "Géographie physique",
-        text: "Comprendre les mécanismes naturels qui façonnent la Terre, afin d’expliquer les paysages, les climats, les écosystèmes et les conditions de vie des êtres vivants.",
+    const engineeringData = {
+      ingenierie_mecanique: {
+        label: "⚙️ Mécanique",
+        title: "Ingénierie mécanique",
+        text: "Comprendre les systèmes en mouvement, les efforts, les liaisons, les matériaux et la conception des pièces et mécanismes.",
         cards: [
           {
-            title: "Reliefs",
-            text: "Les reliefs représentent les différentes formes de la surface terrestre, façonnées par des forces internes et externes."
+            title: "Cinématique et mouvements",
+            text: "Étudier les mouvements des pièces et mécanismes afin de comprendre leur fonctionnement et leurs trajectoires."
           },
           {
-            title: "Hydrologie",
-            text: "L’hydrologie étudie la répartition et les mouvements de l’eau sur Terre, essentiels à la vie et aux équilibres naturels."
+            title: "Résistance des matériaux",
+            text: "Analyser les contraintes, déformations et ruptures potentielles des matériaux soumis à des efforts."
           },
           {
-            title: "Climats",
-            text: "Les climats définissent les conditions atmosphériques d’une région sur le long terme et influencent les écosystèmes et les modes de vie."
+            title: "Conception de pièces",
+            text: "Explorer la logique de conception mécanique, les formes, les tolérances et les contraintes de fabrication."
           },
           {
-            title: "Phénomènes naturels",
-            text: "Les phénomènes naturels sont des événements parfois extrêmes résultant de l’activité interne de la Terre ou des dynamiques atmosphériques."
+            title: "Assemblages et liaisons",
+            text: "Comprendre comment les pièces sont reliées entre elles par vis, soudures, axes, roulements ou articulations."
           },
           {
-            title: "Biomes",
-            text: "Les biomes regroupent de grands ensembles naturels caractérisés par un climat, une végétation et une faune spécifiques."
+            title: "Maintenance et diagnostic",
+            text: "Étudier l’usure, les défaillances et les méthodes d’analyse permettant de maintenir un système mécanique."
           }
         ]
       },
-      geographie_humaine: {
-        label: "🧭 Monde humain",
-        title: "Géographie humaine",
-        text: "Comprendre comment les populations, les cultures et les dynamiques humaines structurent le monde.",
+
+      ingenierie_automobile: {
+        label: "🚗 Automobile",
+        title: "Ingénierie automobile",
+        text: "Comprendre la structure, les fonctions et les systèmes qui composent un véhicule, de la carrosserie aux chaînes de traction.",
         cards: [
           {
-            title: "Répartition mondiale & urbanisation",
-            text: "Étudier la distribution des populations, leur évolution et la concentration croissante dans les espaces urbains."
+            title: "Groupe motopropulseur",
+            text: "Étudier les moteurs thermiques ou électriques, la transmission, la réduction et les organes qui assurent la propulsion."
           },
           {
-            title: "Grandes métropoles et villes mondiales",
-            text: "Analyser le rôle des grandes villes comme centres de pouvoir économique, culturel et politique."
+            title: "Châssis et liaisons au sol",
+            text: "Analyser la structure du véhicule, la suspension, la direction, les freins, les roues et leur comportement dynamique."
           },
           {
-            title: "Migrations humaines",
-            text: "Explorer les déplacements des populations, leurs causes et leurs impacts sur les sociétés."
+            title: "Systèmes électriques et électroniques",
+            text: "Comprendre les réseaux électriques, calculateurs, capteurs, actionneurs et fonctions embarquées."
           },
           {
-            title: "Frontières et tensions géopolitiques",
-            text: "Étudier les rivalités territoriales et les enjeux liés aux frontières, aux ressources et aux identités."
+            title: "Sécurité et ADAS",
+            text: "Explorer les dispositifs de sécurité passive et active, ainsi que les systèmes avancés d’aide à la conduite."
           },
           {
-            title: "Langues, religions et cultures",
-            text: "Analyser la diversité culturelle mondiale et la diffusion des langues, croyances et modes de vie."
+            title: "Thermique et énergie",
+            text: "Étudier le refroidissement, le chauffage, la climatisation, la gestion batterie et les flux énergétiques."
           }
         ]
       },
-      geographie_economique: {
-        label: "💰 Économie & échanges",
-        title: "Géographie économique",
-        text: "Comprendre comment les ressources, les échanges et les activités économiques organisent le monde, créent des richesses et génèrent des inégalités.",
-        cards: [
-            {
-                title: "Routes commerciales et flux mondiaux",
-                text: "Analyser les grands flux de marchandises, d’énergie et de données qui structurent la mondialisation."
-            },
-            {
-                title: "Ressources naturelles et énergie",
-                text: "Etudier la localisation, l’exploitation et les enjeux liés aux ressources naturelles essentielles."
-            },
-            {
-                title: "Inégalités de développement",
-                text: "Analyser les écarts de richesse et de développement entre les territoires et leurs causes."
-            },
-            {
-                title: "Tourisme mondial",
-                text: "Explorer le tourisme comme activité économique majeure et ses impacts sur les territoires."
-            },
-            {
-                title: "Mondialisation et systèmes productifs",
-                text: "Etudier l’organisation mondiale de la production et les stratégies des entreprises."
-            }
-        ]
-      },
-      geographie_environnementale: {
-        label: "🌱 Environnement & équilibres",
-        title: "Géographie environnementale",
-        text: "Comprendre les interactions entre les activités humaines et l’environnement, ainsi que les impacts, les risques et les stratégies pour préserver les équilibres naturels.",
+
+      ingenierie_aeronautique: {
+        label: "✈️ Aéronautique",
+        title: "Ingénierie aéronautique",
+        text: "Comprendre les principes de vol, les structures aériennes, la propulsion et les systèmes embarqués dans l’aviation.",
         cards: [
           {
-              title: "Changement climatique",
-              text: "Analyser les évolutions du climat à l’échelle globale et leurs impacts sur les territoires et les sociétés."
+            title: "Aérodynamique",
+            text: "Étudier les forces exercées par l’air sur les structures volantes : portance, traînée, stabilité et contrôle."
           },
           {
-              title: "Déforestation",
-              text: "Eétudier la disparition des forêts, ses causes et ses conséquences sur les équilibres écologiques."
+            title: "Structures et matériaux",
+            text: "Analyser les matériaux légers et résistants utilisés pour concevoir des cellules sûres et performantes."
           },
           {
-              title: "Aires protégées et conservation",
-              text: "explore les stratégies de protection de la nature face aux pressions humaines."
+            title: "Propulsion",
+            text: "Explorer les moteurs, turbines et systèmes qui génèrent la poussée nécessaire au déplacement aérien."
           },
           {
-              title: "Catastrophes naturelles et résilience",
-              text: "Analyser les catastrophes naturelles et la capacité des sociétés à y faire face et à s’adapter."
+            title: "Commandes de vol",
+            text: "Comprendre les surfaces mobiles, les systèmes de pilotage et les mécanismes de contrôle de trajectoire."
           },
           {
-              title: "Montée des océans et littoraux",
-              text: "étudie les impacts de la montée du niveau des mers sur les territoires côtiers et les populations."
-          },
-          {
-              title: "Gestion durable et transition écologique",
-              text: "Analyser les solutions mises en place pour concilier développement humain et préservation de l’environnement."
+            title: "Maintenance aéronautique",
+            text: "Étudier les exigences de fiabilité, d’inspection et de sécurité propres aux systèmes aéronautiques."
           }
         ]
       },
-      geographie_regionale: {
-        label: "🧭 Territoires du monde",
-        title: "Géographie régionale",
-        text: "Étudier des territoires spécifiques à travers leurs caractéristiques naturelles, humaines et économiques, afin de comprendre les dynamiques locales du monde.",
+
+      ingenierie_electrique: {
+        label: "⚡ Électricité",
+        title: "Ingénierie électrique",
+        text: "Comprendre la production, la distribution, la conversion et l’utilisation de l’énergie électrique dans les systèmes techniques.",
         cards: [
           {
-              title: "Grands fleuves du monde",
-              text: "Analyser le rôle des grands fleuves dans l’organisation des territoires et des civilisations."
+            title: "Circuits et grandeurs électriques",
+            text: "Étudier tension, courant, résistance, puissance et les lois fondamentales des circuits."
           },
           {
-              title: "Déserts emblématiques",
-              text: "Explorer les milieux extrêmes désertiques, leurs contraintes et les adaptations humaines et biologiques."
+            title: "Machines électriques",
+            text: "Explorer le fonctionnement des moteurs, alternateurs, transformateurs et autres convertisseurs électromécaniques."
           },
           {
-              title: "Îles et archipels",
-              text: "Etudier les territoires insulaires, entre isolement, richesse écologique et vulnérabilité."
+            title: "Distribution d’énergie",
+            text: "Comprendre comment l’électricité est transportée, protégée et distribuée dans un réseau ou un système."
           },
           {
-              title: "Grandes chaînes de montagnes",
-              text: "Analyser les grands systèmes montagneux et leur influence sur les climats, les populations et les ressources."
+            title: "Électronique de puissance",
+            text: "Analyser les composants et systèmes qui convertissent et pilotent l’énergie électrique."
           },
           {
-              title: "Études régionales",
-              text: "Analyser complètes d’un territoire en croisant tous les aspects géographiques."
-          },
-          {
-              title: "Interfaces et zones stratégiques",
-              text: "étudie les zones de contact et d’échanges entre régions, souvent clés dans la mondialisation."
+            title: "Automatisation et commande",
+            text: "Étudier les capteurs, actionneurs, automates et logiques de contrôle dans les systèmes industriels."
           }
         ]
       },
-      populations: {
-        label: "À venir",
-        title: "Contenu en préparation",
-        text: "Cette sous-catégorie sera développée prochainement dans le carnet.",
-        cards: []
+
+      ingenierie_civile: {
+        label: "🏗️ Construction",
+        title: "Ingénierie civile",
+        text: "Comprendre la conception, la construction et la durabilité des ouvrages qui structurent les territoires et les sociétés.",
+        cards: [
+          {
+            title: "Structures",
+            text: "Étudier les bâtiments, ponts et ouvrages porteurs à travers leurs équilibres, charges et résistances."
+          },
+          {
+            title: "Matériaux de construction",
+            text: "Explorer le béton, l’acier, le bois et les autres matériaux selon leurs propriétés et usages."
+          },
+          {
+            title: "Géotechnique",
+            text: "Analyser les sols, fondations et interactions entre le terrain et les structures."
+          },
+          {
+            title: "Hydraulique et réseaux",
+            text: "Comprendre les infrastructures d’eau, d’assainissement et les réseaux techniques urbains."
+          },
+          {
+            title: "Chantiers et méthodes",
+            text: "Étudier l’organisation des travaux, la sécurité, la planification et les procédés de réalisation."
+          }
+        ]
+      },
+
+      conception_systemes: {
+        label: "🧩 Conception",
+        title: "Conception & systèmes",
+        text: "Comprendre comment penser un système technique dans son ensemble, depuis le besoin initial jusqu’à la solution fonctionnelle.",
+        cards: [
+          {
+            title: "Analyse fonctionnelle",
+            text: "Identifier les fonctions principales et contraintes d’un système pour structurer sa conception."
+          },
+          {
+            title: "Chaînes d’énergie et d’information",
+            text: "Comprendre les flux d’énergie et de données dans un système technique complet."
+          },
+          {
+            title: "CAO et modélisation",
+            text: "Explorer la représentation numérique des pièces, assemblages et systèmes avant fabrication."
+          },
+          {
+            title: "Méthodes de résolution de problème",
+            text: "Étudier les démarches d’analyse, de diagnostic, d’amélioration et de validation."
+          },
+          {
+            title: "Industrialisation",
+            text: "Analyser le passage de la conception au produit fabriqué, avec ses contraintes de coût, qualité et délai."
+          }
+        ]
       }
     };
 
-    const buttons = document.querySelectorAll(".geo-btn");
+    const buttons = document.querySelectorAll(".eng-btn");
     const labelEl = document.getElementById("content-label");
     const titleEl = document.getElementById("content-title");
     const textEl = document.getElementById("content-text");
     const cardsEl = document.getElementById("content-cards");
 
     function renderCategory(key) {
-      const data = geoData[key];
+      const data = engineeringData[key];
       if (!data) return;
 
       labelEl.textContent = data.label;
@@ -841,6 +871,8 @@
         renderCategory(button.dataset.category);
       });
     });
+
+    renderCategory("ingenierie_mecanique");
   </script>
 </body>
 </html>
